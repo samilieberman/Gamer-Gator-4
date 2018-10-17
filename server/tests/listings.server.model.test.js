@@ -1,6 +1,6 @@
 var should = require('should'), 
     mongoose = require('mongoose'), 
-    Listing = require('../models/listings.server.model'), 
+    Event = require('../models/events.server.model'),
     config = require('../config/config');
 
 var listing, id;
@@ -15,7 +15,7 @@ listing =  {
   address: "1545 W University Ave, Gainesville, FL 32603, United States"
 }
 
-describe('Listing Schema Unit Tests', function() {
+describe('Event Schema Unit Tests', function() {
 
   before(function(done) {
     mongoose.connect(config.db.uri);
@@ -30,7 +30,7 @@ describe('Listing Schema Unit Tests', function() {
     this.timeout(10000);
 
     it('saves properly when code and name provided', function(done){
-      new Listing({
+      new Event({
         name: listing.name, 
         code: listing.code
       }).save(function(err, listing){
@@ -41,7 +41,7 @@ describe('Listing Schema Unit Tests', function() {
     });
 
     it('saves properly when all three properties provided', function(done){
-      new Listing(listing).save(function(err, listing){
+      new Event(listing).save(function(err, listing){
         should.not.exist(err);
         id = listing._id;
         done();
@@ -49,7 +49,7 @@ describe('Listing Schema Unit Tests', function() {
     });
 
     it('throws an error when name not provided', function(done){
-      new Listing({
+      new Event({
         code: listing.code
       }).save(function(err){
         should.exist(err);
@@ -58,7 +58,7 @@ describe('Listing Schema Unit Tests', function() {
     });
 
     it('throws an error when code not provided', function(done){
-      new Listing({
+      new Event({
         name: listing.name
       }).save(function(err){
         should.exist(err);
@@ -70,7 +70,7 @@ describe('Listing Schema Unit Tests', function() {
 
   afterEach(function(done) {
     if(id) {
-      Listing.remove({ _id: id }).exec(function() {
+      Event.remove({ _id: id }).exec(function() {
         id = null;
         done();
       });

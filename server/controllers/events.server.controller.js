@@ -1,7 +1,7 @@
 
 /* Dependencies */
 var mongoose = require('mongoose'), 
-    Listing = require('../models/listings.server.model.js');
+    Event = require('../models/events.server.model.js');
 
 /*
   In this file, you should use Mongoose queries in order to retrieve/add/remove/update listings.
@@ -16,15 +16,16 @@ var mongoose = require('mongoose'),
 exports.create = function(req, res) {
 
   /* Instantiate a Listing */
-  var listing = new Listing(req.body);
+  var event = new Event(req.body);
+  console.log(JSON.stringify(req.body));
 
   /* Then save the listing */
-  listing.save(function(err) {
+  event.save(function(err) {
     if(err) {
       console.log(err);
       res.status(400).send(err); 
     } else {
-      res.json(listing);
+      res.json(event);
     }
   });
 };
@@ -32,41 +33,41 @@ exports.create = function(req, res) {
 /* Show the current listing */
 exports.read = function(req, res) {
   /* send back the listing as json from the request */
-  res.json(req.listing);
+  res.json(req.event);
 };
 
 /* Update a listing */
 exports.update = function(req, res) {
-  var listing = req.listing;
+  var event = req.event;
 
   /** TODO **/
   /* Replace the article's properties with the new properties found in req.body */
   /* Save the article */
     // changing the articles properties
-    listing.code = req.body.code;
-    listing.name = req.body.name;
-    listing.address = req.body.address;
+    event.name = req.body.name;
+    event.address = req.body.address;
+    event.eventTime = req.body.eventTime;
 
-      listing.save(function(err){
+      event.save(function(err){
         if(err){
           console.log(err);
           res.status(400).send(err); // changing status to 404 and sending error message
         }
         else{
           //res.status(200).send(listing); // sending listing to be saved
-          res.json(listing);
+          res.json(event);
         }
       });
 };
 
 /* Delete a listing */
 exports.delete = function(req, res) {
-  var listing = req.listing;
+  var event = req.event;
 
   /** TODO **/
   /* Remove the article */
 
-  listing.remove(function(err){ // finds the specific listing that user wants to remove
+  event.remove(function(err){ // finds the specific event that user wants to remove
     if(err){
       res.status(400).send(err); // sends error and error code
     }
@@ -79,13 +80,13 @@ exports.delete = function(req, res) {
 exports.list = function(req, res) {
   /** TODO **/
   /* Your code here */
-  Listing.find({}, function(err,listing){
+  Event.find({}, function(err, event){
     if (err){
       res.status(400).send(err); // changing status to 404 and sending error message
     }
     res.status(200);
-    res.json(listing); // response with listing in JSON format
-  }).sort({code:1}); // 1 is for ascending order
+    res.json(event); // response with event in JSON format
+  }).sort({eventTime:1}); // 1 is for ascending order
 };
 
 /* 
@@ -95,12 +96,12 @@ exports.list = function(req, res) {
         bind it to the request object as the property 'listing', 
         then finally call next
  */
-exports.listingByID = function(req, res, next, id) {
-  Listing.findById(id).exec(function(err, listing) {
+exports.eventByID = function(req, res, next, id) {
+  Event.findById(id).exec(function(err, event) {
     if(err) {
       res.status(400).send(err);
     } else {
-      req.listing = listing; // bind it to the request object as the property 'listing'
+      req.event = event; // bind it to the request object as the property 'event'
       next();
     }
   });
