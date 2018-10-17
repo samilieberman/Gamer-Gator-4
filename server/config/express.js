@@ -4,7 +4,7 @@ var path = require('path'),
     morgan = require('morgan'),
     bodyParser = require('body-parser'),
     config = require('./config'),
-    listingsRouter = require('../routes/listings.server.routes');
+    eventsRouter = require('../routes/events.server.routes');
 
 module.exports.init = function() {
   //connect to database
@@ -25,7 +25,7 @@ module.exports.init = function() {
 
   /**TODO 
   Use the listings router for requests to the api */
-  app.use('/api/listings', listingsRouter);
+  app.use('/api/events', eventsRouter);
 
   /**TODO 
   Go to homepage for all routes not specified */ 

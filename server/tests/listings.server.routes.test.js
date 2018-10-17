@@ -1,7 +1,7 @@
 var should = require('should'), 
     request = require('supertest'), 
     express = require('../config/express'), 
-    Listing = require('../models/listings.server.model.js');
+    Event = require('../models/events.server.model.js');
 
 /* Global variables */
 var app, agent, listing, id;
@@ -29,7 +29,7 @@ describe('Listings CRUD tests', function() {
       });
   });
   it('should be able to retrieve a single listing', function(done) {
-    Listing.findOne({name: 'Library West'}, function(err, listing) {
+    Event.findOne({name: 'Library West'}, function(err, listing) {
       if(err) {
         console.log(err);
       } else {
@@ -106,7 +106,7 @@ describe('Listings CRUD tests', function() {
 
   after(function(done) {
     if(id) {
-      Listing.remove({_id: id}, function(err){
+      Event.remove({_id: id}, function(err){
         if(err) throw err;
         done();
       })

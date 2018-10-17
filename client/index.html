@@ -4,12 +4,12 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles/main.css">
   </head>
-  <body ng-app="directoryApp">
+  <body ng-app="gamerGatorApp">
     <div class="container">
       <div class="row">
         <h1>UF Directory App</h1>
       </div>
-      <div class="row" ng-controller="ListingsController">
+      <div class="row" ng-controller="EventsController">
         <div class="col-md-6">
           <div class="input-group" id="searchBar">
             <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-search"></span></span>
@@ -19,14 +19,13 @@
             <table class="table table-striped table-hover">
               <tr>
                 <th></th>
-                <th>Code</th>
-                <th>Building Name</th>
+                <th>Name</th>
+                <th>Date</th>
               </tr>
-              <tr ng-repeat="listing in listings | filter: query" ng-click="showDetails($index)">
-                  <td> <button class="btn btn-danger btn-xs" ng-click ="deleteListing($index)"><span class="glyphicon glyphicon-remove"> </button></td>
-                <td>{{listing.code}}</td>
-                <td>{{listing.name}}</td>
-                <!-- <td ng-click="deleteListing($index)"><span style="color: red;" class="glyphicon glyphicon-remove"></span></td> -->
+              <tr ng-repeat="event in events | filter: query" ng-click="showDetails($index)">
+                <td> <button class="btn btn-danger btn-xs" ng-click ="deleteEvent($index)"><span class="glyphicon glyphicon-remove"></span></button></td>
+                <td>{{event.name}}</td>
+                <td>{{event.eventTime}}</td>
               </tr>
             </table>
           </div>
@@ -34,39 +33,28 @@
         </div>
         <div class="col-md-6">
           <div class="jumbotron">
-            <h2>Detailed Information</h2>
+            <h2>Event Information</h2>
             <h4>{{detailedInfo.name}}</h4>
-            <p>Address: {{detailedInfo.address}}</p>
-            <p>Building Code: {{detailedInfo.code}}</p>
+            <p>Date: {{detailedInfo.address}}</p>
+            <p>Address: {{detailedInfo.eventTime}}</p>
+            <p>Host: {{detailedInfo.eventCreator}}</p>
           </div>
         </div>
-
-<!--         <div class="col-md-12" style="margin:30px; float:center"></div>
-          <form novalidate class="simple-form,form-inline">
-            <h2 class = "row" style="margin:10px;">Add New Listing</h2>
-            <div class="form-group"> Code: <input type="text" ng-model="newListing.code" /><br /> </div>
-            <div class="form-group"> Name: <input type="text" ng-model="newListing.name" /><br /> </div>
-            <div class="form-group"> Address: <input type="text" ng-model="newListing.address" /><br /> </div>
-            <button class="btn btn-success" ng-click="addListing()"><span class="glyphicon glyphicon-ok"></button>
-          </form>
-          </div> -->
 
         <!--  Write an HTML form that adds new listings to the directory -->
         <div class="col-md-3" style="margin-left:150px;">
             <div class = "row" style="text-align: center"><b><h3>Add a New Listing: </h3></b></div>
                 <form novalidate class="simple-form,form-group row">
                     <div class="form-group">
-                       <!-- <label for="Name">Name:</label> -->
-                       
-                       <input type="Code" placeholder="Code:" class="form-control" id="code" ng-model="newListing.code" required>
+                       <input type="Name" placeholder="Name:" class="form-control" id="name" ng-model="newEvent.name" required>
                       </div>
                       <div class="form-group"> 
-                          <input type="Name" placeholder="Name:" class="form-control" id="name" ng-model="newListing.name" required>
+                        <input type="Address" placeholder="Address:" class="form-control" id="address" ng-model="newEvent.address" required>
                       </div>
                       <div class="form-group">
-                          <input type="Address" placeholder="Address:" class="form-control" id="address" ng-model="newListing.address" required>
+                        <input type="Event Time" placeholder="Event Time:" class="form-control" id="Event Time" ng-model="newEvent.eventTime" required>
                       </div>
-                      <button type="submit" class="btn btn-success" ng-click="addListing()"><span class="glyphicon glyphicon-ok"></button>
+                  <button type="submit" class="btn btn-success" ng-click="addEvent()"><span class="glyphicon glyphicon-ok"></span></button>
                 </form>
       </div>
       </div>
