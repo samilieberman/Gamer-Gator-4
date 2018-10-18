@@ -7,4 +7,4 @@
 \pard\pardeftab720\sl300\partightenfactor0
 
 \f0\fs26 \cf2 \cb3 \expnd0\expndtw0\kerning0
-web: node server.js}
+web: node server.js

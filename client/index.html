@@ -2,68 +2,111 @@
 <html>
   <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="style.css">
   </head>
   <body ng-app="gamerGatorApp">
-    <div class="container">
-      <div class="row">
-        <h1>UF Directory App</h1>
-      </div>
-      <div class="row" ng-controller="EventsController">
-        <div class="col-md-6">
-          <div class="input-group" id="searchBar">
-            <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-search"></span></span>
-            <input type="text" class="form-control" placeholder="Search" ng-model="query">
-          </div>
-          <div class="tableWrapper">
-            <table class="table table-striped table-hover">
-              <tr>
-                <th></th>
-                <th>Name</th>
-                <th>Date</th>
-              </tr>
-              <tr ng-repeat="event in events | filter: query" ng-click="showDetails($index)">
-                <td> <button class="btn btn-danger btn-xs" ng-click ="deleteEvent($index)"><span class="glyphicon glyphicon-remove"></span></button></td>
-                <td>{{event.name}}</td>
-                <td>{{event.eventTime}}</td>
-              </tr>
-            </table>
-          </div>
-          
-        </div>
-        <div class="col-md-6">
-          <div class="jumbotron">
-            <h2>Event Information</h2>
-            <h4>{{detailedInfo.name}}</h4>
-            <p>Date: {{detailedInfo.address}}</p>
-            <p>Address: {{detailedInfo.eventTime}}</p>
-            <p>Host: {{detailedInfo.eventCreator}}</p>
-          </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-9">
+                <h1 style="text-align:left"><b>Gator Gaming Tournaments</b></h1>
+            </div>
+            <div style="text-align: right" class="col-md-3">
+                <br>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-info btn-lg" data-toggle="collapse" data-target="list">
+                        List
+                    </button>
+                    <button type="button" class="btn btn-info btn-lg" data-toggle="collapse in" data-target="list">
+                        Calendar
+                    </button>
+                <button type="button" class="btn btn-primary btn-lg">Login / Register</button>
+                </div>
+            </div>
         </div>
 
-        <!--  Write an HTML form that adds new listings to the directory -->
-        <div class="col-md-3" style="margin-left:150px;">
-            <div class = "row" style="text-align: center"><b><h3>Add a New Listing: </h3></b></div>
-                <form novalidate class="simple-form,form-group row">
-                    <div class="form-group">
-                       <input type="Name" placeholder="Name:" class="form-control" id="name" ng-model="newEvent.name" required>
-                      </div>
-                      <div class="form-group"> 
-                        <input type="Address" placeholder="Address:" class="form-control" id="address" ng-model="newEvent.address" required>
-                      </div>
-                      <div class="form-group">
-                        <input type="Event Time" placeholder="Event Time:" class="form-control" id="Event Time" ng-model="newEvent.eventTime" required>
-                      </div>
-                  <button type="submit" class="btn btn-success" ng-click="addEvent()"><span class="glyphicon glyphicon-ok"></span></button>
-                </form>
-      </div>
+        <div class="row" ng-controller="EventController">
+            <div class="col-md-3">
+                <div style="text-align: center;" class="collapse" id="createEvent">
+                    <br><h3>Create a new event...</h3>
+                    <input type="text" class="form-control" placeholder="Event name"> <br>
+                    <input type="text" class="form-control" placeholder="Event location"> <br>
+                    <input type="text" class="form-control" placeholder="Event description"> <br>
+                    <input type="text" class="form-control" placeholder="Event tags"> <br>
+                    <button type="button" class="btn btn-primary">Submit</button> <br><br>
+                </div>
+                <br>
+                <button type="button" class="btn btn-success btn-lg btn-block" data-toggle="collapse" data-target="#createEvent">Create Event</button>
+                <br><br>
+                <button type="button" class="btn btn-warning btn-lg btn-block">Edit Event</button>
+                <br><br>
+                <buton type="button" class="btn btn-danger btn-lg btn-block">Delete Event</buton>
+                <br><br>
+
+                <div class="collapse" id="sendMessage">
+                    <div class="input-group">
+                    <h4>Send message to all attendees subscribed to an event you moderate...</h4>
+                    <select class="custom-select my-1 mr-sm-2">
+                        <option selected>Choose event...</option>
+                        <option value="1">Moderated events here</option>
+                    </select> <br><br>
+                        <textarea rows="3" class="form-control">Enter message...</textarea>
+                    <button style="text-align:center; margin-top:20px;" type="button" class="btn btn-primary">Send message</button>
+                    </div>
+                </div>
+
+                <br><br>
+                <button type="button" class="btn btn-info btn-lg btn-block" data-toggle="collapse" data-target="#sendMessage">Send Message to Event Attendees</button>
+                <br><br><br><br><br>
+                <button type="button" class="btn btn-primary btn-lg btn-block">View Subscribed Events</button>
+            </div>
+
+        <div class="col-md-9 collapse" id="calendar">Calendar</div>
+        <div class="col-md-9 collapse in" id="list">
+            <br>
+          <div class="input-group" id="searchBar">
+            <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-search"></span></span>
+            <input type="text" class="form-control" ng-model="searchInput" placeholder="Filter by name, location, or tag...">
+          </div>
+          <div class="tableWrapper">
+            <table class="table table-striped table-hover" id="eventsTable">
+              <tr>
+                <th>Event Name</th>
+                <th>Date</th>
+                <th>Location</th>
+                <th>Tags</th>
+				<th>Fee</th>
+                <th></th>
+              </tr>
+			  
+			  <tr ng-repeat="event in events | filter:searchInput as results">
+				<td>{{event.name}}</td>
+				<td>{{event.date}}</td>
+                <td>{{event.location}}</td>
+                <td>{{event.tags}}</td>
+                <td>{{event.fee}}</td>
+				<td>
+				 <button type="button" class="btn btn-info" ng-click="showDetails(listing.code)">
+					<span class="glyphicon glyphicon-option-horizontal"></span>
+                 </button>
+				</td>
+			  </tr>
+			  <tr ng-if="results.length == 0"> <td> <strong>  </strong> </td> </tr>
+		
+            </table>
+          </div>
+		  <br>
+
+     
+	 
+        </div>
+
       </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
     <script src="https://code.angularjs.org/1.4.3/angular.js"></script>
     <script src="js/app.js"></script>
-    <script src="js/factories/listingFactory.js"></script>
     <script src="js/controllers/listingController.js"></script>
+    <script src="js/factories/listingFactory.js"></script>
   </body>
 </html>
