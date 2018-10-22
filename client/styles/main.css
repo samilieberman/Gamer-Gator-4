@@ -6,3 +6,13 @@
   max-height: 400px;
   overflow: auto;
 }
+.jumbotron {
+  background-image: url("../img/banner1.png");
+  background-size: cover;
+  color:white;
+}
+.text-block {
+  color: black; /* text color */ 
+  background-color: rgb(204, 204, 204);
+  background-color: rgba(204, 204, 204, 0.8);
+}
