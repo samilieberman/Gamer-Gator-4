@@ -45,8 +45,8 @@
                    required> <br>
             <input type="text" placeholder="Event Time:" class="form-control" id="event time"
                    ng-model="newEvent.eventTime" required> <br>
-            <input type="text" placeholder="Event Description:" class="form-control" id="description"
-                   ng-model="newEvent.description"> <br>
+            <textarea rows="3" placeholder="Event Description:" class="form-control" id="description"
+                      ng-model="newEvent.description"></textarea> <br>
             <input type="text" placeholder="Event Tags:" class="form-control" id="tags" ng-model="newEvent.tags"> <br>
             <button type="submit" class="btn btn-success" ng-click="addEvent()"><span
                     class="glyphicon glyphicon-ok"></span></button>
@@ -144,6 +144,7 @@
 
   </div>
 </div>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"
         integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ=="
@@ -159,12 +160,7 @@
 <script>
     function listVisible() {
             if (document.getElementById('cal')) {
-
-                if (document.getElementById('cal').style.display == 'none') {
-                    document.getElementById('cal').style.display = 'block';
-                    document.getElementById('list').style.display = 'none';
-                }
-                else {
+                if (document.getElementById('cal').style.display != 'none') {
                     document.getElementById('cal').style.display = 'none';
                     document.getElementById('list').style.display = 'block';
                 }
@@ -172,12 +168,7 @@
     }
     function calVisible() {
             if (document.getElementById('list')) {
-
-                if (document.getElementById('list').style.display == 'none') {
-                    document.getElementById('list').style.display = 'block';
-                    document.getElementById('cal').style.display = 'none';
-                }
-                else {
+                if (document.getElementById('list').style.display != 'none') {
                     document.getElementById('list').style.display = 'none';
                     document.getElementById('cal').style.display = 'block';
                 }
