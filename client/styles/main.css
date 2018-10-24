@@ -16,3 +16,6 @@
   background-color: rgb(204, 204, 204);
   background-color: rgba(204, 204, 204, 0.8);
 }
+#list{
+  display:none; 
+}
