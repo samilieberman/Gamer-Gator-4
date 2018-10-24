@@ -19,6 +19,8 @@ var eventSchema = new Schema({
   eventCreator: String,
   eventDescription: String,
   numParticipants: Number,
+  tags: [String],
+  fee: String,
 
   created_at: Date,
   updated_at: Date
