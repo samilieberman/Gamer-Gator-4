@@ -8,19 +8,23 @@ var eventSchema = new Schema({
     type: String, 
     required: true
   }, 
-  eventTime: {
-    type: String, /* needs to be implemented as Date */
+  startTime: {
+    type: Date,
+    required: true
+  },
+  endTime: {
+    type: Date,
     required: true
   },
   address: {
     type: String,
     required: true
   },
-  eventCreator: String,
+  creatorUsername: String,
   eventDescription: String,
-  numParticipants: Number,
+  participantUsernames: [String],
   tags: [String],
-  fee: String,
+  fee: Number,
 
   created_at: Date,
   updated_at: Date
