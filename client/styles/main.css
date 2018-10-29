@@ -16,6 +16,13 @@
   background-color: rgb(204, 204, 204);
   background-color: rgba(204, 204, 204, 0.8);
 }
+
+/*Allows text of register button to change*/
+.btn-text b{display:inline}
+.btn-text:not(.collapsed)  span{display:none}
+.btn-text.collapsed b {display:none}
+
+
 #list{
   display:none; 
 }
