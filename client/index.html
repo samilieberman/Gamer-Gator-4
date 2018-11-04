@@ -18,6 +18,7 @@
         </div>
       </div>
       <br>
+
       <div class="btn-group" style="float:right; margin-right:25px;">
         <button type="button" class="btn btn-info rounded" onclick="listVisible();">
           List
@@ -26,27 +27,45 @@
           Calendar
         </button>
       </div>
+
       <div class="col-md-3" style="text-align: center;">
-        <div style="text-align: center;" class="btn-group" style="float:right; margin-right:25px;">
-          <h1>Login</h1>
-        </div>
-        <br><br>
-        <input type="text" placeholder="Username:" class="form-control" id="username" name="username">
-        <br>
-        <input type="text" placeholder="Password:" class="form-control" id="password" name="password">
-        <br>
-        <div style="text-align: center;" class="collapse" id="registerFields">
-          <input type="text" placeholder="Confirm Password:" class="form-control" id="passwordConfirmed" name="passwordConfirmed"> <br>
-          <input type="text" placeholder="Email:" class="form-control" id="email" name = "email">
-          <br>
-        </div>
-        <button type="button" class="btn-text collapsed" data-toggle="collapse"
-                data-target="#registerFields">
-          <span>Need an account? Click here to register</span><b>Got an account? Click here to login!</b>
+        <!-- Login button -->
+        <button type="button" class="btn btn-info rounded" data-toggle="modal" data-target="#loginModal">
+          Login
         </button>
-        <button type="submit" class="btn btn-success" ng-click="addUser"><span
-                class="glyphicon glyphicon-ok"></span>
-        </button>
+        <!--Modal login dialogue -->
+        <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Login/Register</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <br><br>
+                <input type="text" placeholder="Username:" class="form-control" id="username" ng-model="newUser.username" required>
+                <br>
+                <input type="text" placeholder="Password:" class="form-control" id="password" ng-model="newUser.password" required>
+                <br>
+                <div style="text-align: center;" class="collapse" id="registerFields">
+                  <input type="text" placeholder="Confirm Password:" class="form-control" id="passwordConfirmed"  ng-model="newUser.passwordConfirmed" required> <br>
+                  <input type="text" placeholder="Email:" class="form-control" id="email"  ng-model="newUser.email" required>
+                  <br>
+                </div>
+                <button type="button" class="btn-text collapsed" data-toggle="collapse"
+                        data-target="#registerFields">
+                  <span>Need an account? Click here to register</span><b>Got an account? Click here to login!</b>
+                </button>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" ng-click="addUser" data-dismiss="modal">Confirm</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -54,10 +73,6 @@
 
       <div class="col-md-3">
 
-        <br><br>
-        <br><br>
-        <br><br>
-        <br><br>
         <br><br>
         <button type="button" class="btn btn-success btn-lg btn-block" data-toggle="collapse"
                 data-target="#createEvent">Create Event
