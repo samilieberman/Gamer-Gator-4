@@ -7,9 +7,9 @@
   overflow: auto;
 }
 .jumbotron {
-  background-image: url("../img/banner1.png");
   background-size: cover;
-  color:white;
+  background-color: white;
+  margin-bottom: 0px;
 }
 .text-block {
   color: black; /* text color */ 
@@ -49,4 +49,8 @@
   display: table;
   margin-left: auto;
   margin-right: auto;
+}
+@font-face {
+  font-family: arcadeFont;
+  src: url("../fonts/arcadefont.TTF");
 }
