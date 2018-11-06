@@ -13,10 +13,6 @@ var userSchema = new Schema({
     type: String,
     required: true
   },
-  confirmedPassword: {
-    type: String,
-    required: true
-    },
   email: {
     type: String,
     required: true,
