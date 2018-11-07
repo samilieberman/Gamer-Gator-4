@@ -188,15 +188,16 @@
           <br>
           <h3>Create a new event...</h3>
           <form novalidate class="simple-form,form-group row">
-            <input type="text" placeholder="Name:" class="form-control" id="name" ng-model="newEvent.name" required>
-            <br>
+            <input type="text" placeholder="Name:" class="form-control" id="name" ng-model="newEvent.name" style="margin-left:16px"
+             required > <br>
             <input type="text" placeholder="Location:" class="form-control" id="address" ng-model="newEvent.address"
-                   required> <br>
-            <input type="text" placeholder="Event Time:" class="form-control" id="event time"
+              style="margin-left:16px" required> <br>
+            <input type="text" placeholder="Event Time:" class="form-control" id="event time"  style="margin-left:16px"
                    ng-model="newEvent.eventTime" required> <br>
-            <textarea rows="3" placeholder="Event Description:" class="form-control" id="description"
+            <textarea rows="3" placeholder="Event Description:" class="form-control" id="description"  style="margin-left:16px"
                       ng-model="newEvent.description"></textarea> <br>
-            <input type="text" placeholder="Event Tags:" class="form-control" id="tags" ng-model="newEvent.tags"> <br>
+            <input type="text" placeholder="Event Tags:" class="form-control" id="tags" ng-model="newEvent.tags"
+            style=margin-left:16px > <br>
             <button type="submit" class="btn btn-success" ng-click="addEvent()"><span
                     class="glyphicon glyphicon-ok"></span></button>
             <br><br>
