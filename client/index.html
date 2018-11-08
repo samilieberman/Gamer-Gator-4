@@ -176,7 +176,7 @@
       <button class="btn2" onclick="" style="font-family: arcadeFont; font-size: x-small;"> Fighting </button>
       <button class="btn2" onclick="" style="font-family: arcadeFont; font-size: x-small;"> Action </button>
       <button class="btn2" onclick="" style="font-family: arcadeFont; font-size: x-small;"> Simulation </button>
-      <button class="btn2" onclick="" style="font-family: arcadeFont; font-size: x-small;"> Simulation </button>
+      <button class="btn2" onclick="" style="font-family: arcadeFont; font-size: x-small;"> Mario </button>
     </div>
 
     <div class="row" ng-controller="EventsController">
@@ -189,8 +189,8 @@
           <br>
           <h3>Create a new event...</h3>
           <form novalidate class="simple-form,form-group row">
-            <input type="text" placeholder="Name:" class="form-control" id="name" ng-model="newEvent.name" required>
-            <br>
+            <input type="text" placeholder="Name:" class="form-control" id="name" ng-model="newEvent.name" style="margin-left:16px"
+             required > <br>
             <input type="text" placeholder="Location:" class="form-control" id="address" ng-model="newEvent.address"
                    required> <br>
 
@@ -238,7 +238,8 @@
 
             <textarea rows="3" placeholder="Event Description:" class="form-control" id="description"
                       ng-model="newEvent.description"></textarea> <br>
-            <input type="text" placeholder="Event Tags:" class="form-control" id="tags" ng-model="newEvent.tags"> <br>
+            <input type="text" placeholder="Event Tags:" class="form-control" id="tags" ng-model="newEvent.tags"
+            style=margin-left:16px > <br>
             <button type="submit" class="btn btn-success" ng-click="addEvent()"><span
                     class="glyphicon glyphicon-ok"></span></button>
             <br><br>
@@ -372,19 +373,19 @@
                     //right: 'month,basicWeek,basicDay'
                     right: 'month,basicDay'
                 },
-                defaultDate: '2018-10-23',
+                defaultDate: new Date(),
                 navLinks: true, // can click day/week names to navigate views
                 editable: true,
                 eventLimit: true, // allow "more" link when too many events
                 events: [
                     {
                         title: 'Tournament',
-                        start: '2018-10-25'
+                        start: '2018-11-25'
                     },
                     {
                         title: 'Tournament',
-                        start: '2018-10-25',
-                        end: '2018-10-28'
+                        start: '2018-11-25',
+                        end: '2018-11-28'
                     },
                     {
                         id: 999,
@@ -392,14 +393,14 @@
                         start: '2018-10-09T16:00:00'
                     },
                     {
-                        id: 999, // id: 999 means it repeats on same day 
+                        id: 999, // id: 999 means it repeats on same day
                         title: 'Tuesday Tournament',
                         start: '2018-10-16T16:00:00'
                     },
                     {
                         title: 'Tournament',
-                        start: '2018-10-11',
-                        end: '2018-10-13'
+                        start: '2018-11-11',
+                        end: '2018-11-13'
                     },
                     {
                         title: 'Tournament',
@@ -433,10 +434,10 @@
                     }
                 ]
             });
-            
+
         });
-        
-</script>  
+
+</script>
 </body>
 
 </html>

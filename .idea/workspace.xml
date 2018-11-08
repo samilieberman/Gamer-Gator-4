@@ -15,22 +15,22 @@
     <session id="-946324000">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="1" />
-          <entry key="project.open.time.7" value="1" />
+          <entry key="project.closed" value="2" />
+          <entry key="project.open.time.7" value="2" />
           <entry key="project.open.time.8" value="1" />
-          <entry key="project.opened" value="2" />
+          <entry key="project.opened" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="css" value="287" />
-          <entry key="html" value="725" />
+          <entry key="html" value="784" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSS" value="287" />
-          <entry key="HTML" value="725" />
+          <entry key="HTML" value="784" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -38,12 +38,14 @@
           <entry key="TTF" value="1" />
           <entry key="css" value="2" />
           <entry key="html" value="1" />
+          <entry key="js" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CSS" value="2" />
           <entry key="HTML" value="1" />
+          <entry key="JavaScript" value="4" />
           <entry key="PLAIN_TEXT" value="1" />
         </counts>
       </usages-collector>
@@ -150,6 +152,7 @@
       <find>h1</find>
       <find>filter</find>
       <find>arcade</find>
+      <find>simulat</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -294,7 +297,8 @@
       <option name="presentableId" value="Default" />
       <updated>1541472118081</updated>
       <workItem from="1541472122683" duration="1617000" />
-      <workItem from="1541511952444" duration="4751000" />
+      <workItem from="1541511952444" duration="5274000" />
+      <workItem from="1541610311696" duration="1361000" />
     </task>
     <servers />
   </component>
