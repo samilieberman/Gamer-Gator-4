@@ -193,8 +193,49 @@
             <br>
             <input type="text" placeholder="Location:" class="form-control" id="address" ng-model="newEvent.address"
                    required> <br>
-            <input type="text" placeholder="Event Time:" class="form-control" id="event time"
-                   ng-model="newEvent.eventTime" required> <br>
+
+            <div>
+              <label for="startTime"> Event Start Time: </label> <br>
+              <select name="year" ng-model="startTime.year">
+                <option value="">year</option>
+                <option value="2018">2018</option>
+                <option value="2019">2019</option>
+              </select>
+              <select name="month" ng-model="startTime.month">
+                <option value="">month</option>
+                <option ng-repeat="month in months" value="{{month}}">{{month}}</option>
+              </select>
+              <select name="day" ng-model="startTime.day">
+                <option value="">day</option>
+                <option ng-repeat="day in days" value="{{day}}">{{day}}</option>
+              </select>
+              <select name="hour" ng-model="startTime.hour">
+                <option value="">hour</option>
+                <option ng-repeat="hour in hours" value="{{hour}}">{{hour}}</option>
+              </select>
+            </div> <br>
+
+            <div>
+              <label for="endTime"> Event End Time: </label> <br>
+              <select name="year" ng-model="endTime.year">
+                <option value="">year</option>
+                <option value="2018">2018</option>
+                <option value="2019">2019</option>
+              </select>
+              <select name="month" ng-model="endTime.month">
+                <option value="">month</option>
+                <option ng-repeat="month in months" value="{{month}}">{{month}}</option>
+              </select>
+              <select name="day" ng-model="endTime.day">
+                <option value="">day</option>
+                <option ng-repeat="day in days" value="{{day}}">{{day}}</option>
+              </select>
+              <select name="hour" ng-model="endTime.hour">
+                <option value="">hour</option>
+                <option ng-repeat="hour in hours" value="{{hour}}">{{hour}}</option>
+              </select>
+            </div> <br>
+
             <textarea rows="3" placeholder="Event Description:" class="form-control" id="description"
                       ng-model="newEvent.description"></textarea> <br>
             <input type="text" placeholder="Event Tags:" class="form-control" id="tags" ng-model="newEvent.tags"> <br>
@@ -255,7 +296,7 @@
               <th>Event Name</th>
               <th>Date</th>
               <th>Location</th>
-              <th>Tags</th>
+              <th>Game</th>
               <th>Fee</th>
               <th></th>
             </tr>
