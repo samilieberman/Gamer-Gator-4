@@ -51,7 +51,7 @@
   margin-right: auto;
 }
 
-.btn {
+/*.btn {
 	-moz-box-shadow: 3px 4px 0px 0px #899599;
 	-webkit-box-shadow: 3px 4px 0px 0px #899599;
 	box-shadow: 3px 4px 0px 0px #899599;
@@ -89,7 +89,7 @@
 .btn:active {
 	position:relative;
 	top:1px;
-}
+}*/
 
 
 @font-face {
