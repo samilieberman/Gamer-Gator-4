@@ -2,8 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b5fb62b7-e519-4abd-889d-0f183f6824a0" name="Default Changelist" comment="">
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/index.html" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/index.html" afterDir="false" />
+>>>>>>> 1ef6add19b35858a53abb41064d8537130b2187b
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -101,11 +106,14 @@
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/js/controllers/eventController.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="660">
               <caret line="44" selection-start-line="44" selection-end-line="44" />
+=======
+>>>>>>> 1ef6add19b35858a53abb41064d8537130b2187b
             </state>
           </provider>
         </entry>
@@ -118,8 +126,13 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server/controllers/events.server.controller.js">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="360">
               <caret line="24" column="14" selection-start-line="24" selection-start-column="14" selection-end-line="24" selection-end-column="14" />
+=======
+            <state relative-caret-position="360">
+              <caret line="24" column="14" selection-start-line="24" selection-start-column="14" selection-end-line="24" selection-end-column="14" />
+>>>>>>> 1ef6add19b35858a53abb41064d8537130b2187b
             </state>
           </provider>
         </entry>
@@ -146,7 +159,11 @@
       <list>
         <option value="$PROJECT_DIR$/client/styles/main.css" />
         <option value="$PROJECT_DIR$/server/models/users.server.model.js" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/client/js/controllers/eventController.js" />
+=======
+        <option value="$PROJECT_DIR$/client/js/controllers/eventController.js" />
+>>>>>>> 1ef6add19b35858a53abb41064d8537130b2187b
         <option value="$PROJECT_DIR$/client/index.html" />
       </list>
     </option>
@@ -167,8 +184,13 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="y" value="23" />
+<<<<<<< HEAD
     <option name="width" value="1280" />
     <option name="height" value="735" />
+=======
+    <option name="width" value="1280" />
+    <option name="height" value="735" />
+>>>>>>> 1ef6add19b35858a53abb41064d8537130b2187b
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -288,15 +310,22 @@
       <workItem from="1541472122683" duration="1617000" />
       <workItem from="1541511952444" duration="5274000" />
       <workItem from="1541610311696" duration="1361000" />
+<<<<<<< HEAD
       <workItem from="1541964169859" duration="329000" />
+=======
+      <workItem from="1541964169859" duration="329000" />
+>>>>>>> 1ef6add19b35858a53abb41064d8537130b2187b
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="15938000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="735" extended-state="6" />
+=======
+>>>>>>> 1ef6add19b35858a53abb41064d8537130b2187b
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18745036" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -364,13 +393,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/client/js/controllers/eventController.js">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="660">
           <caret line="44" selection-start-line="44" selection-end-line="44" />
+=======
+        <state relative-caret-position="660">
+          <caret line="44" selection-start-line="44" selection-end-line="44" />
+>>>>>>> 1ef6add19b35858a53abb41064d8537130b2187b
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/server/controllers/events.server.controller.js">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="360">
           <caret line="24" column="14" selection-start-line="24" selection-start-column="14" selection-end-line="24" selection-end-column="14" />
         </state>
@@ -380,6 +415,8 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2508">
           <caret line="181" column="9" selection-start-line="181" selection-start-column="4" selection-end-line="181" selection-end-column="9" />
+=======
+>>>>>>> 1ef6add19b35858a53abb41064d8537130b2187b
           <folding>
             <element signature="n#style#0;n#h1#0;n#div#0;n#div#0;n#div#0;n#div#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#html#0;n#!!top" expanded="true" />
@@ -401,6 +438,9 @@
             <element signature="n#style#0;n#button#0;n#div#0;n#div#2;n#div#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#div#2;n#div#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#input#0;n#form#0;n#div#0;n#div#0;n#div#2;n#div#0;n#html#0;n#!!top" expanded="true" />
+<<<<<<< HEAD
+=======
+>>>>>>> 1ef6add19b35858a53abb41064d8537130b2187b
             <element signature="n#style#0;n#button#1;n#div#0;n#div#2;n#div#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#button#2;n#div#0;n#div#2;n#div#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#button#0;n#div#0;n#div#1;n#div#0;n#div#2;n#div#0;n#html#0;n#!!top" expanded="true" />
