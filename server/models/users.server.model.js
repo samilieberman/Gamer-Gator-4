@@ -41,7 +41,7 @@ eventSchema.pre('save', function(next) {
 });
 
 /* Use your schema to instantiate a Mongoose model */
-var User = mongoose.model('User', userSchema);
+var User = mongoose.model('User', userSchema,'users');
 
 /* Export the model to make it avaiable to other parts of your Node application */
 module.exports = User;

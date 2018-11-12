@@ -188,6 +188,7 @@
         <div style="text-align: center;" class="collapse" id="createEvent">
           <br>
           <h3>Create a new event...</h3>
+          <div class = "col-sm-12">
           <form novalidate class="simple-form,form-group row">
             <input type="text" placeholder="Name:" class="form-control" id="name" ng-model="newEvent.name" style="margin-left:16px"
              required > <br>
@@ -244,6 +245,7 @@
                       ng-model="newEvent.description"></textarea> <br>
             <input type="text" placeholder="Event Tags:" class="form-control" id="tags" ng-model="newEvent.tags"
             style=margin-left:16px > <br>
+          </div>
             <button type="submit" class="btn btn-success" ng-click="addEvent()"><span
                     class="glyphicon glyphicon-ok"></span></button>
             <br><br>
