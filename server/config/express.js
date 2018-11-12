@@ -30,11 +30,11 @@ module.exports.init = function() {
   app.use('/api/events', eventsRouter);
 
   // set up session
-  app.use(session({
-    secret:'thesecret'
-    saveUninitialized:false,
-    resave:false
-  }))
+  //app.use(session({
+    //secret:'thesecret'
+    //saveUninitialized:false,
+    //resave:false
+  //}))
 
   /**TODO
   Go to homepage for all routes not specified */
