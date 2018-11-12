@@ -241,6 +241,78 @@
 
         </div>
 
+        <br><br>
+        <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="collapse"
+                data-target="#editEvent" style = "margin-left:10px;">Edit Event
+        </button>
+        <div style="text-align: center;" class="collapse" id="editEvent">
+          <br>
+          <h3>Edit Pre-existing Event...</h3>
+
+          <form novalidate class="simple-form,form-group row">
+              <div class = "col-sm-12" style = "padding-left: 25px;">
+                
+            <input type="text" placeholder="Name:" class="form-control" id="name"  > <br>
+            <input type="text" placeholder="Location:" class="form-control" id="address" ng-model="newEvent.address" required> <br>
+
+            <div>
+              <label name="startTime"> Event Start Time: </label> <br>
+              <select name="year" ng-model="startTime.year">
+                <option value="">year</option>
+                <option value="2018">2018</option>
+                <option value="2019">2019</option>
+              </select>
+              <select name="month" ng-model="startTime.month">
+                <option value="">month</option>
+                <option ng-repeat="month in months" value="{{month}}">{{month}}</option>
+              </select>
+              <select name="day" ng-model="startTime.day">
+                <option value="">day</option>
+                <option ng-repeat="day in days" value="{{day}}">{{day}}</option>
+              </select>
+              <select name="hour" ng-model="startTime.hour">
+                <option value="">hour</option>
+                <option ng-repeat="hour in hours" value="{{hour}}">{{hour}}</option>
+              </select>
+            </div> <br>
+
+            <div>
+              <label name="endTime"> Event End Time: </label> <br>
+              <select name="year" ng-model="endTime.year">
+                <option value="">year</option>
+                <option value="2018">2018</option>
+                <option value="2019">2019</option>
+              </select>
+              <select name="month" ng-model="endTime.month">
+                <option value="">month</option>
+                <option ng-repeat="month in months" value="{{month}}">{{month}}</option>
+              </select>
+              <select name="day" ng-model="endTime.day">
+                <option value="">day</option>
+                <option ng-repeat="day in days" value="{{day}}">{{day}}</option>
+              </select>
+              <select name="hour" ng-model="endTime.hour">
+                <option value="">hour</option>
+                <option ng-repeat="hour in hours" value="{{hour}}">{{hour}}</option>
+              </select>
+            </div> <br>
+
+            <input type="text" placeholder="Game:" class="form-control" id="game" ng-model="newEvent.game" required > <br>
+            <input type="text" placeholder="Fee:" class="form-control" id="fee" ng-model="newEvent.fee" required > <br>
+            <textarea rows="3" placeholder="Event Description:" class="form-control" id="description"
+                      ng-model="newEvent.description"></textarea> <br>
+            <input type="text" placeholder="Event Tags:" class="form-control" id="tags" ng-model="newEvent.tags"> <br>
+
+            <button type="submit" class="btn btn-success" ng-click="addEvent()"><span
+                    class="glyphicon glyphicon-ok"></span></button>
+            <br><br>
+              </div>
+          </form>
+          
+
+        </div>
+
+
         <!--<br><br>-->
         <!---<button type="button" class="btn btn-primary btn-lg btn-block" style = "margin-left:10px;">Edit Event</button>-->
         <!--<br><br>-->
@@ -288,7 +360,8 @@
         <div class="tableWrapper">
           <table class="table table-striped table-hover" id="eventsTable">
             <tr>
-              <th></th>
+              <th>Delete</th>
+              <th>Edit</th>
               <th>Event Name</th>
               <th>Start Time</th>
               <th>Location</th>
@@ -302,8 +375,14 @@
                 <button class="btn btn-danger btn-xs" ng-click="deleteEvent($index)"><span
                         class="glyphicon glyphicon-remove"></span></button>
               </td>
+              <td>
+                  <button class="btn btn-danger btn-xs" ng-click="editEvent($index)" data-toggle="collapse"
+                  data-target="#editEvent"> <span
+                          class="glyphicon glyphicon-pencil"> </span></button>
+                </td>
+  
               <td>{{event.name}}</td>
-              <td>{{event.startTime}}</td>
+              <td>{{event.startTime | date:'MMM d, y @ h:mma'}}</td>
               <td>{{event.address}}</td>
               <td>{{event.game}}</td>
               <td>{{event.fee}}</td>
