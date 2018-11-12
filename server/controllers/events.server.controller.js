@@ -46,7 +46,7 @@ exports.update = function(req, res) {
     // changing the articles properties
     event.name = req.body.name;
     event.address = req.body.address;
-    event.eventTime = req.body.eventTime;
+    event.startTime = req.body.startTime;
 
       event.save(function(err){
         if(err){

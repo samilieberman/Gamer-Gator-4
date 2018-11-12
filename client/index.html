@@ -81,16 +81,6 @@
       </div>
     </div>
       <br>
-<!--      <div id="myBtnContainer" style="margin-bottom:20px;">
-        <button class="btn2" onclick="" style="font-family: arcadeFont; font-size: x-small;"> RPG </button>
-        <button class="btn2" onclick="" style="font-family: arcadeFont; font-size: x-small;"> Adventure </button>
-        <button class="btn2" onclick="" style="font-family: arcadeFont; font-size: x-small;"> Sports </button>
-        <button class="btn2" onclick="" style="font-family: arcadeFont; font-size: x-small;"> Racing </button>
-        <button class="btn2" onclick="" style="font-family: arcadeFont; font-size: x-small;"> Fighting </button>
-        <button class="btn2" onclick="" style="font-family: arcadeFont; font-size: x-small;"> Action </button>
-        <button class="btn2" onclick="" style="font-family: arcadeFont; font-size: x-small;"> Simulation </button>
-        <button class="btn2" onclick="" style="font-family: arcadeFont; font-size: x-small;"> Simulation </button>
-      </div>-->
 
       <div class="btn-group" style="float:right; margin-right:25px; margin-bottom:10px;">
         <button type="button" class="btn btn-info rounded" onclick="listVisible();">
@@ -176,22 +166,22 @@
       <button class="btn2" onclick="" style="font-family: arcadeFont; font-size: x-small;"> Fighting </button>
       <button class="btn2" onclick="" style="font-family: arcadeFont; font-size: x-small;"> Action </button>
       <button class="btn2" onclick="" style="font-family: arcadeFont; font-size: x-small;"> Simulation </button>
-      <button class="btn2" onclick="" style="font-family: arcadeFont; font-size: x-small;"> Mario </button>
+      <button class="btn2" onclick="" style="font-family: arcadeFont; font-size: x-small;"> Strategy </button>
     </div>
 
     <div class="row" ng-controller="EventsController">
       <div class="col-md-3">
-        <br><br>
+        <br><br><br>
         <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="collapse"
                 data-target="#createEvent" style = "margin-left:10px;">Create Event
         </button>
         <div style="text-align: center;" class="collapse" id="createEvent">
           <br>
           <h3>Create a new event...</h3>
-          <div class = "col-sm-12">
+
           <form novalidate class="simple-form,form-group row">
-            <input type="text" placeholder="Name:" class="form-control" id="name" ng-model="newEvent.name" style="margin-left:16px"
-             required > <br>
+              <div class = "col-sm-12" style = "padding-left: 25px;">
+            <input type="text" placeholder="Name:" class="form-control" id="name" ng-model="newEvent.name" required > <br>
             <input type="text" placeholder="Location:" class="form-control" id="address" ng-model="newEvent.address"
                    required> <br>
 
@@ -243,19 +233,20 @@
                    required > <br>
             <textarea rows="3" placeholder="Event Description:" class="form-control" id="description"
                       ng-model="newEvent.description"></textarea> <br>
-            <input type="text" placeholder="Event Tags:" class="form-control" id="tags" ng-model="newEvent.tags"
-            style=margin-left:16px > <br>
-          </div>
+            <input type="text" placeholder="Event Tags:" class="form-control" id="tags" ng-model="newEvent.tags"> <br>
+
             <button type="submit" class="btn btn-success" ng-click="addEvent()"><span
                     class="glyphicon glyphicon-ok"></span></button>
             <br><br>
+              </div>
           </form>
+
         </div>
 
-        <br><br>
-        <button type="button" class="btn btn-primary btn-lg btn-block" style = "margin-left:10px;">Edit Event</button>
-        <br><br>
-        <button type="button" class="btn btn-primary btn-lg btn-block" style = "margin-left:10px;">Delete Event</button>
+        <!--<br><br>-->
+        <!---<button type="button" class="btn btn-primary btn-lg btn-block" style = "margin-left:10px;">Edit Event</button>-->
+        <!--<br><br>-->
+        <!--<button type="button" class="btn btn-primary btn-lg btn-block" style = "margin-left:10px;">Delete Event</button>-->
         <br><br>
 
         <div class="collapse" id="sendMessage">
@@ -280,14 +271,14 @@
       </div>
 
       <div class="col-md-9" id="cal">
-                    <div class="ui container">
-                            <div class="ui grid">
-                              <div class="ui sixteen column">
-                                <div id="calendar"></div>
-                              </div>
-                            </div>
-                    </div>
-       </div>
+        <div class="ui container">
+          <div class="ui grid">
+            <div class="ui sixteen column">
+              <div id="calendar"></div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <div class="col-md-9 collapse in" id="list">
         <br>
