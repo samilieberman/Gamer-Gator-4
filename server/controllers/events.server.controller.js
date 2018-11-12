@@ -86,7 +86,7 @@ exports.list = function(req, res) {
     }
     res.status(200);
     res.json(event); // response with event in JSON format
-  }).sort({eventTime:1}); // 1 is for ascending order
+  }).sort({startTime:-1}); // 1 is for ascending order
 };
 
 /* 

@@ -23,6 +23,7 @@ var eventSchema = new Schema({
   creatorUsername: String,
   eventDescription: String,
   participantUsernames: [String],
+  game: String,
   tags: [String],
   fee: Number,
 

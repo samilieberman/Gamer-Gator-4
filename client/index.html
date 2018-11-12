@@ -196,7 +196,7 @@
                    required> <br>
 
             <div>
-              <label for="startTime"> Event Start Time: </label> <br>
+              <label name="startTime"> Event Start Time: </label> <br>
               <select name="year" ng-model="startTime.year">
                 <option value="">year</option>
                 <option value="2018">2018</option>
@@ -217,7 +217,7 @@
             </div> <br>
 
             <div>
-              <label for="endTime"> Event End Time: </label> <br>
+              <label name="endTime"> Event End Time: </label> <br>
               <select name="year" ng-model="endTime.year">
                 <option value="">year</option>
                 <option value="2018">2018</option>
@@ -237,6 +237,10 @@
               </select>
             </div> <br>
 
+            <input type="text" placeholder="Game:" class="form-control" id="game" ng-model="newEvent.game" style="margin-left:16px"
+                   required > <br>
+            <input type="text" placeholder="Fee:" class="form-control" id="fee" ng-model="newEvent.fee" style="margin-left:16px"
+                   required > <br>
             <textarea rows="3" placeholder="Event Description:" class="form-control" id="description"
                       ng-model="newEvent.description"></textarea> <br>
             <input type="text" placeholder="Event Tags:" class="form-control" id="tags" ng-model="newEvent.tags"
@@ -297,7 +301,7 @@
             <tr>
               <th></th>
               <th>Event Name</th>
-              <th>Date</th>
+              <th>Start Time</th>
               <th>Location</th>
               <th>Game</th>
               <th>Fee</th>
@@ -310,9 +314,9 @@
                         class="glyphicon glyphicon-remove"></span></button>
               </td>
               <td>{{event.name}}</td>
-              <td>{{event.eventTime}}</td>
+              <td>{{event.startTime}}</td>
               <td>{{event.address}}</td>
-              <td>{{event.tags}}</td>
+              <td>{{event.game}}</td>
               <td>{{event.fee}}</td>
               <td>
                 <button type="button" class="btn btn-info" ng-click="showDetails($index)">
