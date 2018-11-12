@@ -66,6 +66,20 @@ angular.module('events').controller('EventsController', ['$scope', 'Events',
       $scope.events.splice(index, 1);
     };
 
+    $scope.updateEvent = function (index) {
+      Events.update($scope.events[index]._id, $scope.updatedEvent).then(function (response) {
+        Events.getAll().then(function (response) {
+          console.log(response.data);
+          $scope.events = response.data;
+        }, function (error) {
+          console.log('Unable to update events:', error);
+          console.log(response.data);
+        });
+      });
+      $scope.events[index] = $scope.updatedEvent;
+      $scope.events = ""; // is this necessary
+    };
+
     $scope.showDetails = function (index) {
       $scope.detailedInfo = $scope.events[index];
     };

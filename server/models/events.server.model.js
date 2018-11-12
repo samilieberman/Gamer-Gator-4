@@ -21,7 +21,7 @@ var eventSchema = new Schema({
     required: true
   },
   creatorUsername: String,
-  eventDescription: String,
+  description: String,
   participantUsernames: [String],
   game: String,
   tags: [String],

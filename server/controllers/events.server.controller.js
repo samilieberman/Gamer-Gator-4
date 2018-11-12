@@ -47,6 +47,10 @@ exports.update = function(req, res) {
     event.name = req.body.name;
     event.address = req.body.address;
     event.startTime = req.body.startTime;
+    event.endTime = req.body.endTime;
+    event.game = req.body.game;
+    event.fee = req.body.fee;
+    event.description = req.body.description;
 
       event.save(function(err){
         if(err){
