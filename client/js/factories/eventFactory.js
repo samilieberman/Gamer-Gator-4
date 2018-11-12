@@ -5,7 +5,7 @@ angular.module('events', []).factory('Events', function($http) {
       //return $http.get('//bootcamp-assignment6.herokuapp.com/api/listings');
     },
 	
-	create: function(event) {
+	  create: function(event) {
       return $http.post('http://localhost:8080/api/events', event);
       //return $http.post('//bootcamp-assignment6.herokuapp.com/api/listings', listing);
     }, 
@@ -17,6 +17,10 @@ angular.module('events', []).factory('Events', function($http) {
       //console.log(id);
       return $http.delete('http://localhost:8080/api/events/' + id);
       //return $http.delete('//bootcamp-assignment6.herokuapp.com/api/listings/' + id);
+    },
+
+    update: function(id, event) {
+      return $http.put('http://localhost:8080/api/events/' + id, event);
     }
   };
 
