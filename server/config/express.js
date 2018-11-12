@@ -1,10 +1,12 @@
-var path = require('path'),  
-    express = require('express'), 
+var path = require('path'),
+    express = require('express'),
     mongoose = require('mongoose'),
     morgan = require('morgan'),
     bodyParser = require('body-parser'),
     config = require('./config'),
-    eventsRouter = require('../routes/events.server.routes');
+    eventsRouter = require('../routes/events.server.routes'),
+    session = require('express-session'),
+    passport = require('passport');
 
 module.exports.init = function() {
   //connect to database
@@ -15,23 +17,30 @@ module.exports.init = function() {
   //enable request logging for development debugging
   app.use(morgan('dev'));
 
-  //body parsing middleware 
+  //body parsing middleware
   app.use(bodyParser.json());
 
-  
+
   /**TODO
   Serve static files */
   app.use('/', express.static(__dirname + '/../../client'));
 
-  /**TODO 
+  /**TODO
   Use the listings router for requests to the api */
   app.use('/api/events', eventsRouter);
 
-  /**TODO 
-  Go to homepage for all routes not specified */ 
+  // set up session
+  app.use(session({
+    secret:'thesecret'
+    saveUninitialized:false,
+    resave:false
+  }))
+
+  /**TODO
+  Go to homepage for all routes not specified */
   app.get('*', function(req, res) {
     res.sendFile(path.resolve('client/index.html'));
   });
 
   return app;
-};  
+};
