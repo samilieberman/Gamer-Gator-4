@@ -52,7 +52,7 @@ exports.update = function(req, res) {
     event.fee = req.body.fee;
     event.description = req.body.description;
 
-    
+
 
       event.save(function(err){
         if(err){

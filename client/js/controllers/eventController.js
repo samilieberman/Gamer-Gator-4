@@ -9,7 +9,7 @@ angular.module('events').controller('EventsController', ['$scope', 'Events',
     });
 
     $scope.detailedInfo = undefined;
-
+    $scope.currentIndex = -1;
 
     $scope.months=[];
     for (var i = 1; i <= 12; ++i) {
@@ -82,6 +82,7 @@ angular.module('events').controller('EventsController', ['$scope', 'Events',
 
     $scope.showDetails = function (index) {
       $scope.detailedInfo = $scope.events[index];
+      $scope.currentIndex = index;
     };
   }
 ]);
