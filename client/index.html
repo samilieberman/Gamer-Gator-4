@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="gamerGatorApp">
 
 <head>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -8,7 +8,7 @@
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.css'>
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.css'>
 </head>
-<div ng-app="gamerGatorApp">
+<div>
 
   <div class="container-fluid">
     <div class="row">
@@ -170,6 +170,131 @@
     </div>
 
     <div class="row" ng-controller="EventsController">
+    
+     <!--Edit Event modal dialog-->
+     <div id="editEvent" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h2 class="modal-title" style="text-align:center">Edit Event...</h2>
+          </div>
+          <div class="modal-body">
+            <form novalidate class="simple-form,form-group row">
+              <div class = "col-sm-12" style = "padding-left: 25px;">
+
+                <input type="text" placeholder="Name:" class="form-control" id="name"  > <br>
+                <input type="text" placeholder="Location:" class="form-control" id="address" ng-model="newEvent.address" required> <br>
+
+                <div>
+                  <label name="startTime"> Event Start Time: </label> <br>
+                  <select name="year" ng-model="startTime.year">
+                    <option value="">year</option>
+                    <option value="2018">2018</option>
+                    <option value="2019">2019</option>
+                  </select>
+                  <select name="month" ng-model="startTime.month">
+                    <option value="">month</option>
+                    <option ng-repeat="month in months" value="{{month}}">{{month}}</option>
+                  </select>
+                  <select name="day" ng-model="startTime.day">
+                    <option value="">day</option>
+                    <option ng-repeat="day in days" value="{{day}}">{{day}}</option>
+                  </select>
+                  <select name="hour" ng-model="startTime.hour">
+                    <option value="">hour</option>
+                    <option ng-repeat="hour in hours" value="{{hour}}">{{hour}}</option>
+                  </select>
+                </div> <br>
+
+                <div>
+                  <label name="endTime"> Event End Time: </label> <br>
+                  <select name="year" ng-model="endTime.year">
+                    <option value="">year</option>
+                    <option value="2018">2018</option>
+                    <option value="2019">2019</option>
+                  </select>
+                  <select name="month" ng-model="endTime.month">
+                    <option value="">month</option>
+                    <option ng-repeat="month in months" value="{{month}}">{{month}}</option>
+                  </select>
+                  <select name="day" ng-model="endTime.day">
+                    <option value="">day</option>
+                    <option ng-repeat="day in days" value="{{day}}">{{day}}</option>
+                  </select>
+                  <select name="hour" ng-model="endTime.hour">
+                    <option value="">hour</option>
+                    <option ng-repeat="hour in hours" value="{{hour}}">{{hour}}</option>
+                  </select>
+                </div> <br>
+
+                <input type="text" placeholder="Game:" class="form-control" id="game" ng-model="newEvent.game" required > <br>
+                <input type="text" placeholder="Fee:" class="form-control" id="fee" ng-model="newEvent.fee" required > <br>
+                <textarea rows="3" placeholder="Event Description:" class="form-control" id="description"
+                          ng-model="newEvent.description"></textarea> <br>
+                <input type="text" placeholder="Event Tags:" class="form-control" id="tags" ng-model="newEvent.tags"> <br>
+
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-success" ng-click="addEvent()"><span
+                    class="glyphicon glyphicon-ok"></span></button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel edit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+       
+    <!-- Details modal dialog -->
+    <div id="detailsModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h2 class="modal-title" style="text-align:center">  {{detailedInfo.name}}</h2>
+          </div>
+          <div class="modal-body">
+            <h3 style="text-align:center">Game:  {{detailedInfo.game}}</h3>
+            <h3 style="text-align:center">Date</h3>
+            <h4 class="well" style="text-align:center; margin-top: 0px;">{{detailedInfo.startTime}}  to  {{detailedInfo.endTime}}</h4>
+            <h3 style="text-align:center">Location</h3>
+            <p class="well" style="text-align:center">{{detailedInfo.address}}</p>
+            <h3 style="text-align:center">Description</h3>
+            <p class="well">{{detailedInfo.eventDescription}}</p>
+            <h3 style="text-align:center">Fee:  ${{detailedInfo.fee}}</h3>
+          </div>
+
+          <div class="modal-footer">
+            <div class="text-center">
+              <button type="button" class="btn btn-success" >
+                <!-- ng-if="currentUser.registeredEvents[] does not contain detailedInfo" ng-click="subscribeUser(username, currentIndex)"-->
+                Subscribe
+              </button>
+              <button type="button" class="btn btn-secondary">
+                <!-- ng-if="currentUser.registeredEvents[] contains detailedInfo" ng-click="unsubscribeUser(username, currentIndex)"-->
+                Unsubscribe
+              </button>
+            </div>
+            <br><br>
+            <button type="button" class="btn btn-danger pull-left" ng-click="deleteEvent(currentIndex)" data-dismiss="modal">
+              <!-- ng-if="(currentUser == detailedInfo.creatorUsername)||(currentUser.admin)"-->
+              Delete Event</button>
+            <button type="button" class="btn btn-warning pull-left">
+              <!-- ng-if="(currentUser == detailedInfo.creatorUsername)||(currentUser.admin)" ng-click="editEvent()" -->
+              Edit Event
+            </button>
+            <button type="button" class="btn btn-info pull-left" >
+              <!-- ng-if="(currentUser == detailedInfo.creatorUsername)||(currentUser.admin)" ng-click="sendMessageModal()" -->
+              Message event members
+            </button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+      
+      
       <div class="col-md-3">
         <br><br><br>
         <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="collapse"
@@ -242,101 +367,7 @@
           </form>
 
         </div>
-
-        <br><br>
-        <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="collapse"
-                data-target="#editEvent" style = "margin-left:10px;">Edit Event
-        </button>
-        <div style="text-align: center;" class="collapse" id="editEvent">
-          <br>
-          <h3>Edit Pre-existing Event...</h3>
-
-          <form novalidate class="simple-form,form-group row">
-              <div class = "col-sm-12" style = "padding-left: 25px;">
-                
-            <input type="text" placeholder="Name:" class="form-control" id="name"  > <br>
-            <input type="text" placeholder="Location:" class="form-control" id="address" ng-model="newEvent.address" required> <br>
-
-            <div>
-              <label name="startTime"> Event Start Time: </label> <br>
-              <select name="year" ng-model="startTime.year">
-                <option value="">year</option>
-                <option value="2018">2018</option>
-                <option value="2019">2019</option>
-              </select>
-              <select name="month" ng-model="startTime.month">
-                <option value="">month</option>
-                <option ng-repeat="month in months" value="{{month}}">{{month}}</option>
-              </select>
-              <select name="day" ng-model="startTime.day">
-                <option value="">day</option>
-                <option ng-repeat="day in days" value="{{day}}">{{day}}</option>
-              </select>
-              <select name="hour" ng-model="startTime.hour">
-                <option value="">hour</option>
-                <option ng-repeat="hour in hours" value="{{hour}}">{{hour}}</option>
-              </select>
-            </div> <br>
-
-            <div>
-              <label name="endTime"> Event End Time: </label> <br>
-              <select name="year" ng-model="endTime.year">
-                <option value="">year</option>
-                <option value="2018">2018</option>
-                <option value="2019">2019</option>
-              </select>
-              <select name="month" ng-model="endTime.month">
-                <option value="">month</option>
-                <option ng-repeat="month in months" value="{{month}}">{{month}}</option>
-              </select>
-              <select name="day" ng-model="endTime.day">
-                <option value="">day</option>
-                <option ng-repeat="day in days" value="{{day}}">{{day}}</option>
-              </select>
-              <select name="hour" ng-model="endTime.hour">
-                <option value="">hour</option>
-                <option ng-repeat="hour in hours" value="{{hour}}">{{hour}}</option>
-              </select>
-            </div> <br>
-
-            <input type="text" placeholder="Game:" class="form-control" id="game" ng-model="newEvent.game" required > <br>
-            <input type="text" placeholder="Fee:" class="form-control" id="fee" ng-model="newEvent.fee" required > <br>
-            <textarea rows="3" placeholder="Event Description:" class="form-control" id="description"
-                      ng-model="newEvent.description"></textarea> <br>
-            <input type="text" placeholder="Event Tags:" class="form-control" id="tags" ng-model="newEvent.tags"> <br>
-
-            <button type="submit" class="btn btn-success" ng-click="addEvent()"><span
-                    class="glyphicon glyphicon-ok"></span></button>
-            <br><br>
-              </div>
-          </form>
           
-
-        </div>
-
-
-        <!--<br><br>-->
-        <!---<button type="button" class="btn btn-primary btn-lg btn-block" style = "margin-left:10px;">Edit Event</button>-->
-        <!--<br><br>-->
-        <!--<button type="button" class="btn btn-primary btn-lg btn-block" style = "margin-left:10px;">Delete Event</button>-->
-        <br><br>
-
-        <div class="collapse" id="sendMessage">
-          <div class="input-group">
-            <h4>Send message to all attendees subscribed to an event you moderate...</h4>
-            <select class="custom-select my-1 mr-sm-2">
-              <option selected>Choose event...</option>
-              <option value="1">Moderated events here</option>
-            </select> <br><br>
-            <textarea rows="3" class="form-control">Enter message...</textarea>
-            <button style="text-align:center; margin-top:20px;" type="button" class="btn btn-primary">Send message
-            </button>
-          </div>
-          <br>
-        </div>
-        <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="collapse" data-target="#sendMessage" style = "margin-left:10px;">
-          Send Message to Attendees
-        </button>
         <br><br>
         <button type="button" class="btn btn-primary btn-lg btn-block" style = "margin-left:10px;">View Subscribed Events</button>
         <br>
@@ -389,7 +420,7 @@
               <td>{{event.game}}</td>
               <td>{{event.fee}}</td>
               <td>
-                <button type="button" class="btn btn-info" ng-click="showDetails($index)">
+                <button type="button" class="btn btn-info" ng-click="showDetails($index) data-toggle="modal" data-target="#detailsModal">
                   <span class="glyphicon glyphicon-option-horizontal"></span>
                 </button>
               </td>
