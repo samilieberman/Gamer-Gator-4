@@ -234,6 +234,20 @@
             <textarea rows="3" placeholder="Event Description:" class="form-control" id="description"
                       ng-model="newEvent.description"></textarea> <br>
             <input type="text" placeholder="Event Tags:" class="form-control" id="tags" ng-model="newEvent.tags"> <br>
+                <div>
+                  <label>Event Tag:</label>
+                  <select name="tag" ng-model="newEvent.tags">
+                    <option value="RPG">RPG</option>
+                    <option value="Adventure">Adventure</option>
+                    <option value="Sports">Sports</option>
+                    <option value="Racing">Racing</option>
+                    <option value="Fighting">Fighting</option>
+                    <option value="Action">Action</option>
+                    <option value="Simulation">Simulation</option>
+                    <option value="Strategy">Strategy</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
 
             <button type="submit" class="btn btn-success" ng-click="addEvent()"><span
                     class="glyphicon glyphicon-ok"></span></button>
@@ -303,6 +317,20 @@
             <input type="text" placeholder="Fee:" class="form-control" id="fee" ng-model="newEvent.fee" required > <br>
             <textarea rows="3" placeholder="Event Description:" class="form-control" id="description"
                       ng-model="newEvent.description"></textarea> <br>
+                <div>
+                  <label>Event Tag: </label>
+                  <select name="tag" ng-model="newEvent.tags">
+                    <option value="RPG">RPG</option>
+                    <option value="Adventure">Adventure</option>
+                    <option value="Sports">Sports</option>
+                    <option value="Racing">Racing</option>
+                    <option value="Fighting">Fighting</option>
+                    <option value="Action">Action</option>
+                    <option value="Simulation">Simulation</option>
+                    <option value="Strategy">Strategy</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
             <input type="text" placeholder="Event Tags:" class="form-control" id="tags" ng-model="newEvent.tags"> <br>
 
             <button type="submit" class="btn btn-success" ng-click="addEvent()"><span
@@ -438,8 +466,8 @@
                 }
             }
     }
-    </script>
-    <script>
+</script>
+<script>
             $(document).ready(function() {
 
             $('#calendar').fullCalendar({
