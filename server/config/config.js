@@ -5,7 +5,7 @@
 
 module.exports={
     db: {
-      uri: 'mongodb://CEN3031:CEN3031TA@ds137862.mlab.com:37862/gamergator4', //place the URI of your mongo database here.
+      uri: 'mongodb://admin:passw0rd@ds111489.mlab.com:11489/gamergator4', //place the URI of your mongo database here.
     },
     port: 8080
   };

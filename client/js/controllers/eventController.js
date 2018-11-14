@@ -68,7 +68,10 @@ angular.module('events').controller('EventsController', ['$scope', 'Events',
 
     $scope.updateEvent = function (index) {
       Events.update($scope.events[index]._id, $scope.updatedEvent).then(function (response) {
-        Events.getAll().then(function (response) {
+
+          $scope.events[index] = $scope.updatedEvent;
+
+          Events.getAll().then(function (response) {
           console.log(response.data);
           $scope.events = response.data;
         }, function (error) {
@@ -76,7 +79,6 @@ angular.module('events').controller('EventsController', ['$scope', 'Events',
           console.log(response.data);
         });
       });
-      $scope.events[index] = $scope.updatedEvent;
       $scope.events = ""; // is this necessary
     };
 
