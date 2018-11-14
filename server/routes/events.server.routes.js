@@ -1,7 +1,11 @@
 /* Dependencies */
-var events = require('../controllers/events.server.controller.js'),
-    express = require('express'), 
-    router = express.Router();
+var path = require('path');
+var express = require('express');
+var router = express.Router();
+var events = require('../controllers/events.server.controller.js');
+var users = require('../controllers/users.server.controller.js');
+var User = require('../models/users.server.model.js');
+var passport = require('passport');
 
 /* 
   These method calls are responsible for routing requests to the correct request handler.
@@ -11,7 +15,6 @@ router.route('/')
   .get(events.list)
   .post(events.create);
 
-
 /*
   The ':' specifies a URL parameter. 
  */
@@ -19,6 +22,7 @@ router.route('/:eventId')
   .get(events.read)
   .put(events.update)
   .delete(events.delete);
+
 
 /*
   The 'router.param' method allows us to specify middleware we would like to use to handle 
