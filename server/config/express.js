@@ -96,7 +96,9 @@ module.exports.init = function() {
         req.logout();
         res.redirect('/');
     });
-
+    function isAuthenticated(req,res){
+        return req.isAuthenticated();
+    }
 
   return app;
 };
