@@ -56,6 +56,7 @@ angular.module('events').controller('EventsController', ['$scope', 'Events',
     };
 
     $scope.deleteEvent = function (index) {
+      console.log(index);
       Events.delete($scope.events[index]._id).then(function (response) { // _id is from Mlab
         Events.getAll().then(function (response) {  // navigate back to 'listing.list'
         }, function (error) {
@@ -67,6 +68,37 @@ angular.module('events').controller('EventsController', ['$scope', 'Events',
     };
 
     $scope.updateEvent = function (index) {
+
+      Events.delete($scope.events[index]._id).then(function (response) { // _id is from Mlab
+        Events.getAll().then(function (response) {  // navigate back to 'listing.list'
+        }, function (error) {
+          console.log('Unable to delete events:', error);
+          console.log(response.data);
+        });
+      });
+      $scope.events.splice(index, 1);
+
+      var startTimeConcat = $scope.startTime.year + "-" + $scope.startTime.month + "-" + $scope.startTime.day + "T" + $scope.startTime.hour + ":00:00Z";
+      var endTimeConcat = $scope.endTime.year + "-" + $scope.endTime.month + "-" + $scope.endTime.day + "T" + $scope.endTime.hour + ":00:00Z";
+      //catch exceptions?
+      $scope.updatedEvent.startTime = new Date(startTimeConcat);
+      $scope.updatedEvent.endTime = new Date(endTimeConcat);
+
+      Events.create($scope.updatedEvent).then(function (response) {
+        Events.getAll().then(function (response) {
+          // redirect back to the list page
+          console.log(response.data);
+          $scope.events = response.data;
+          //window.location.href = '/';
+        }, function (error) {
+          console.log('Unable to create events:', error);
+        });
+      });
+      $scope.events = "";       // clears the form after submitting
+
+    };
+
+    /*$scope.updateEvent = function (index) {
       Events.update($scope.events[index]._id, $scope.updatedEvent).then(function (response) {
 
           $scope.events[index] = $scope.updatedEvent;
@@ -80,7 +112,7 @@ angular.module('events').controller('EventsController', ['$scope', 'Events',
         });
       });
       $scope.events = ""; // is this necessary
-    };
+    };*/
 
     $scope.showDetails = function (index) {
       $scope.detailedInfo = $scope.events[index];
