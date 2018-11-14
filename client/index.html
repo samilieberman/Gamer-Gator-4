@@ -27,7 +27,7 @@
         <!-- Wrapper for slides -->
         <div class="carousel-inner">
           <div class="item active">
-            <img src="../img/fortnite.png" alt="fortnite" style="width:100%; height:300px;">
+            <img src="../img/fortnite_banner.png" alt="fortnite" style="width:100%; height:300px;">
             <div class="carousel-caption">
               <h3></h3>
             </div>
@@ -37,7 +37,7 @@
           </div>
 
           <div class="item">
-            <img src="../img/callofduty.jpg" alt="call" style="width:100%; height:300px;">
+            <img src="../img/league_banner.png" alt="call" style="width:100%; height:300px;">
             <div class="carousel-caption">
               <h3>RPG</h3>
             </div>
@@ -47,7 +47,7 @@
           </div>
 
           <div class="item">
-            <img src="../img/mario.jpg" alt="mario" style="width:100%; height:300px;">
+            <img src="../img/rocket_league_banner.png" alt="mario" style="width:100%; height:300px;">
             <div class="carousel-caption">
               <h3></h3>
             </div>
@@ -57,7 +57,7 @@
           </div>
 
           <div class="item">
-            <img src="../img/banner2.jpg" alt="banne" style="width:100%; height:300px;">
+            <img src="../img/smash_banner.png" alt="banne" style="width:100%; height:300px;">
             <div class="carousel-caption">
               <h3>Arcade</h3>
             </div>
@@ -132,8 +132,8 @@
             <form novalidate class="simple-form,form-group row">
               <div class = "col-sm-12" style = "padding-left: 25px;">
 
-                <input type="text" placeholder="Name:" class="form-control" id="editName" > <br>
-                <input type="text" placeholder="Location:" class="form-control" id="editAddress" ng-model="updatedEvent.address" required> <br>
+                <input type="text" placeholder='Name: {{detailedInfo.name}}' class="form-control" id="editName" > <br>
+                <input type="text" placeholder='Location: {{detailedInfo.address}}' class="form-control" id="editAddress" ng-model="updatedEvent.address" required> <br>
 
                 <div>
                   <label name="startTime"> Event Start Time: </label> <br>
@@ -177,11 +177,11 @@
                   </select>
                 </div> <br>
 
-                <input type="text" placeholder="Game:" class="form-control" id="game" ng-model="updatedEvent.game" required>{{detailedInfo.game}}<br>
-                <input type="text" placeholder="Fee:" class="form-control" id="fee" ng-model="updatedEvent.fee" required >{{detailedInfo.fee}}<br>
-                <textarea rows="3" placeholder="Event Description:" class="form-control" id="description"
+                <input type="text" placeholder='Game: {{detailedInfo.game}}' class="form-control" id="game" ng-model="updatedEvent.game" required><br>
+                <input type="text" placeholder='Fee: {{detailedInfo.fee}}' class="form-control" id="fee" ng-model="updatedEvent.fee" required ><br>
+                <textarea rows="3" placeholder='Event Description: {{detailedInfo.description}}' class="form-control" id="description"
                           ng-model="updatedEvent.description"></textarea><br>
-                <input type="text" placeholder="Event Tags:" class="form-control" id="tags2" ng-model="updatedEvent.tags">{{detailedInfo.tags}}<br>
+                <input type="text" placeholder='Event Tags: {{detailedInfo.tags}}' class="form-control" id="tags" ng-model="updatedEvent.tags"><br>
 
               </div>
             </form>
