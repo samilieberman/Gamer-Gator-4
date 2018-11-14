@@ -132,7 +132,7 @@
             <form novalidate class="simple-form,form-group row">
               <div class = "col-sm-12" style = "padding-left: 25px;">
 
-                <input type="text" placeholder='Name: {{detailedInfo.name}}' class="form-control" id="editName" > <br>
+                <input type="text" placeholder='Name: {{detailedInfo.name}}' class="form-control" id="editName" ng-model="updatedEvent.name" required> <br>
                 <input type="text" placeholder='Location: {{detailedInfo.address}}' class="form-control" id="editAddress" ng-model="updatedEvent.address" required> <br>
 
                 <div>

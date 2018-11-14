@@ -56,6 +56,7 @@ angular.module('events').controller('EventsController', ['$scope', 'Events',
     };
 
     $scope.deleteEvent = function (index) {
+      console.log(index);
       Events.delete($scope.events[index]._id).then(function (response) { // _id is from Mlab
         Events.getAll().then(function (response) {  // navigate back to 'listing.list'
         }, function (error) {
@@ -67,6 +68,15 @@ angular.module('events').controller('EventsController', ['$scope', 'Events',
     };
 
     $scope.updateEvent = function (index) {
+
+      Events.delete($scope.events[index]._id).then(function (response) { // _id is from Mlab
+        Events.getAll().then(function (response) {  // navigate back to 'listing.list'
+        }, function (error) {
+          console.log('Unable to delete events:', error);
+          console.log(response.data);
+        });
+      });
+      $scope.events.splice(index, 1);
 
       var startTimeConcat = $scope.startTime.year + "-" + $scope.startTime.month + "-" + $scope.startTime.day + "T" + $scope.startTime.hour + ":00:00Z";
       var endTimeConcat = $scope.endTime.year + "-" + $scope.endTime.month + "-" + $scope.endTime.day + "T" + $scope.endTime.hour + ":00:00Z";
@@ -84,15 +94,6 @@ angular.module('events').controller('EventsController', ['$scope', 'Events',
           console.log('Unable to create events:', error);
         });
       });
-
-      Events.delete($scope.events[index]._id).then(function (response) { // _id is from Mlab
-        Events.getAll().then(function (response) {  // navigate back to 'listing.list'
-        }, function (error) {
-          console.log('Unable to delete events:', error);
-          console.log(response.data);
-        });
-      });
-      $scope.events.splice(index, 1);
       $scope.events = "";       // clears the form after submitting
 
     };
@@ -111,11 +112,11 @@ angular.module('events').controller('EventsController', ['$scope', 'Events',
         });
       });
       $scope.events = ""; // is this necessary
-    };
+    };*/
 
     $scope.showDetails = function (index) {
       $scope.detailedInfo = $scope.events[index];
       $scope.currentIndex = index;
-    };*/
+    };
   }
 ]);
