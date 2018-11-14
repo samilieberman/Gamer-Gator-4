@@ -12,7 +12,7 @@
   margin-bottom: 0px;
 }
 .text-block {
-  color: black; /* text color */ 
+  color: black; /* text color */
   background-color: rgb(204, 204, 204);
   background-color: rgba(204, 204, 204, 0.8);
 }
@@ -24,7 +24,7 @@
 
 
 #list{
-  display:none; 
+  display:none;
 }
 /* Style the buttons */
 .btn2 {
@@ -96,5 +96,3 @@
   font-family: arcadeFont;
   src: url("../fonts/arcadefont.TTF");
 }
-
-
