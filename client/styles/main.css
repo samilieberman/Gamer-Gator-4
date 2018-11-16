@@ -28,6 +28,9 @@
 #list{
   display:none;
 }
+#map{
+    display:none;
+}
 /* Style the buttons */
 .btn2 {
   border: none;
