@@ -90,6 +90,9 @@
       <button type="button" class="btn btn-info rounded" onclick="calVisible();">
         Calendar
       </button>
+      <button type="button" class="btn btn-info rounded" onclick="mapVisible();">
+        Map
+      </button>
     </div>
 
     <!-- Login button -->
@@ -332,6 +335,12 @@
       </div>
     </div>
 
+    <div class="col-md-9" id="map">
+      <div class="ui container">
+      hello world
+      </div>
+    </div>
+
     <div class="col-md-9 collapse in" id="list">
       <br>
       <div class="input-group" id="searchBar">
@@ -394,18 +403,29 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js'></script>
 <script>
     function listVisible() {
-        if (document.getElementById('cal')) {
-            if (document.getElementById('cal').style.display != 'none') {
+        if (document.getElementById('cal') || document.getElementById('map')) {
+            if (document.getElementById('cal').style.display != 'none' || document.getElementById('map').style.display != 'none') {
                 document.getElementById('cal').style.display = 'none';
+                document.getElementById('map').style.display = 'none';
                 document.getElementById('list').style.display = 'block';
             }
         }
     }
     function calVisible() {
-        if (document.getElementById('list')) {
-            if (document.getElementById('list').style.display != 'none') {
+        if (document.getElementById('list') || document.getElementById('map')) {
+            if (document.getElementById('list').style.display != 'none' || document.getElementById('map').style.display != 'none') {
                 document.getElementById('list').style.display = 'none';
+                document.getElementById('map').style.display = 'none';
                 document.getElementById('cal').style.display = 'block';
+            }
+        }
+    }
+    function mapVisible() {
+        if (document.getElementById('list') || document.getElementById('cal')) {
+            if (document.getElementById('list').style.display != 'none' || document.getElementById('cal').style.display != 'none') {
+                document.getElementById('list').style.display = 'none';
+                document.getElementById('cal').style.display = 'none';
+                document.getElementById('map').style.display = 'block';
             }
         }
     }
