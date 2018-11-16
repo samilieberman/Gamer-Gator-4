@@ -11,6 +11,7 @@
   background-color: white;
   margin-bottom: 0px;
   background-color:black;
+  border-radius: 0 !important;
 }
 .text-block {
   color: black; /* text color */
