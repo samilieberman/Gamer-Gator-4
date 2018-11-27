@@ -186,8 +186,21 @@
                 <input type="text" placeholder='Fee: {{detailedInfo.fee}}' class="form-control" id="fee" ng-model="updatedEvent.fee" required ><br>
                 <textarea rows="3" placeholder='Event Description: {{detailedInfo.description}}' class="form-control" id="description"
                           ng-model="updatedEvent.description"></textarea><br>
-                <input type="text" placeholder='Event Tags: {{detailedInfo.tags}}' class="form-control" id="tags" ng-model="updatedEvent.tags"><br>
-
+                <div>
+                  <label name="tag">Event Tag:</label>
+                  <select name="tags" ng-model="newEvent.tags">
+                    <option value="">--tags--</option>
+                    <option value="RPG">RPG</option>
+                    <option value="Adventure">Adventure</option>
+                    <option value="Sports">Sports</option>
+                    <option value="Racing">Racing</option>
+                    <option value="Fighting">Fighting</option>
+                    <option value="Action">Action</option>
+                    <option value="Simulation">Simulation</option>
+                    <option value="Strategy">Strategy</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div> <br>
               </div>
             </form>
           </div>
@@ -265,7 +278,7 @@
                    required> <br>
 
             <div>
-              <label name="startTime"> Event Start Time: </label> <br>
+              <label name="startTime">Event Start Time:</label> <br>
               <select name="year" ng-model="startTime.year">
                 <option value="">year</option>
                 <option value="2018">2018</option>
@@ -286,7 +299,7 @@
             </div> <br>
 
             <div>
-              <label name="endTime"> Event End Time: </label> <br>
+              <label name="endTime">Event End Time:</label> <br>
               <select name="year" ng-model="endTime.year">
                 <option value="">year</option>
                 <option value="2018">2018</option>
@@ -310,7 +323,21 @@
             <input type="number" placeholder="Fee:" class="form-control" ng-model="newEvent.fee" required > <br>
             <textarea rows="3" placeholder="Event Description:" class="form-control"
                       ng-model="newEvent.description"></textarea> <br>
-            <input type="text" placeholder="Event Tags:" class="form-control" ng-model="newEvent.tags"> <br>
+            <div>
+              <label name="tag">Event Tag:</label>
+              <select name="tags" ng-model="newEvent.tags">
+                <option value="">--tags--</option>
+                <option value="RPG">RPG</option>
+                <option value="Adventure">Adventure</option>
+                <option value="Sports">Sports</option>
+                <option value="Racing">Racing</option>
+                <option value="Fighting">Fighting</option>
+                <option value="Action">Action</option>
+                <option value="Simulation">Simulation</option>
+                <option value="Strategy">Strategy</option>
+                <option value="Other">Other</option>
+              </select>
+            </div> <br>
 
             <button type="submit" class="btn btn-success" ng-click="addEvent()"><span
                     class="glyphicon glyphicon-ok"></span></button>
@@ -362,7 +389,8 @@
           <tr ng-repeat="event in events | filter: searchInput as results">
 
             <td>{{event.name}}</td>
-            <td>{{event.startTime | date:'MMM d, y @ h:mma'}}</td>
+            <!--<td>{{event.startTime}}</td>-->
+            <td>{{event.startTime | date:'medium'}}</td>
             <td>{{event.address}}</td>
             <td>{{event.game}}</td>
             <td>{{event.fee}}</td>
