@@ -11,6 +11,7 @@ angular.module('events').controller('EventsController', ['$scope', 'Events',
     $scope.detailedInfo = undefined;
     $scope.currentIndex = -1;
 
+    // Initializing info for date picker
     $scope.months=[];
     for (var i = 1; i <= 12; ++i) {
       if (i < 10)
@@ -34,6 +35,13 @@ angular.module('events').controller('EventsController', ['$scope', 'Events',
       else
         $scope.hours.push(i.toString());
     }
+
+    // Get Filter Values
+    $scope.getFilterVal = function(tag) {
+      $scope.searchInput = tag.currentTarget.value;
+    };
+
+    // Event CRUD
 
     $scope.addEvent = function () {
       var startTimeConcat = $scope.startTime.year + "-" + $scope.startTime.month + "-" + $scope.startTime.day + "T" + $scope.startTime.hour + ":00:00Z";
