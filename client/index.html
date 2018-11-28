@@ -447,21 +447,34 @@
         }
     }
 </script>
+<div ng-controller="EventsController">
 <script>
     $(document).ready(function() {
 
+        var event = [];
+        eventArray = [];
+
+/*        $.parseJSON(eventArray).forEach(function(element){
+            event.push({
+                title:element.name,
+                start:element.startTime.toISOString(),
+                end:element.endTime.toISOString(),
+
+            })
+        });*/
         $('#calendar').fullCalendar({
             header: {
                 left: 'prev,next today',
                 center: 'title',
                 //right: 'month,basicWeek,basicDay'
-                right: 'month,basicDay'
+                right: 'month,basicDay,list'
             },
             defaultDate: new Date(),
             navLinks: true, // can click day/week names to navigate views
             editable: true,
             eventLimit: true, // allow "more" link when too many events
-            events: [
+            events: event
+            /*events: [
                 {
                     title: 'Fortnite Tournament',
                     start: '2018-11-25'
@@ -503,12 +516,13 @@
                     url: 'https://mariokart8.nintendo.com/',
                     start: '2018-10-28'
                 }
-            ]
+            ]*/
         });
 
     });
 
 </script>
+</div>
 </body>
 
 </html>
