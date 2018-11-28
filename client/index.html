@@ -274,7 +274,7 @@
         <br>
         <h3>Create a new event...</h3>
 
-        <form novalidate class="simple-form,form-group row">
+        <form id = "myForm" novalidate class="simple-form,form-group row">
           <div class = "col-sm-12" style = "padding-left: 25px;">
             <input type="text" placeholder="Name:" class="form-control" id="name" ng-model="newEvent.name" required > <br>
             <input type="text" placeholder="Location:" class="form-control" id="address" ng-model="newEvent.address"
@@ -342,8 +342,8 @@
               </select>
             </div> <br>
 
-            <button type="submit" class="btn btn-success" ng-click="addEvent()"><span
-                    class="glyphicon glyphicon-ok"></span></button>
+            <button type="submit" class="btn btn-success" ng-click="addEvent()" onclick="document.getElementById('myForm').reset();">
+                <span class="glyphicon glyphicon-ok"></span></button>
             <br><br>
           </div>
         </form>
