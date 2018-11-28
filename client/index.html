@@ -113,14 +113,17 @@
 
   <!-- top filter code -->
   <div id="myBtnContainer" style="margin-bottom:20px;">
-    <button class="btn2" onclick="" style="font-family: arcadeFont; font-size: x-small;"> RPG </button>
-    <button class="btn2" onclick="" style="font-family: arcadeFont; font-size: x-small;"> Adventure </button>
-    <button class="btn2" onclick="" style="font-family: arcadeFont; font-size: x-small;"> Sports </button>
-    <button class="btn2" onclick="" style="font-family: arcadeFont; font-size: x-small;"> Racing </button>
-    <button class="btn2" onclick="" style="font-family: arcadeFont; font-size: x-small;"> Fighting </button>
-    <button class="btn2" onclick="" style="font-family: arcadeFont; font-size: x-small;"> Action </button>
-    <button class="btn2" onclick="" style="font-family: arcadeFont; font-size: x-small;"> Simulation </button>
-    <button class="btn2" onclick="" style="font-family: arcadeFont; font-size: x-small;"> Strategy </button>
+    <button class="btn2" ng-model="searchInput" value="" ng-click="getFilterVal($event)" style="font-family: arcadeFont; font-size: x-small;"> All </button>
+    <button class="btn2" ng-model="searchInput" value="RPG" ng-click="getFilterVal($event)" style="font-family: arcadeFont; font-size: x-small;"> RPG </button>
+    <button class="btn2" ng-model="searchInput" value="Adventure" ng-click="getFilterVal($event)" style="font-family: arcadeFont; font-size: x-small;"> Adventure </button>
+    <button class="btn2" ng-model="searchInput" value="Sports" ng-click="getFilterVal($event)" style="font-family: arcadeFont; font-size: x-small;"> Sports </button>
+    <button class="btn2" ng-model="searchInput" value="Racing" ng-click="getFilterVal($event)" style="font-family: arcadeFont; font-size: x-small;"> Racing </button>
+    <button class="btn2" ng-model="searchInput" value="Fighting" ng-click="getFilterVal($event)" style="font-family: arcadeFont; font-size: x-small;"> Fighting </button>
+    <button class="btn2" ng-model="searchInput" value="Action" ng-click="getFilterVal($event)" style="font-family: arcadeFont; font-size: x-small;"> Action </button>
+    <button class="btn2" ng-model="searchInput" value="Simulation" ng-click="getFilterVal($event)" style="font-family: arcadeFont; font-size: x-small;"> Simulation </button>
+    <button class="btn2" ng-model="searchInput" value="Strategy" ng-click="getFilterVal($event)" style="font-family: arcadeFont; font-size: x-small;"> Strategy </button>
+    <button class="btn2" ng-model="searchInput" value="Other" ng-click="getFilterVal($event)" style="font-family: arcadeFont; font-size: x-small;"> Other </button>
+
   </div>
 
   <div class="row">
