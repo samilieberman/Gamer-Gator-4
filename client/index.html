@@ -274,7 +274,7 @@
         <br>
         <h3>Create a new event...</h3>
 
-        <form novalidate class="simple-form,form-group row">
+        <form id = "myForm" novalidate class="simple-form,form-group row">
           <div class = "col-sm-12" style = "padding-left: 25px;">
             <input type="text" placeholder="Name:" class="form-control" id="name" ng-model="newEvent.name" required > <br>
             <input type="text" placeholder="Location:" class="form-control" id="address" ng-model="newEvent.address"
@@ -342,8 +342,8 @@
               </select>
             </div> <br>
 
-            <button type="submit" class="btn btn-success" ng-click="addEvent()"><span
-                    class="glyphicon glyphicon-ok"></span></button>
+            <button type="submit" class="btn btn-success" ng-click="addEvent()" onclick="document.getElementById('myForm').reset();">
+                <span class="glyphicon glyphicon-ok"></span></button>
             <br><br>
           </div>
         </form>
@@ -478,21 +478,34 @@
         }
     }
 </script>
+<div ng-controller="EventsController">
 <script>
     $(document).ready(function() {
 
+        var event = [];
+        eventArray = [];
+
+/*        $.parseJSON(eventArray).forEach(function(element){
+            event.push({
+                title:element.name,
+                start:element.startTime.toISOString(),
+                end:element.endTime.toISOString(),
+
+            })
+        });*/
         $('#calendar').fullCalendar({
             header: {
                 left: 'prev,next today',
                 center: 'title',
                 //right: 'month,basicWeek,basicDay'
-                right: 'month,basicDay'
+                right: 'month,basicDay,list'
             },
             defaultDate: new Date(),
             navLinks: true, // can click day/week names to navigate views
             editable: true,
             eventLimit: true, // allow "more" link when too many events
-            events: [
+            events: event
+            /*events: [
                 {
                     title: 'Fortnite Tournament',
                     start: '2018-11-25'
@@ -534,12 +547,13 @@
                     url: 'https://mariokart8.nintendo.com/',
                     start: '2018-10-28'
                 }
-            ]
+            ]*/
         });
 
     });
 
 </script>
+</div>
 </body>
 
 </html>
