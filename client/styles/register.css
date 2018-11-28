@@ -1,11 +1,11 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
 body {
-    background: #76b852; /* fallback for old browsers */
-    background: -webkit-linear-gradient(right, #76b852, #8DC26F);
-    background: -moz-linear-gradient(right, #76b852, #8DC26F);
-    background: -o-linear-gradient(right, #76b852, #8DC26F);
-    background: linear-gradient(to left, #76b852, #8DC26F);
+    background: #428bca; /* fallback for old browsers */
+    background: -webkit-linear-gradient(right, #428bca, #8DC26F);
+    background: -moz-linear-gradient(right, #428bca, #8DC26F);
+    background: -o-linear-gradient(right, #428bca, #8DC26F);
+    background: linear-gradient(to left, #428bca, #8DC26F);
     font-family: "Roboto", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -41,7 +41,7 @@ body {
     font-family: "Roboto", sans-serif;
     text-transform: uppercase;
     outline: 0;
-    background: #4CAF50;
+    background: #5bc0de;
     width: 100%;
     border: 0;
     padding: 15px;

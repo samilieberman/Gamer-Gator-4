@@ -335,9 +335,9 @@
       </div>
     </div>
 
-    <div class="col-md-9" id="map">
+    <div class="col-md-9" id="map2">
       <div class="ui container">
-      hello world
+        <div id="map" style="margin-bottom:40px;"></div>
       </div>
     </div>
 
@@ -402,20 +402,37 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js'></script>
 <script>
+    // Initialize and add the map
+    function initMap() {
+        // The location of Uluru
+        var uluru = {lat: 29.651634, lng: -82.3248};
+        // The map, centered at Uluru
+        var map = new google.maps.Map(
+            document.getElementById('map'), {zoom: 4, center: uluru});
+        // The marker, positioned at Uluru
+        var marker = new google.maps.Marker({position: uluru, map: map});
+    }
+</script>
+
+<!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4kwn_SvtsH-sVdIrRuD_ptPyxNiCIk68&callback=initMap" async defer>-->
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4kwn_SvtsH-sVdIrRuD_ptPyxNiCIk68&callback=initMap">
+</script>
+<script>
     function listVisible() {
-        if (document.getElementById('cal') || document.getElementById('map')) {
+        if (document.getElementById('cal') || document.getElementById('map2')) {
             if (document.getElementById('cal').style.display != 'none' || document.getElementById('map').style.display != 'none') {
                 document.getElementById('cal').style.display = 'none';
-                document.getElementById('map').style.display = 'none';
+                document.getElementById('map2').style.display = 'none';
                 document.getElementById('list').style.display = 'block';
             }
         }
     }
     function calVisible() {
-        if (document.getElementById('list') || document.getElementById('map')) {
+        if (document.getElementById('list') || document.getElementById('map2')) {
             if (document.getElementById('list').style.display != 'none' || document.getElementById('map').style.display != 'none') {
                 document.getElementById('list').style.display = 'none';
-                document.getElementById('map').style.display = 'none';
+                document.getElementById('map2').style.display = 'none';
                 document.getElementById('cal').style.display = 'block';
             }
         }
@@ -425,7 +442,7 @@
             if (document.getElementById('list').style.display != 'none' || document.getElementById('cal').style.display != 'none') {
                 document.getElementById('list').style.display = 'none';
                 document.getElementById('cal').style.display = 'none';
-                document.getElementById('map').style.display = 'block';
+                document.getElementById('map2').style.display = 'block';
             }
         }
     }
