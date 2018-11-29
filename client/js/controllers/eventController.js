@@ -61,6 +61,8 @@ angular.module('events').controller('EventsController', ['$scope', 'Events',
         });
       });
       $scope.events = ""; // clears the form after submitting
+      $scope.startTime = {};
+      $scope.endTime = {};
     };
 
     $scope.deleteEvent = function (index) {
@@ -89,7 +91,6 @@ angular.module('events').controller('EventsController', ['$scope', 'Events',
       $scope.updatedEndTime.month = $scope.updatedEvent.endTime.substring(5,7);
       $scope.updatedEndTime.day = $scope.updatedEvent.endTime.substring(8,10);
       $scope.updatedEndTime.hour = $scope.updatedEvent.endTime.substring(11,13);
-
     };
 
     $scope.updateEvent = function (index) {
