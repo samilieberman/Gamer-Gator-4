@@ -75,6 +75,23 @@ angular.module('events').controller('EventsController', ['$scope', 'Events',
       $scope.events.splice(index, 1);
     };
 
+    $scope.updatedStartTime = {};
+    $scope.updatedEndTime = {};
+
+    $scope.fillUpdateInput = function (index) {
+      $scope.updatedEvent = $scope.events[index];
+      console.log($scope.updatedEvent.startTime);
+      $scope.updatedStartTime.year = $scope.updatedEvent.startTime.substring(0,4);
+      $scope.updatedStartTime.month = $scope.updatedEvent.startTime.substring(5,7);
+      $scope.updatedStartTime.day = $scope.updatedEvent.startTime.substring(8,10);
+      $scope.updatedStartTime.hour = $scope.updatedEvent.startTime.substring(11,13);
+      $scope.updatedEndTime.year = $scope.updatedEvent.endTime.substring(0,4);
+      $scope.updatedEndTime.month = $scope.updatedEvent.endTime.substring(5,7);
+      $scope.updatedEndTime.day = $scope.updatedEvent.endTime.substring(8,10);
+      $scope.updatedEndTime.hour = $scope.updatedEvent.endTime.substring(11,13);
+
+    };
+
     $scope.updateEvent = function (index) {
 
       Events.delete($scope.events[index]._id).then(function (response) { // _id is from Mlab
@@ -86,8 +103,8 @@ angular.module('events').controller('EventsController', ['$scope', 'Events',
       });
       $scope.events.splice(index, 1);
 
-      var startTimeConcat = $scope.startTime.year + "-" + $scope.startTime.month + "-" + $scope.startTime.day + "T" + $scope.startTime.hour + ":00:00Z";
-      var endTimeConcat = $scope.endTime.year + "-" + $scope.endTime.month + "-" + $scope.endTime.day + "T" + $scope.endTime.hour + ":00:00Z";
+      var startTimeConcat = $scope.updatedStartTime.year + "-" + $scope.updatedStartTime.month + "-" + $scope.updatedStartTime.day + "T" + $scope.updatedStartTime.hour + ":00:00Z";
+      var endTimeConcat = $scope.updatedEndTime.year + "-" + $scope.updatedEndTime.month + "-" + $scope.updatedEndTime.day + "T" + $scope.updatedEndTime.hour + ":00:00Z";
       //catch exceptions?
       $scope.updatedEvent.startTime = new Date(startTimeConcat);
       $scope.updatedEvent.endTime = new Date(endTimeConcat);

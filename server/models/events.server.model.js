@@ -24,7 +24,7 @@ var eventSchema = new Schema({
   description: String,
   participantUsernames: [String],
   game: String,
-  tags: [String],
+  tags: String,
   fee: Number,
 
   created_at: Date,

@@ -145,20 +145,20 @@
 
                 <div>
                   <label name="startTime"> Event Start Time: </label> <br>
-                  <select name="year" ng-model="startTime.year">
+                  <select name="year" ng-model="updatedStartTime.year">
                     <option value="">year</option>
                     <option value="2018">2018</option>
                     <option value="2019">2019</option>
                   </select>
-                  <select name="month" ng-model="startTime.month">
+                  <select name="month" ng-model="updatedStartTime.month">
                     <option value="">month</option>
                     <option ng-repeat="month in months" value="{{month}}">{{month}}</option>
                   </select>
-                  <select name="day" ng-model="startTime.day">
+                  <select name="day" ng-model="updatedStartTime.day">
                     <option value="">day</option>
                     <option ng-repeat="day in days" value="{{day}}">{{day}}</option>
                   </select>
-                  <select name="hour" ng-model="startTime.hour">
+                  <select name="hour" ng-model="updatedStartTime.hour">
                     <option value="">hour</option>
                     <option ng-repeat="hour in hours" value="{{hour}}">{{hour}}</option>
                   </select>
@@ -166,20 +166,20 @@
 
                 <div>
                   <label name="endTime"> Event End Time: </label> <br>
-                  <select name="year" ng-model="endTime.year">
+                  <select name="year" ng-model="updatedEndTime.year">
                     <option value="">year</option>
                     <option value="2018">2018</option>
                     <option value="2019">2019</option>
                   </select>
-                  <select name="month" ng-model="endTime.month">
+                  <select name="month" ng-model="updatedEndTime.month">
                     <option value="">month</option>
                     <option ng-repeat="month in months" value="{{month}}">{{month}}</option>
                   </select>
-                  <select name="day" ng-model="endTime.day">
+                  <select name="day" ng-model="updatedEndTime.day">
                     <option value="">day</option>
                     <option ng-repeat="day in days" value="{{day}}">{{day}}</option>
                   </select>
-                  <select name="hour" ng-model="endTime.hour">
+                  <select name="hour" ng-model="updatedEndTime.hour">
                     <option value="">hour</option>
                     <option ng-repeat="hour in hours" value="{{hour}}">{{hour}}</option>
                   </select>
@@ -191,7 +191,7 @@
                           ng-model="updatedEvent.description"></textarea><br>
                 <div>
                   <label name="tag">Event Tag:</label>
-                  <select name="tags" ng-model="newEvent.tags">
+                  <select name="tags" ng-model="updatedEvent.tags">
                     <option value="">--tags--</option>
                     <option value="RPG">RPG</option>
                     <option value="Adventure">Adventure</option>
@@ -250,7 +250,7 @@
             <button type="button" class="btn btn-danger pull-left" ng-click="deleteEvent(currentIndex)" data-dismiss="modal">
               <!-- ng-if="(currentUser == detailedInfo.creatorUsername)||(currentUser.admin)"-->
               Delete Event</button>
-            <button type="button" class="btn btn-warning pull-left" data-toggle="modal" data-target="#editEvent" data-dismiss="modal">
+            <button type="button" class="btn btn-warning pull-left" ng-click="fillUpdateInput(currentIndex)" data-toggle="modal" data-target="#editEvent" data-dismiss="modal">
               <!-- ng-if="(currentUser == detailedInfo.creatorUsername)||(currentUser.admin)" ng-click="editEvent()" -->
               Edit Event
             </button>
