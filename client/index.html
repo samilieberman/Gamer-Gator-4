@@ -139,7 +139,7 @@
             <form novalidate class="simple-form,form-group row">
               <div class = "col-sm-12" style = "padding-left: 25px;">
 
-                <input type="text" placeholder='Name: {{detailedInfo.title}}' class="form-control" id="editName" ng-model="updatedEvent.name" required> <br>
+                <input type="text" placeholder='Name: {{detailedInfo.title}}' class="form-control" id="editName" ng-model="updatedEvent.title" required> <br>
                 <input type="text" placeholder='Location: {{detailedInfo.address}}' class="form-control" id="editAddress" ng-model="updatedEvent.address" required> <br>
 
                 <div>
@@ -364,20 +364,9 @@
       </div>
     </div>
 
-    <div class="col-md-9" id="map2">
+    <div class="col-md-9" id="map3">
       <div class="ui container">
-          <!--<body onload="initialize()">-->
         <div id="map" style="margin-bottom:40px;"></div>
-        <!--<div>
-            <input id="address2" type="textbox">
-            <input type="button" value="Drop Pin" onclick="codeAddress()" style = "margin-bottom:20px;">
-        </div>-->
-        <h2>Chosen Location</h2>
-        <form method="post">
-            <input type="text" id="lat" readonly="yes"><br>
-            <input type="text" id="lng" readonly="yes"><br><br>
-        </form>
-          <!--</body>-->
       </div>
     </div>
 
@@ -393,6 +382,7 @@
           <tr>
             <th>Event Name</th>
             <th>Start Time</th>
+            <th>End Time</th>
             <th>Location</th>
             <th>Game</th>
             <th>Fee</th>
@@ -403,6 +393,7 @@
 
             <td>{{event.title}}</td>
             <td>{{event.start | date:"MM/dd/yyyy 'at' h:mma" : 'UTC'}}</td>
+            <td>{{event.end | date:"MM/dd/yyyy 'at' h:mma" : 'UTC'}}</td>
             <td>{{event.address}}</td>
             <td>{{event.game}}</td>
             <td>{{event.fee}}</td>
@@ -513,71 +504,25 @@
     //Load the map when the page has finished loading.
     google.maps.event.addDomListener(window, 'load', initMap);
 
-
-/*    console.log("hi");
-
-    // Initialize and add the map
-    var geocoder;
-    var map;
-    function initialize() {
-        geocoder = new google.maps.Geocoder();
-        var latlng = new google.maps.LatLng(29.651634, -82.3248);
-        var mapOptions = {
-            zoom: 13,
-            center: latlng
-        }
-        map = new google.maps.Map(document.getElementById('map'), mapOptions);
-    }
-
-    function codeAddress() {
-        var address = document.getElementById('address2').value;
-        geocoder.geocode( { 'address': address}, function(results, status) {
-            if (status == 'OK') {
-                map.setCenter(results[0].geometry.location);
-                var marker = new google.maps.Marker({
-                    map: map,
-                    position: results[0].geometry.location
-                });
-            } else {
-                alert('Geocode was not successful for the following reason: ' + status);
-            }
-        });
-    }*/
-
-    /*function initMap() {
-        // The location of Uluru
-        //var uluru = {lat: 29.651634, lng: -82.3248};
-        var tour1 = {lat: 29.651634, lng: -82.3248};
-        var tour2 = {lat: 29.648263, lng: -82.344416};
-        // The map, centered at Uluru
-        var map = new google.maps.Map(
-            document.getElementById('map'), {zoom: 13, center: tour2});
-        // The marker, positioned at Uluru
-        var marker = new google.maps.Marker({position: tour1, map: map});
-        var marker = new google.maps.Marker({position: tour2, map: map});
-    }*/
-
-    //Function to covert address to Latitude and Longitude
-
 </script>
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4kwn_SvtsH-sVdIrRuD_ptPyxNiCIk68&callback=initMap">
 </script>
 <script>
     function listVisible() {
-        if (document.getElementById('cal') || document.getElementById('map2')) {
+        if (document.getElementById('cal') || document.getElementById('map3')) {
             if (document.getElementById('cal').style.display != 'none' || document.getElementById('map').style.display != 'none') {
                 document.getElementById('cal').style.display = 'none';
-                document.getElementById('map2').style.display = 'none';
+                document.getElementById('map3').style.display = 'none';
                 document.getElementById('list').style.display = 'block';
             }
         }
     }
     function calVisible() {
-        if (document.getElementById('list') || document.getElementById('map2')) {
+        if (document.getElementById('list') || document.getElementById('map3')) {
             if (document.getElementById('list').style.display != 'none' || document.getElementById('map').style.display != 'none') {
                 document.getElementById('list').style.display = 'none';
-                document.getElementById('map2').style.display = 'none';
+                document.getElementById('map3').style.display = 'none';
                 document.getElementById('cal').style.display = 'block';
             }
         }
@@ -587,76 +532,10 @@
             if (document.getElementById('list').style.display != 'none' || document.getElementById('cal').style.display != 'none') {
                 document.getElementById('list').style.display = 'none';
                 document.getElementById('cal').style.display = 'none';
-                document.getElementById('map2').style.display = 'block';
+                document.getElementById('map3').style.display = 'block';
             }
         }
     }
-</script>
-<script>
-  /*
-    $(document).ready(function() {
-
-        var event = [];
-        eventArray = [];
-        $('#calendar').fullCalendar({
-            header: {
-                left: 'prev,next today',
-                center: 'title',
-                //right: 'month,basicWeek,basicDay'
-                right: 'month,basicDay,list'
-            },
-            defaultDate: new Date(),
-            navLinks: true, // can click day/week names to navigate views
-            editable: true,
-            eventLimit: true, // allow "more" link when too many events
-            events: event*/
-            /*events: [
-                {
-                    title: 'Fortnite Tournament',
-                    start: '2018-11-25'
-                },
-                {
-                    title: 'Call of Duty Tournament',
-                    start: '2018-11-22'
-                },
-                {
-                    title: 'Super Smash Bros Tournament',
-                    start: '2018-11-15',
-                    end: '2018-11-17'
-                },
-                {
-                    id: 999, // id: 999 means it repeats on same day
-                    title: 'Tuesday Tournament',
-                    start: '2018-10-16T16:00:00'
-                },
-                {
-                    title: 'League of Legends Tournament',
-                    start: '2018-11-11',
-                    end: '2018-11-13'
-                },
-                {
-                    title: 'Tournament',
-                    start: '2018-10-12T10:30:00',
-                    end: '2018-10-12T12:30:00'
-                },
-                {
-                    title: 'Tournament',
-                    start: '2018-10-12T12:00:00'
-                },
-                {
-                    title: 'Tournament',
-                    start: '2018-10-12T14:30:00'
-                },
-                {
-                    title: 'Mario Kart Tournament',
-                    url: 'https://mariokart8.nintendo.com/',
-                    start: '2018-10-28'
-                }
-            ]*/
-       // });
-
-//    });
-
 </script>
 </body>
 
