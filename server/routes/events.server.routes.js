@@ -3,7 +3,6 @@ var path = require('path');
 var express = require('express');
 var router = express.Router();
 var events = require('../controllers/events.server.controller.js');
-var users = require('../controllers/users.server.controller.js');
 var User = require('../models/users.server.model.js');
 var passport = require('passport');
 

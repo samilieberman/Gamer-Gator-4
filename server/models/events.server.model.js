@@ -3,15 +3,15 @@ var mongoose = require('mongoose'),
 
 /* Create your schema */
 var eventSchema = new Schema({
-  name: {
+  title: {
     type: String, 
     required: true
   }, 
-  startTime: {
+  start: {
     type: Date,
     required: true
   },
-  endTime: {
+  end: {
     type: Date,
     required: true
   },
@@ -25,6 +25,10 @@ var eventSchema = new Schema({
   game: String,
   tags: String,
   fee: Number,
+  stick: {
+      type: Boolean,
+      default: true,
+  },
 
   created_at: Date,
   updated_at: Date
