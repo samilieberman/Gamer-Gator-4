@@ -1,3 +1,10 @@
+#myfooter{
+    height: 3em;
+    background-color: #f1f1f1;;
+    text-align: center;
+    padding-top: 1em;
+}
+
 #searchBar {
   margin: 15px 10px;
 }
@@ -15,7 +22,7 @@
 }
 .text-block {
   color: black; /* text color */
-  background-color: rgb(204, 204, 204);
+  background-color: #2196f3;
   background-color: rgba(204, 204, 204, 0.8);
 }
 
@@ -23,7 +30,6 @@
 .btn-text b{display:inline}
 .btn-text:not(.collapsed)  span{display:none}
 .btn-text.collapsed b {display:none}
-
 
 #list{
   display:none;
