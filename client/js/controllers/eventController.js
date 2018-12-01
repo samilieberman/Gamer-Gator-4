@@ -1,9 +1,10 @@
-angular.module('events').controller('EventsController', ['$scope', 'Events',
-  function ($scope, Events) {
+angular.module('events').controller('EventsController', ['$scope', 'Events','$compile', '$http', '$timeout', 'uiCalendarConfig',
+  function ($scope, Events, $compile, $http, $timeout, uiCalendarConfig) {
 
-    /* Get all the listings, then bind it to the scope */
+      /* Get all the listings, then bind it to the scope */
     Events.getAll().then(function (response) {
       $scope.events = response.data;
+
     }, function (error) {
       console.log('Unable to retrieve listings:', error);
     });
@@ -44,11 +45,11 @@ angular.module('events').controller('EventsController', ['$scope', 'Events',
     // Event CRUD
 
     $scope.addEvent = function () {
-      var startTimeConcat = $scope.startTime.year + "-" + $scope.startTime.month + "-" + $scope.startTime.day + "T" + $scope.startTime.hour + ":00:00Z";
-      var endTimeConcat = $scope.endTime.year + "-" + $scope.endTime.month + "-" + $scope.endTime.day + "T" + $scope.endTime.hour + ":00:00Z";
+      var startConcat = $scope.start.year + "-" + $scope.start.month + "-" + $scope.start.day + "T" + $scope.start.hour + ":00:00Z";
+      var endConcat = $scope.end.year + "-" + $scope.end.month + "-" + $scope.end.day + "T" + $scope.end.hour + ":00:00Z";
       //catch exceptions?
-      $scope.newEvent.startTime = new Date(startTimeConcat);
-      $scope.newEvent.endTime = new Date(endTimeConcat);
+      $scope.newEvent.start = new Date(startConcat);
+      $scope.newEvent.end = new Date(endConcat);
 
       console.log($scope.newEvent.latitude);
       console.log($scope.newEvent.longitude);
@@ -63,9 +64,8 @@ angular.module('events').controller('EventsController', ['$scope', 'Events',
           console.log('Unable to create events:', error);
         });
       });
-      $scope.events = ""; // clears the form after submitting
-      $scope.startTime = {};
-      $scope.endTime = {};
+      //$scope.start = {};
+      //$scope.end = {};
     };
 
     $scope.deleteEvent = function (index) {
@@ -85,15 +85,15 @@ angular.module('events').controller('EventsController', ['$scope', 'Events',
 
     $scope.fillUpdateInput = function (index) {
       $scope.updatedEvent = $scope.events[index];
-      console.log($scope.updatedEvent.startTime);
-      $scope.updatedStartTime.year = $scope.updatedEvent.startTime.substring(0,4);
-      $scope.updatedStartTime.month = $scope.updatedEvent.startTime.substring(5,7);
-      $scope.updatedStartTime.day = $scope.updatedEvent.startTime.substring(8,10);
-      $scope.updatedStartTime.hour = $scope.updatedEvent.startTime.substring(11,13);
-      $scope.updatedEndTime.year = $scope.updatedEvent.endTime.substring(0,4);
-      $scope.updatedEndTime.month = $scope.updatedEvent.endTime.substring(5,7);
-      $scope.updatedEndTime.day = $scope.updatedEvent.endTime.substring(8,10);
-      $scope.updatedEndTime.hour = $scope.updatedEvent.endTime.substring(11,13);
+      console.log($scope.updatedEvent.start);
+      $scope.updatedStartTime.year = $scope.updatedEvent.start.substring(0,4);
+      $scope.updatedStartTime.month = $scope.updatedEvent.start.substring(5,7);
+      $scope.updatedStartTime.day = $scope.updatedEvent.start.substring(8,10);
+      $scope.updatedStartTime.hour = $scope.updatedEvent.start.substring(11,13);
+      $scope.updatedEndTime.year = $scope.updatedEvent.end.substring(0,4);
+      $scope.updatedEndTime.month = $scope.updatedEvent.end.substring(5,7);
+      $scope.updatedEndTime.day = $scope.updatedEvent.end.substring(8,10);
+      $scope.updatedEndTime.hour = $scope.updatedEvent.end.substring(11,13);
     };
 
     /*$scope.updateEvent = function (index) {
@@ -107,11 +107,11 @@ angular.module('events').controller('EventsController', ['$scope', 'Events',
       });
       $scope.events.splice(index, 1);
 
-      var startTimeConcat = $scope.updatedStartTime.year + "-" + $scope.updatedStartTime.month + "-" + $scope.updatedStartTime.day + "T" + $scope.updatedStartTime.hour + ":00:00Z";
-      var endTimeConcat = $scope.updatedEndTime.year + "-" + $scope.updatedEndTime.month + "-" + $scope.updatedEndTime.day + "T" + $scope.updatedEndTime.hour + ":00:00Z";
+      var startConcat = $scope.updatedStartTime.year + "-" + $scope.updatedStartTime.month + "-" + $scope.updatedStartTime.day + "T" + $scope.updatedStartTime.hour + ":00:00Z";
+      var endConcat = $scope.updatedEndTime.year + "-" + $scope.updatedEndTime.month + "-" + $scope.updatedEndTime.day + "T" + $scope.updatedEndTime.hour + ":00:00Z";
       //catch exceptions?
-      $scope.updatedEvent.startTime = new Date(startTimeConcat);
-      $scope.updatedEvent.endTime = new Date(endTimeConcat);
+      $scope.updatedEvent.start = new Date(startConcat);
+      $scope.updatedEvent.end = new Date(endConcat);
 
       Events.create($scope.updatedEvent).then(function (response) {
         Events.getAll().then(function (response) {
@@ -123,7 +123,6 @@ angular.module('events').controller('EventsController', ['$scope', 'Events',
           console.log('Unable to create events:', error);
         });
       });
-      $scope.events = "";       // clears the form after submitting
 
     };*/
 
@@ -149,5 +148,75 @@ angular.module('events').controller('EventsController', ['$scope', 'Events',
       $scope.detailedInfo = $scope.events[index];
       $scope.currentIndex = index;
     };
+
+      var vm = this;
+
+      var date = new Date();
+      var d = date.getDate();
+      var m = date.getMonth();
+      var y = date.getFullYear();
+
+      $scope.eventSource = [];
+
+      $scope.loadEventList = function () {
+          $http({
+              method: 'GET',
+              url: '/api/events'
+          }).then(function (res) {
+                  console.log('Successful');
+                  console.log(res);
+                  //$scope.eventSources = res.data;
+                  for(var i = 0; i < res.data.length; i ++){
+                      $scope.eventSource.push(res.data[i]);
+              }
+
+              },
+
+             function (res) {
+                  console.log('Failed');
+                  console.log(res);
+              });
+
+      };
+
+      $scope.renderCalendar = function(calendar) {
+          $timeout(function () {
+              if (uiCalendarConfig.calendars[calendar]) {
+                  uiCalendarConfig.calendars[calendar].fullCalendar('render');
+              }
+          });
+      };
+      $scope.eventRender = function( event, element, view ) {
+          element.attr({'tooltip': event.title,
+              'tooltip-append-to-body': true});
+          $compile(element)($scope);
+      };
+
+      $scope.uiConfig = {
+          calendar: {
+              navLinks: true,
+              displayEventTime: false,
+              defaultTimedEventDuration: '01:00:00',
+              height: 900,
+              editable: false,
+              header: {
+                  left: 'title',
+                  center: '',
+                  right: 'today prev,next'
+              },
+
+              eventRender: $scope.eventRender,
+          }
+      };
+
+
+
+      //Events.getAll();
+
+      $scope.loadEventList();
+
+      console.log("Event Source", $scope.eventSource);
+      $scope.eventSources = [$scope.eventSource];
+
   }
 ]);

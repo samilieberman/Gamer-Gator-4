@@ -11,7 +11,7 @@ angular.module('users', []).factory('Users', function($http) {
       //return $http.post('//bootcamp-assignment6.herokuapp.com/api/listings', listing);
     },
 
-    loginUser: function() {
+    login: function() {
         return $http.post('http://localhost:8080/api/login');
     }
   };

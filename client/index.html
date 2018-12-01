@@ -1,20 +1,19 @@
 <!DOCTYPE html>
-<html ng-app="gamerGatorApp">
+<html ng-app="gamerGatorApp" ng-controller="EventsController">
 
 <head>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <link rel="stylesheet" href="styles/main.css">
-  <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.print.min.css' rel='stylesheet' media='print' />
-  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.css'>
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.css'>
+   <link rel="stylesheet" href="bower_components/fullcalendar/dist/fullcalendar.css"/>
+    <!-- jquery, moment, and angular have to get included before fullcalendar -->
   <link rel="icon" href="img/favicon.ico" type="image/x-icon"/>
 </head>
-<div ng-controller="EventsController">
-
+<body>
   <div class="container-fluid">
     <div class="row">
       <div class="jumbotron">
-        <h1 style="text-align:center; font-family: arcadeFont; font-size: xx-large; color:white;"><b>Gator Gaming Tournaments</b></h1>
+        <h1 style="text-align:center; font-family: arcadeFont; font-size: xx-large; color:white;"><b>Gator Gaming Tournaments </b></h1>
       </div>
       <div id="myCarousel" class="carousel slide" data-ride="carousel">
         <!-- Indicators -->
@@ -87,7 +86,7 @@
       <button type="button" class="btn btn-info rounded" onclick="listVisible();">
         List
       </button>
-      <button type="button" class="btn btn-info rounded" onclick="calVisible();">
+      <button type="button" class="btn btn-info rounded" onclick="calVisible(); window.location.reload()">
         Calendar
       </button>
       <button type="button" class="btn btn-info rounded" onclick="mapVisible();">
@@ -149,42 +148,42 @@
                 </div>-->
 
                 <div>
-                  <label name="startTime"> Event Start Time: </label> <br>
-                  <select name="year" ng-model="updatedStartTime.year">
+                  <label name="start"> Event Start Time: </label> <br>
+                  <select name="year" ng-model="updatedstart.year">
                     <option value="">year</option>
                     <option value="2018">2018</option>
                     <option value="2019">2019</option>
                   </select>
-                  <select name="month" ng-model="updatedStartTime.month">
+                  <select name="month" ng-model="updatedstart.month">
                     <option value="">month</option>
                     <option ng-repeat="month in months" value="{{month}}">{{month}}</option>
                   </select>
-                  <select name="day" ng-model="updatedStartTime.day">
+                  <select name="day" ng-model="updatedstart.day">
                     <option value="">day</option>
                     <option ng-repeat="day in days" value="{{day}}">{{day}}</option>
                   </select>
-                  <select name="hour" ng-model="updatedStartTime.hour">
+                  <select name="hour" ng-model="updatedstart.hour">
                     <option value="">hour</option>
                     <option ng-repeat="hour in hours" value="{{hour}}">{{hour}}</option>
                   </select>
                 </div> <br>
 
                 <div>
-                  <label name="endTime"> Event End Time: </label> <br>
-                  <select name="year" ng-model="updatedEndTime.year">
+                  <label name="end"> Event End Time: </label> <br>
+                  <select name="year" ng-model="updatedend.year">
                     <option value="">year</option>
                     <option value="2018">2018</option>
                     <option value="2019">2019</option>
                   </select>
-                  <select name="month" ng-model="updatedEndTime.month">
+                  <select name="month" ng-model="updatedend.month">
                     <option value="">month</option>
                     <option ng-repeat="month in months" value="{{month}}">{{month}}</option>
                   </select>
-                  <select name="day" ng-model="updatedEndTime.day">
+                  <select name="day" ng-model="updatedend.day">
                     <option value="">day</option>
                     <option ng-repeat="day in days" value="{{day}}">{{day}}</option>
                   </select>
-                  <select name="hour" ng-model="updatedEndTime.hour">
+                  <select name="hour" ng-model="updatedend.hour">
                     <option value="">hour</option>
                     <option ng-repeat="hour in hours" value="{{hour}}">{{hour}}</option>
                   </select>
@@ -227,12 +226,12 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h2 class="modal-title" style="text-align:center">  {{detailedInfo.name}}</h2>
+            <h2 class="modal-title" style="text-align:center">  {{detailedInfo.title}}</h2>
           </div>
           <div class="modal-body">
             <h3 style="text-align:center">Game:  {{detailedInfo.game}}</h3>
             <h3 style="text-align:center">Date</h3>
-            <h4 class="well" style="text-align:center; margin-top: 0px;">{{detailedInfo.startTime}}  to  {{detailedInfo.endTime}}</h4>
+            <h4 class="well" style="text-align:center; margin-top: 0px;">{{detailedInfo.start}}  to  {{detailedInfo.end}}</h4>
             <h3 style="text-align:center">Location</h3>
             <p class="well" style="text-align:center">{{detailedInfo.address}}</p>
             <h3 style="text-align:center">Description</h3>
@@ -259,10 +258,10 @@
               <!-- ng-if="(currentUser == detailedInfo.creatorUsername)||(currentUser.admin)" ng-click="editEvent()" -->
               Edit Event
             </button>
-            <button type="button" class="btn btn-info pull-left" >
-              <!-- ng-if="(currentUser == detailedInfo.creatorUsername)||(currentUser.admin)" ng-click="sendMessageModal()" -->
+            <!-- <button type="button" class="btn btn-info pull-left" >
+              <!-- ng-if="(currentUser == detailedInfo.creatorUsername)||(currentUser.admin)" ng-click="sendMessageModal()"
               Message event members
-            </button>
+            </button>-->
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           </div>
         </div>
@@ -281,6 +280,7 @@
 
         <form id="myForm" novalidate class="simple-form,form-group row">
           <div class = "col-sm-12" style = "padding-left: 25px;">
+
             <input type="text" placeholder="Name:" class="form-control" id="name" ng-model="newEvent.name" required > <br>
 
             <div id="map2">
@@ -290,42 +290,42 @@
             </div>
 
             <div>
-              <label name="startTime">Event Start Time:</label> <br>
-              <select name="year" ng-model="startTime.year">
+              <label name="start">Event Start Time:</label> <br>
+              <select name="year" ng-model="start.year">
                 <option value="">year</option>
                 <option value="2018">2018</option>
                 <option value="2019">2019</option>
               </select>
-              <select name="month" ng-model="startTime.month">
+              <select name="month" ng-model="start.month">
                 <option value="">month</option>
                 <option ng-repeat="month in months" value="{{month}}">{{month}}</option>
               </select>
-              <select name="day" ng-model="startTime.day">
+              <select name="day" ng-model="start.day">
                 <option value="">day</option>
                 <option ng-repeat="day in days" value="{{day}}">{{day}}</option>
               </select>
-              <select name="hour" ng-model="startTime.hour">
+              <select name="hour" ng-model="start.hour">
                 <option value="">hour</option>
                 <option ng-repeat="hour in hours" value="{{hour}}">{{hour}}</option>
               </select>
             </div> <br>
 
             <div>
-              <label name="endTime">Event End Time:</label> <br>
-              <select name="year" ng-model="endTime.year">
+              <label name="end">Event End Time:</label> <br>
+              <select name="year" ng-model="end.year">
                 <option value="">year</option>
                 <option value="2018">2018</option>
                 <option value="2019">2019</option>
               </select>
-              <select name="month" ng-model="endTime.month">
+              <select name="month" ng-model="end.month">
                 <option value="">month</option>
                 <option ng-repeat="month in months" value="{{month}}">{{month}}</option>
               </select>
-              <select name="day" ng-model="endTime.day">
+              <select name="day" ng-model="end.day">
                 <option value="">day</option>
                 <option ng-repeat="day in days" value="{{day}}">{{day}}</option>
               </select>
-              <select name="hour" ng-model="endTime.hour">
+              <select name="hour" ng-model="end.hour">
                 <option value="">hour</option>
                 <option ng-repeat="hour in hours" value="{{hour}}">{{hour}}</option>
               </select>
@@ -351,7 +351,8 @@
               </select>
             </div> <br>
 
-            <button type="submit" class="btn btn-success" ng-click="addEvent()" onclick="document.getElementById('myForm').reset();">
+            <button type="submit" class="btn btn-success" ng-click="addEvent(); loadEventList();" onclick="document.getElementById('myForm').reset();">
+
                 <span class="glyphicon glyphicon-ok"></span></button>
             <br><br>
           </div>
@@ -368,7 +369,7 @@
       <div class="ui container">
         <div class="ui grid">
           <div class="ui sixteen column">
-            <div id="calendar"></div>
+              <div ui-calendar ng-model="eventSources" id="calendar"></div>
           </div>
         </div>
       </div>
@@ -410,9 +411,8 @@
 
           <tr ng-repeat="event in events | filter: searchInput as results">
 
-            <td>{{event.name}}</td>
-            <!--<td>{{event.startTime}}</td>-->
-            <td>{{event.startTime | date:'medium'}}</td>
+            <td>{{event.title}}</td>
+            <td>{{event.start | date:"MM/dd/yyyy 'at' h:mma" : 'UTC'}}</td>
             <td>{{event.game}}</td>
             <td>{{event.fee}}</td>
             <td>
@@ -450,6 +450,13 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js'></script>
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/moment/min/moment.min.js"></script>
+<script src="bower_components/angular/angular.min.js"></script>
+<script src="bower_components/angular-ui-calendar/src/calendar.js"></script>
+<script src="bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
+<script src="bower_components/fullcalendar/dist/gcal.js"></script>
+
 <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4kwn_SvtsH-sVdIrRuD_ptPyxNiCIk68&callback=initMap" async defer>-->
 
 
@@ -584,82 +591,19 @@
         }
     }*/
 </script>
-<div ng-controller="EventsController">
-<script>
-    $(document).ready(function() {
-
-        var event = [];
-        eventArray = [];
-
-/*        $.parseJSON(eventArray).forEach(function(element){
-            event.push({
-                title:element.name,
-                start:element.startTime.toISOString(),
-                end:element.endTime.toISOString(),
-
-            })
-        });*/
-        $('#calendar').fullCalendar({
-            header: {
-                left: 'prev,next today',
-                center: 'title',
-                //right: 'month,basicWeek,basicDay'
-                right: 'month,basicDay,list'
-            },
-            defaultDate: new Date(),
-            navLinks: true, // can click day/week names to navigate views
-            editable: true,
-            eventLimit: true, // allow "more" link when too many events
-            events: event
-            /*events: [
-                {
-                    title: 'Fortnite Tournament',
-                    start: '2018-11-25'
-                },
-                {
-                    title: 'Call of Duty Tournament',
-                    start: '2018-11-22'
-                },
-                {
-                    title: 'Super Smash Bros Tournament',
-                    start: '2018-11-15',
-                    end: '2018-11-17'
-                },
-                {
-                    id: 999, // id: 999 means it repeats on same day
-                    title: 'Tuesday Tournament',
-                    start: '2018-10-16T16:00:00'
-                },
-                {
-                    title: 'League of Legends Tournament',
-                    start: '2018-11-11',
-                    end: '2018-11-13'
-                },
-                {
-                    title: 'Tournament',
-                    start: '2018-10-12T10:30:00',
-                    end: '2018-10-12T12:30:00'
-                },
-                {
-                    title: 'Tournament',
-                    start: '2018-10-12T12:00:00'
-                },
-                {
-                    title: 'Tournament',
-                    start: '2018-10-12T14:30:00'
-                },
-                {
-                    title: 'Mario Kart Tournament',
-                    url: 'https://mariokart8.nintendo.com/',
-                    start: '2018-10-28'
-                }
-            ]*/
-        });
-
-    });
-
-</script>
 </div>
 </body>
+
+<footer style="margin-top:20px">
+    <div class="footer">
+        <div class="container-fluid"  id="myfooter">
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="copy"><b>Created by: Samantha Lieberman, Andres Inguanzo, Julian Marrotta, Michael Jarvis, and Jordan Thelmas</b></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
 
 </html>

@@ -44,11 +44,13 @@ exports.update = function(req, res) {
   /* Replace the article's properties with the new properties found in req.body */
   /* Save the article */
     // changing the articles properties
-    event.name = req.body.name;
+
     event.latitude = req.body.latitude;
     event.longitude = req.body.longitude;
-    event.startTime = req.body.startTime;
-    event.endTime = req.body.endTime;
+    event.title = req.body.title;
+    event.address = req.body.address;
+    event.start = req.body.start;
+    event.end = req.body.end;
     event.game = req.body.game;
     event.fee = req.body.fee;
     event.description = req.body.description;
@@ -94,7 +96,7 @@ exports.list = function(req, res) {
     }
     res.status(200);
     res.json(event); // response with event in JSON format
-  }).sort({startTime:-1}); // 1 is for ascending order
+  }).sort({start:1}); // 1 is for ascending order
 };
 
 /* 

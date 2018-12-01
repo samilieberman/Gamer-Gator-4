@@ -10,6 +10,7 @@
     "bcrypt-nodejs": "latest",
     "bcryptjs": "*",
     "body-parser": "*",
+    "bower": "^1.8.4",
     "connect-flash": "*",
     "cookie-parser": "^1.4.1",
     "ejs": "~2.5.2",
