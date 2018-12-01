@@ -45,12 +45,14 @@ exports.update = function(req, res) {
   /* Save the article */
     // changing the articles properties
     event.name = req.body.name;
-    event.address = req.body.address;
+    event.latitude = req.body.latitude;
+    event.longitude = req.body.longitude;
     event.startTime = req.body.startTime;
     event.endTime = req.body.endTime;
     event.game = req.body.game;
     event.fee = req.body.fee;
     event.description = req.body.description;
+    event.tags = req.body.tags;
 
 
 

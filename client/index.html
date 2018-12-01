@@ -141,7 +141,12 @@
               <div class = "col-sm-12" style = "padding-left: 25px;">
 
                 <input type="text" placeholder='Name: {{detailedInfo.name}}' class="form-control" id="editName" ng-model="updatedEvent.name" required> <br>
-                <input type="text" placeholder='Location: {{detailedInfo.address}}' class="form-control" id="editAddress" ng-model="updatedEvent.address" required> <br>
+
+               <!-- <div id="map2">
+                  <div id="map" style="margin-bottom:40px;">  </div>
+                  <input type="number" name="lat" id="lat" readonly="yes" ng-model="updatedEvent.latitude" ng-init="updatedEvent.latitude=29.651634" hidden>
+                  <input type="number" name="lng" id="lng" readonly="yes" ng-model="updatedEvent.longitude" ng-init="updatedEvent.longitude=-82.3248" hidden>
+                </div>-->
 
                 <div>
                   <label name="startTime"> Event Start Time: </label> <br>
@@ -274,11 +279,15 @@
         <br>
         <h3>Create a new event...</h3>
 
-        <form id = "myForm" novalidate class="simple-form,form-group row">
+        <form id="myForm" novalidate class="simple-form,form-group row">
           <div class = "col-sm-12" style = "padding-left: 25px;">
             <input type="text" placeholder="Name:" class="form-control" id="name" ng-model="newEvent.name" required > <br>
-            <input type="text" placeholder="Location:" class="form-control" id="address" ng-model="newEvent.address"
-                   required> <br>
+
+            <div id="map2">
+              <div id="map" style="margin-bottom:40px;">  </div>
+              <input type="number" name="lat" id="lat2" readonly="yes" ng-model="newEvent.latitude" ng-init="newEvent.latitude=29.651634" hidden>
+              <input type="number" name="lng" id="lng2" readonly="yes" ng-model="newEvent.longitude" ng-init="newEvent.longitude=-82.3248" hidden>
+            </div>
 
             <div>
               <label name="startTime">Event Start Time:</label> <br>
@@ -365,22 +374,22 @@
       </div>
     </div>
 
-    <div class="col-md-9" id="map2">
+    <!--<div class="col-md-9" id="map2">
       <div class="ui container">
-          <!--<body onload="initialize()">-->
+          &lt;!&ndash;<body onload="initialize()">&ndash;&gt;
         <div id="map" style="margin-bottom:40px;"></div>
-        <!--<div>
+        &lt;!&ndash;<div>
             <input id="address2" type="textbox">
             <input type="button" value="Drop Pin" onclick="codeAddress()" style = "margin-bottom:20px;">
-        </div>-->
+        </div>&ndash;&gt;
         <h2>Chosen Location</h2>
         <form method="post">
             <input type="text" id="lat" readonly="yes"><br>
             <input type="text" id="lng" readonly="yes"><br><br>
         </form>
-          <!--</body>-->
+          &lt;!&ndash;</body>&ndash;&gt;
       </div>
-    </div>
+    </div>-->
 
     <div class="col-md-9 collapse in" id="list">
       <br>
@@ -394,7 +403,6 @@
           <tr>
             <th>Event Name</th>
             <th>Start Time</th>
-            <th>Location</th>
             <th>Game</th>
             <th>Fee</th>
             <th></th>
@@ -405,7 +413,6 @@
             <td>{{event.name}}</td>
             <!--<td>{{event.startTime}}</td>-->
             <td>{{event.startTime | date:'medium'}}</td>
-            <td>{{event.address}}</td>
             <td>{{event.game}}</td>
             <td>{{event.fee}}</td>
             <td>
@@ -524,20 +531,7 @@
         map = new google.maps.Map(document.getElementById('map'), mapOptions);
     }
 
-    function codeAddress() {
-        var address = document.getElementById('address2').value;
-        geocoder.geocode( { 'address': address}, function(results, status) {
-            if (status == 'OK') {
-                map.setCenter(results[0].geometry.location);
-                var marker = new google.maps.Marker({
-                    map: map,
-                    position: results[0].geometry.location
-                });
-            } else {
-                alert('Geocode was not successful for the following reason: ' + status);
-            }
-        });
-    }*/
+
 
     /*function initMap() {
         // The location of Uluru
@@ -555,29 +549,32 @@
     //Function to covert address to Latitude and Longitude
 
 </script>
+
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4kwn_SvtsH-sVdIrRuD_ptPyxNiCIk68&callback=initMap">
 </script>
 <script>
     function listVisible() {
-        if (document.getElementById('cal') || document.getElementById('map2')) {
+        if (document.getElementById('cal')) {
+          //if (document.getElementById('cal') || document.getElementById('map2')) {
             if (document.getElementById('cal').style.display != 'none' || document.getElementById('map').style.display != 'none') {
                 document.getElementById('cal').style.display = 'none';
-                document.getElementById('map2').style.display = 'none';
+                //document.getElementById('map2').style.display = 'none';
                 document.getElementById('list').style.display = 'block';
             }
         }
     }
     function calVisible() {
-        if (document.getElementById('list') || document.getElementById('map2')) {
+        //if (document.getElementById('list') || document.getElementById('map2')) {
+      if (document.getElementById('list')) {
             if (document.getElementById('list').style.display != 'none' || document.getElementById('map').style.display != 'none') {
                 document.getElementById('list').style.display = 'none';
-                document.getElementById('map2').style.display = 'none';
+                //document.getElementById('map2').style.display = 'none';
                 document.getElementById('cal').style.display = 'block';
             }
         }
     }
-    function mapVisible() {
+/*  function mapVisible() {
         if (document.getElementById('list') || document.getElementById('cal')) {
             if (document.getElementById('list').style.display != 'none' || document.getElementById('cal').style.display != 'none') {
                 document.getElementById('list').style.display = 'none';
@@ -585,7 +582,7 @@
                 document.getElementById('map2').style.display = 'block';
             }
         }
-    }
+    }*/
 </script>
 <div ng-controller="EventsController">
 <script>
