@@ -15,10 +15,8 @@ var eventSchema = new Schema({
     type: Date,
     required: true
   },
-  address: {
-    type: String,
-    required: true
-  },
+  longitude: Number,
+  latitude: Number,
   creatorUsername: String,
   description: String,
   participantUsernames: [String],

@@ -44,6 +44,9 @@ exports.update = function(req, res) {
   /* Replace the article's properties with the new properties found in req.body */
   /* Save the article */
     // changing the articles properties
+
+    event.latitude = req.body.latitude;
+    event.longitude = req.body.longitude;
     event.title = req.body.title;
     event.address = req.body.address;
     event.start = req.body.start;
@@ -51,6 +54,7 @@ exports.update = function(req, res) {
     event.game = req.body.game;
     event.fee = req.body.fee;
     event.description = req.body.description;
+    event.tags = req.body.tags;
 
 
 

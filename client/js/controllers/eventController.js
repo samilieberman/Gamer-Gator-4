@@ -51,6 +51,9 @@ angular.module('events').controller('EventsController', ['$scope', 'Events','$co
       $scope.newEvent.start = new Date(startConcat);
       $scope.newEvent.end = new Date(endConcat);
 
+      console.log($scope.newEvent.latitude);
+      console.log($scope.newEvent.longitude);
+
       Events.create($scope.newEvent).then(function (response) {
         Events.getAll().then(function (response) {
           // redirect back to the list page
@@ -93,7 +96,7 @@ angular.module('events').controller('EventsController', ['$scope', 'Events','$co
       $scope.updatedEndTime.hour = $scope.updatedEvent.end.substring(11,13);
     };
 
-    $scope.updateEvent = function (index) {
+    /*$scope.updateEvent = function (index) {
 
       Events.delete($scope.events[index]._id).then(function (response) { // _id is from Mlab
         Events.getAll().then(function (response) {  // navigate back to 'listing.list'
@@ -121,10 +124,12 @@ angular.module('events').controller('EventsController', ['$scope', 'Events','$co
         });
       });
 
-    };
+    };*/
 
-    /*$scope.updateEvent = function (index) {
+    $scope.updateEvent = function (index) {
       Events.update($scope.events[index]._id, $scope.updatedEvent).then(function (response) {
+
+          console.log(index);
 
           $scope.events[index] = $scope.updatedEvent;
 
@@ -136,8 +141,8 @@ angular.module('events').controller('EventsController', ['$scope', 'Events','$co
           console.log(response.data);
         });
       });
-      $scope.events = ""; // is this necessary
-    };*/
+
+    };
 
     $scope.showDetails = function (index) {
       $scope.detailedInfo = $scope.events[index];
