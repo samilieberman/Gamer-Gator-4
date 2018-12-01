@@ -235,11 +235,11 @@
 
           <div class="modal-footer">
             <div class="text-center">
-              <button type="button" class="btn btn-success" >
+              <button type="button" class="btn btn-success" data-toggle="button" aria-pressed="true" autocomplete="off">
                 <!-- ng-if="currentUser.registeredEvents[] does not contain detailedInfo" ng-click="subscribeUser(username, currentIndex)"-->
                 Subscribe
               </button>
-              <button type="button" class="btn btn-secondary">
+              <button type="button" class="btn btn-secondary" data-toggle="button" aria-pressed="false" autocomplete="off">
                 <!-- ng-if="currentUser.registeredEvents[] contains detailedInfo" ng-click="unsubscribeUser(username, currentIndex)"-->
                 Unsubscribe
               </button>
@@ -282,7 +282,7 @@
               <input type="number" name="lat" id="lat" readonly="yes" ng-model="newEvent.latitude">
               <input type="number" name="lng" id="lng" readonly="yes" ng-model="newEvent.longitude">
             </div>
-            
+
             <div>
               <label name="start">Event Start Time:</label> <br>
               <select name="year" ng-model="start.year">
@@ -366,6 +366,18 @@
               <div ui-calendar ng-model="eventSources" id="calendar"></div>
           </div>
         </div>
+      </div>
+    </div>
+
+    <div class="col-md-9">
+      <div class="ui container">
+         <div class="ui grid">
+            <div class="ui sixteen column">
+                <div id = "mapTab">
+                    <div id="mapT" style="margin-bottom:40px;">  </div>
+                </div>
+            </div>
+         </div>
       </div>
     </div>
 
@@ -462,11 +474,10 @@
     //map.js
 
     //Set up some of our variables.
-    var map; //Will contain map object.
+    var map,map2; //Will contain map object.
     var marker = false; ////Has the user plotted their location marker?
 
     //Function called to initialize / create the map.
-    //This is called when the page has loaded.
     function initMap() {
 
         //The center location of our map.
@@ -480,6 +491,7 @@
 
         //Create the map object.
         map = new google.maps.Map(document.getElementById('map'), options);
+        map2 = new google.maps.Map(document.getElementById('mapT'), options);
 
         //Listen for any clicks on the map.
         google.maps.event.addListener(map, 'click', function(event) {
@@ -491,6 +503,29 @@
                 marker = new google.maps.Marker({
                     position: clickedLocation,
                     map: map,
+                    draggable: true //make it draggable
+                });
+                //Listen for drag events!
+                google.maps.event.addListener(marker, 'dragend', function(event){
+                    markerLocation();
+                });
+            } else{
+                //Marker has already been added, so just change its location.
+                marker.setPosition(clickedLocation);
+            }
+            //Get the marker's location.
+            markerLocation();
+        });
+        //Listen for any clicks on the map2.
+        google.maps.event.addListener(map2, 'click', function(event) {
+            //Get the location that the user clicked.
+            var clickedLocation = event.latLng;
+            //If the marker hasn't been added.
+            if(marker === false){
+                //Create the marker.
+                marker = new google.maps.Marker({
+                    position: clickedLocation,
+                    map: map2,
                     draggable: true //make it draggable
                 });
                 //Listen for drag events!
@@ -526,34 +561,32 @@
 </script>
 <script>
     function listVisible() {
-        if (document.getElementById('cal')) {
-          //if (document.getElementById('cal') || document.getElementById('map2')) {
-            if (document.getElementById('cal').style.display != 'none' || document.getElementById('map').style.display != 'none') {
+        if (document.getElementById('cal') || document.getElementById('mapTab')) {
+            if (document.getElementById('cal').style.display != 'none' || document.getElementById('mapTab').style.display != 'none') {
                 document.getElementById('cal').style.display = 'none';
-                //document.getElementById('map2').style.display = 'none';
+                document.getElementById('mapTab').style.display = 'none';
                 document.getElementById('list').style.display = 'block';
             }
         }
     }
     function calVisible() {
-        //if (document.getElementById('list') || document.getElementById('map2')) {
-      if (document.getElementById('list')) {
-            if (document.getElementById('list').style.display != 'none' || document.getElementById('map').style.display != 'none') {
+      if (document.getElementById('list') || document.getElementById('mapTab')) {
+            if (document.getElementById('list').style.display != 'none' || document.getElementById('mapTab').style.display != 'none') {
                 document.getElementById('list').style.display = 'none';
-                //document.getElementById('map2').style.display = 'none';
+                document.getElementById('mapTab').style.display = 'none';
                 document.getElementById('cal').style.display = 'block';
             }
         }
     }
-/*  function mapVisible() {
-        if (document.getElementById('list') || document.getElementById('cal')) {
+    function mapVisible() {
+      if (document.getElementById('list') || document.getElementById('cal')) {
             if (document.getElementById('list').style.display != 'none' || document.getElementById('cal').style.display != 'none') {
                 document.getElementById('list').style.display = 'none';
                 document.getElementById('cal').style.display = 'none';
-                document.getElementById('map3').style.display = 'block';
+                document.getElementById('mapTab').style.display = 'block';
             }
         }
-    }*/
+    }
 </script>
 
 </body>
