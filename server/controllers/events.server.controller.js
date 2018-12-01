@@ -78,7 +78,7 @@ exports.delete = function(req, res) {
       res.status(400).send(err); // sends error and error code
     }
     res.status(200);
-    res.end(); // end response w/o data
+    //res.end(); // end response w/o data
   })
 };
 
