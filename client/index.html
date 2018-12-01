@@ -139,13 +139,7 @@
             <form novalidate class="simple-form,form-group row">
               <div class = "col-sm-12" style = "padding-left: 25px;">
 
-                <input type="text" placeholder='Name: {{detailedInfo.name}}' class="form-control" id="editName" ng-model="updatedEvent.name" required> <br>
-
-               <!-- <div id="map2">
-                  <div id="map" style="margin-bottom:40px;">  </div>
-                  <input type="number" name="lat" id="lat" readonly="yes" ng-model="updatedEvent.latitude" ng-init="updatedEvent.latitude=29.651634" hidden>
-                  <input type="number" name="lng" id="lng" readonly="yes" ng-model="updatedEvent.longitude" ng-init="updatedEvent.longitude=-82.3248" hidden>
-                </div>-->
+                <input type="text" placeholder='Name: {{detailedInfo.title}}' class="form-control" id="editName" ng-model="updatedEvent.title" required> <br>
 
                 <div>
                   <label name="start"> Event Start Time: </label> <br>
@@ -281,14 +275,14 @@
         <form id="myForm" novalidate class="simple-form,form-group row">
           <div class = "col-sm-12" style = "padding-left: 25px;">
 
-            <input type="text" placeholder="Name:" class="form-control" id="name" ng-model="newEvent.name" required > <br>
+            <input type="text" placeholder="Name:" class="form-control" id="name" ng-model="newEvent.title" required > <br>
 
             <div id="map2">
               <div id="map" style="margin-bottom:40px;">  </div>
-              <input type="number" name="lat" id="lat2" readonly="yes" ng-model="newEvent.latitude" ng-init="newEvent.latitude=29.651634" hidden>
-              <input type="number" name="lng" id="lng2" readonly="yes" ng-model="newEvent.longitude" ng-init="newEvent.longitude=-82.3248" hidden>
+              <input type="number" name="lat" id="lat" readonly="yes" ng-model="newEvent.latitude">
+              <input type="number" name="lng" id="lng" readonly="yes" ng-model="newEvent.longitude">
             </div>
-
+            
             <div>
               <label name="start">Event Start Time:</label> <br>
               <select name="year" ng-model="start.year">
