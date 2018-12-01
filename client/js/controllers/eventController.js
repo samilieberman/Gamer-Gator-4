@@ -186,7 +186,7 @@ angular.module('events').controller('EventsController', ['$scope', 'Events','$co
               }
           });
       };
-      $scope.eventRender = function( event, element, view ) {
+      $scope.eventRender = function( event, element,view) {
           element.attr({'tooltip': event.title,
               'tooltip-append-to-body': true});
           $compile(element)($scope);
