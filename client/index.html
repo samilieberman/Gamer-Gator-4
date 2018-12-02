@@ -8,10 +8,9 @@
    <link rel="stylesheet" href="bower_components/fullcalendar/dist/fullcalendar.css"/>
     <!-- jquery, moment, and angular have to get included before fullcalendar -->
   <link rel="icon" href="img/favicon.ico" type="image/x-icon"/>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-
 </head>
-<body>
+
+<body ng-view>
   <div class="container-fluid">
     <div class="row">
       <div class="jumbotron">
@@ -24,8 +23,6 @@
           <li data-target="#myCarousel" data-slide-to="1"></li>
           <li data-target="#myCarousel" data-slide-to="2"></li>
           <li data-target="#myCarousel" data-slide-to="3"></li>
-            <li data-target="#myCarousel" data-slide-to="4"></li>
-            <li data-target="#myCarousel" data-slide-to="5"></li>
         </ol>
 
         <!-- Wrapper for slides -->
@@ -39,20 +36,6 @@
               <p style="font-size: 100px">Fortnite</p>
             </div> -->
           </div>
-          <div class="item">
-                <img src="../img/dnd_banner.png" alt="banne" style="width:100%; height:250px;">
-                <div class="carousel-caption">
-                    <h3></h3>
-                </div>
-            </div>
-
-
-            <div class="item">
-                <img src="../img/hearthstone_banner.png" alt="banne" style="width:100%; height:250px;">
-                <div class="carousel-caption">
-                    <h3></h3>
-                </div>
-            </div>
 
           <div class="item">
             <img src="../img/league_banner.png" alt="call" style="width:100%; height:250px;">
@@ -85,14 +68,14 @@
           </div>
         </div>
 
-          <script>
-              $('.carousel-control').click(function(e){
-                  e.preventDefault();
-              });
-          </script>
+        <script>
+            $('.carousel-control').click(function(e){
+                e.preventDefault();
+            });
+        </script>
 
-        <!-- Left and right controls href="#myCarousel" -->
-        <a class="left carousel-control"  href="#myCarousel" data-slide="prev">
+        <!-- Left and right controls -->
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
           <span class="glyphicon glyphicon-chevron-left"></span>
           <span class="sr-only">Previous</span>
         </a>
@@ -108,7 +91,7 @@
       <button type="button" class="btn btn-info rounded" onclick="listVisible();">
         List
       </button>
-      <button type="button" class="btn btn-info rounded" onclick="calVisible(); window.location.reload()">
+      <button type="button" class="btn btn-info rounded" onclick="calVisible(); uiCalendarConfig.calendars[calendar].fullCalendar('render');">
         Calendar
       </button>
       <button type="button" class="btn btn-info rounded" onclick="mapVisible();">
@@ -116,163 +99,31 @@
       </button>
     </div>
 
-    <!-- Login button -->
-    <button type="button" class="btn btn-info rounded" onclick="window.location.href = 'login.html'">
-      Login
-    </button>
-
-    <button type="button" class="btn btn-info rounded" onclick="window.location.href = 'register.html'">
-      Register
-    </button>
-    <br> <br>
-
-  <form action = "/logout" method = "GET">
-    <button type="submit" class="btn btn-primary" >Log Out</button>
-  </form>
-
-   <!-- <h4>Currently logged in as: {{req.user}}</h4> -->
 
   <div class="row">
 
-    <!--Edit Event modal dialog-->
-    <div id="editEvent" class="modal fade" role="dialog">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h2 class="modal-title" style="text-align:center">Edit Event...</h2>
-          </div>
-          <div class="modal-body">
-            <form novalidate class="simple-form,form-group row">
-              <div class = "col-sm-12" style = "padding-left: 25px;">
-
-                <input type="text" placeholder='Name: {{detailedInfo.title}}' class="form-control" id="editName" ng-model="updatedEvent.title" required> <br>
-
-                <div>
-                  <label name="start"> Event Start Time: </label> <br>
-                  <select name="year" ng-model="updatedStart.year">
-                    <option value="">year</option>
-                    <option value="2018">2018</option>
-                    <option value="2019">2019</option>
-                  </select>
-                  <select name="month" ng-model="updatedStart.month">
-                    <option value="">month</option>
-                    <option ng-repeat="month in months" value="{{month}}">{{month}}</option>
-                  </select>
-                  <select name="day" ng-model="updatedStart.day">
-                    <option value="">day</option>
-                    <option ng-repeat="day in days" value="{{day}}">{{day}}</option>
-                  </select>
-                  <select name="hour" ng-model="updatedStart.hour">
-                    <option value="">hour</option>
-                    <option ng-repeat="hour in hours" value="{{hour}}">{{hour}}</option>
-                  </select>
-                </div> <br>
-
-                <div>
-                  <label name="end"> Event End Time: </label> <br>
-                  <select name="year" ng-model="updatedEnd.year">
-                    <option value="">year</option>
-                    <option value="2018">2018</option>
-                    <option value="2019">2019</option>
-                  </select>
-                  <select name="month" ng-model="updatedEnd.month">
-                    <option value="">month</option>
-                    <option ng-repeat="month in months" value="{{month}}">{{month}}</option>
-                  </select>
-                  <select name="day" ng-model="updatedEnd.day">
-                    <option value="">day</option>
-                    <option ng-repeat="day in days" value="{{day}}">{{day}}</option>
-                  </select>
-                  <select name="hour" ng-model="updatedEnd.hour">
-                    <option value="">hour</option>
-                    <option ng-repeat="hour in hours" value="{{hour}}">{{hour}}</option>
-                  </select>
-                </div> <br>
-
-                <input type="text" placeholder='Game: {{detailedInfo.game}}' class="form-control" id="game" ng-model="updatedEvent.game" required><br>
-                <input type="text" placeholder='Fee: {{detailedInfo.fee}}' class="form-control" id="fee" ng-model="updatedEvent.fee" required ><br>
-                <textarea rows="3" placeholder='Event Description: {{detailedInfo.description}}' class="form-control" id="description"
-                          ng-model="updatedEvent.description"></textarea><br>
-                <div>
-                  <label name="tag">Event Tag:</label>
-                  <select name="tags" ng-model="updatedEvent.tags">
-                    <option value="">--tags--</option>
-                    <option value="RPG">RPG</option>
-                    <option value="Adventure">Adventure</option>
-                    <option value="Sports">Sports</option>
-                    <option value="Racing">Racing</option>
-                    <option value="Fighting">Fighting</option>
-                    <option value="Action">Action</option>
-                    <option value="Simulation">Simulation</option>
-                    <option value="Strategy">Strategy</option>
-                    <option value="Other">Other</option>
-                  </select>
-                </div> <br>
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-success" ng-click="updateEvent(currentIndex)" data-dismiss="modal"><span
-                    class="glyphicon glyphicon-ok"></span></button>
-            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel edit</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Details modal dialog -->
-    <div id="detailsModal" class="modal fade" role="dialog">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h2 class="modal-title" style="text-align:center">  {{detailedInfo.title}}</h2>
-          </div>
-          <div class="modal-body">
-            <h3 style="text-align:center">Game:  {{detailedInfo.game}}</h3>
-            <h3 style="text-align:center">Date</h3>
-            <h4 class="well" style="text-align:center; margin-top: 0px;">{{detailedInfo.start}}  to  {{detailedInfo.end}}</h4>
-            <h3 style="text-align:center">Location</h3>
-            <p class="well" style="text-align:center">{{detailedInfo.address}}</p>
-            <h3 style="text-align:center">Description</h3>
-            <p class="well">{{detailedInfo.description}}</p>
-            <h3 style="text-align:center">Fee:  ${{detailedInfo.fee}}</h3>
-          </div>
-
-          <div class="modal-footer">
-            <div class="text-center">
-              <button type="button" class="btn btn-success" data-toggle="button" aria-pressed="true" autocomplete="off">
-                <!-- ng-if="currentUser.registeredEvents[] does not contain detailedInfo" ng-click="subscribeUser(username, currentIndex)"-->
-                Subscribe
-              </button>
-              <button type="button" class="btn btn-secondary" data-toggle="button" aria-pressed="false" autocomplete="off">
-                <!-- ng-if="currentUser.registeredEvents[] contains detailedInfo" ng-click="unsubscribeUser(username, currentIndex)"-->
-                Unsubscribe
-              </button>
-            </div>
-            <br><br>
-            <button type="button" class="btn btn-danger pull-left" ng-click="deleteEvent(currentIndex)" data-dismiss="modal">
-              <!-- ng-if="(currentUser == detailedInfo.creatorUsername)||(currentUser.admin)"-->
-              Delete Event</button>
-            <button type="button" class="btn btn-warning pull-left" ng-click="fillUpdateInput(currentIndex)" data-toggle="modal" data-target="#editEvent" data-dismiss="modal">
-              <!-- ng-if="(currentUser == detailedInfo.creatorUsername)||(currentUser.admin)" ng-click="editEvent()" -->
-              Edit Event
-            </button>
-            <!-- <button type="button" class="btn btn-info pull-left" >
-              <!-- ng-if="(currentUser == detailedInfo.creatorUsername)||(currentUser.admin)" ng-click="sendMessageModal()"
-              Message event members
-            </button>-->
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
 
     <div class="col-md-3">
-      <br><br><br>
-      <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="collapse"
+      <br>
+      <!-- Login button -->
+      <button type="button" class="btn btn-info rounded btn-lg btn-block" style = "margin-left:10px" ng-show="!currentUser" ng-click="go('/login')">
+        Login
+      </button>
+      <br>
+      <button type="button" class="btn btn-info rounded btn-lg btn-block" style = "margin-left:10px" ng-show="!currentUser" ng-click="go('/register')">
+        Register
+      </button>
+
+      <span ng-show="currentUser">
+      <p style="font-size: 18px; text-align: center;"> Currently logged in as:  <b style="font-size: 22px">{{currentUser.username}}</b></p>
+      <button class="btn btn-danger btn-lg btn-block" style = "margin-left:10px" ng-show="currentUser" ng-click="currentUser = null">Log Out</button>
+      </span>
+      <br>
+
+      <button type="button" class="btn btn-primary btn-lg btn-block" ng-show="currentUser" style = "margin-left:10px;">View Subscribed Events</button>
+      <br>
+
+      <button type="button" class="btn btn-primary btn-lg btn-block" ng-show="currentUser" data-toggle="collapse"
               data-target="#createEvent" style = "margin-left:10px;">Create Event
       </button>
       <div style="text-align: center;" class="collapse" id="createEvent">
@@ -283,15 +134,12 @@
           <div class = "col-sm-12" style = "padding-left: 25px;">
 
             <input type="text" placeholder="Name:" class="form-control" id="name" ng-model="newEvent.title" required > <br>
-            <input id="searchTextField" type="text" placeholder="Location:" class="form-control" size="45"><br>
-            <input type = "hidden" id="city2" name="city2" />
-            <input type = "hidden" id="cityLat" name="cityLat" />
-            <input type = "hidden" id="cityLng" name="cityLng" />
-<!--            <div id="map2">
+
+            <div id="map2">
               <div id="map" style="margin-bottom:40px;">  </div>
               <input type="number" name="lat" id="lat" readonly="yes" ng-model="newEvent.latitude">
               <input type="number" name="lng" id="lng" readonly="yes" ng-model="newEvent.longitude">
-            </div>-->
+            </div>
 
             <div>
               <label name="start">Event Start Time:</label> <br>
@@ -357,7 +205,7 @@
 
             <button type="submit" class="btn btn-success" ng-click="addEvent(); loadEventList();" onclick="document.getElementById('myForm').reset();">
 
-                <span class="glyphicon glyphicon-ok"></span></button>
+              <span class="glyphicon glyphicon-ok"></span></button>
             <br><br>
           </div>
         </form>
@@ -365,8 +213,6 @@
       </div>
 
       <br><br>
-      <button type="button" class="btn btn-primary btn-lg btn-block" style = "margin-left:10px;">View Subscribed Events</button>
-      <br>
     </div>
 
     <div class="col-md-9" id="cal">
@@ -381,16 +227,15 @@
 
     <div class="col-md-9">
       <div class="ui container">
-         <div class="ui grid">
-            <div class="ui sixteen column">
-                <div id = "mapTab">
-                    <div id="mapT" style="margin-bottom:40px;">  </div>
-                </div>
+        <div class="ui grid">
+          <div class="ui sixteen column">
+            <div id = "mapTab">
+              <div id="mapT" style="margin-bottom:40px;">  </div>
             </div>
-         </div>
+          </div>
+        </div>
       </div>
     </div>
-
 
     <!--<div class="col-md-9" id="map2">
       <div class="ui container">
@@ -410,21 +255,21 @@
       </div>
     </div>-->
 
-    <div class="col-md-9 collapse in" id="list">
-      <br>
-        <!-- top filter code -->
-        <div id="myBtnContainer" style="margin-bottom:20px;">
-            <button class="btn2" ng-model="searchInput" value="" ng-click="getFilterVal($event)" style="font-family: arcadeFont; font-size: x-small;"> All </button>
-            <button class="btn2" ng-model="searchInput" value="RPG" ng-click="getFilterVal($event)" style="font-family: arcadeFont; font-size: x-small;"> RPG </button>
-            <button class="btn2" ng-model="searchInput" value="Adventure" ng-click="getFilterVal($event)" style="font-family: arcadeFont; font-size: x-small;"> Adventure </button>
-            <button class="btn2" ng-model="searchInput" value="Sports" ng-click="getFilterVal($event)" style="font-family: arcadeFont; font-size: x-small;"> Sports </button>
-            <button class="btn2" ng-model="searchInput" value="Racing" ng-click="getFilterVal($event)" style="font-family: arcadeFont; font-size: x-small;"> Racing </button>
-            <button class="btn2" ng-model="searchInput" value="Fighting" ng-click="getFilterVal($event)" style="font-family: arcadeFont; font-size: x-small;"> Fighting </button>
-            <button class="btn2" ng-model="searchInput" value="Action" ng-click="getFilterVal($event)" style="font-family: arcadeFont; font-size: x-small;"> Action </button>
-            <button class="btn2" ng-model="searchInput" value="Simulation" ng-click="getFilterVal($event)" style="font-family: arcadeFont; font-size: x-small;"> Simulation </button>
-            <button class="btn2" ng-model="searchInput" value="Strategy" ng-click="getFilterVal($event)" style="font-family: arcadeFont; font-size: x-small;"> Strategy </button>
-            <button class="btn2" ng-model="searchInput" value="Other" ng-click="getFilterVal($event)" style="font-family: arcadeFont; font-size: x-small;"> Other </button>
-        </div>
+    <div class="col-md-9 collapse in" id="list" >
+      <!-- top filter code -->
+      <div id="myBtnContainer" style="margin-bottom:20px;">
+        <button class="btn2" ng-model="searchInput" value="" ng-click="getFilterVal($event)" style="font-family: arcadeFont; font-size: x-small;"> All </button>
+        <button class="btn2" ng-model="searchInput" value="RPG" ng-click="getFilterVal($event)" style="font-family: arcadeFont; font-size: x-small;"> RPG </button>
+        <button class="btn2" ng-model="searchInput" value="Adventure" ng-click="getFilterVal($event)" style="font-family: arcadeFont; font-size: x-small;"> Adventure </button>
+        <button class="btn2" ng-model="searchInput" value="Sports" ng-click="getFilterVal($event)" style="font-family: arcadeFont; font-size: x-small;"> Sports </button>
+        <button class="btn2" ng-model="searchInput" value="Racing" ng-click="getFilterVal($event)" style="font-family: arcadeFont; font-size: x-small;"> Racing </button>
+        <button class="btn2" ng-model="searchInput" value="Fighting" ng-click="getFilterVal($event)" style="font-family: arcadeFont; font-size: x-small;"> Fighting </button>
+        <button class="btn2" ng-model="searchInput" value="Action" ng-click="getFilterVal($event)" style="font-family: arcadeFont; font-size: x-small;"> Action </button>
+        <button class="btn2" ng-model="searchInput" value="Simulation" ng-click="getFilterVal($event)" style="font-family: arcadeFont; font-size: x-small;"> Simulation </button>
+        <button class="btn2" ng-model="searchInput" value="Strategy" ng-click="getFilterVal($event)" style="font-family: arcadeFont; font-size: x-small;"> Strategy </button>
+        <button class="btn2" ng-model="searchInput" value="Other" ng-click="getFilterVal($event)" style="font-family: arcadeFont; font-size: x-small;"> Other </button>
+
+      </div>
       <div class="input-group" id="searchBar">
         <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-search"></span></span>
         <input type="text" class="form-control" ng-model="searchInput"
@@ -441,7 +286,7 @@
             <th></th>
           </tr>
 
-          <tr ng-repeat="event in events | filter: searchInput as results">
+          <tr ng-repeat="event in events | orderBy: 'start'| filter: searchInput as results">
 
             <td>{{event.title}}</td>
             <td>{{event.start | date:"MM/dd/yyyy 'at' h:mma" : 'UTC'}}</td>
@@ -466,18 +311,153 @@
 
   </div>
 
-</div>
+
+    <div id="editEvent" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h2 class="modal-title" style="text-align:center">Edit Event...</h2>
+          </div>
+          <div class="modal-body">
+            <form novalidate class="simple-form,form-group row">
+              <div class = "col-sm-12" style = "padding-left: 25px;">
+
+                <input type="text" placeholder='Name: {{detailedInfo.title}}' class="form-control" id="editName" ng-model="updatedEvent.title" required> <br>
+
+                <div>
+                  <label name="start"> Event Start Time: </label> <br>
+                  <select name="year" ng-model="updatedstart.year">
+                    <option value="">year</option>
+                    <option value="2018">2018</option>
+                    <option value="2019">2019</option>
+                  </select>
+                  <select name="month" ng-model="updatedstart.month">
+                    <option value="">month</option>
+                    <option ng-repeat="month in months" value="{{month}}">{{month}}</option>
+                  </select>
+                  <select name="day" ng-model="updatedstart.day">
+                    <option value="">day</option>
+                    <option ng-repeat="day in days" value="{{day}}">{{day}}</option>
+                  </select>
+                  <select name="hour" ng-model="updatedstart.hour">
+                    <option value="">hour</option>
+                    <option ng-repeat="hour in hours" value="{{hour}}">{{hour}}</option>
+                  </select>
+                </div> <br>
+
+                <div>
+                  <label name="end"> Event End Time: </label> <br>
+                  <select name="year" ng-model="updatedend.year">
+                    <option value="">year</option>
+                    <option value="2018">2018</option>
+                    <option value="2019">2019</option>
+                  </select>
+                  <select name="month" ng-model="updatedend.month">
+                    <option value="">month</option>
+                    <option ng-repeat="month in months" value="{{month}}">{{month}}</option>
+                  </select>
+                  <select name="day" ng-model="updatedend.day">
+                    <option value="">day</option>
+                    <option ng-repeat="day in days" value="{{day}}">{{day}}</option>
+                  </select>
+                  <select name="hour" ng-model="updatedend.hour">
+                    <option value="">hour</option>
+                    <option ng-repeat="hour in hours" value="{{hour}}">{{hour}}</option>
+                  </select>
+                </div> <br>
+
+                <input type="text" placeholder='Game: {{detailedInfo.game}}' class="form-control" id="game" ng-model="updatedEvent.game" required><br>
+                <input type="text" placeholder='Fee: {{detailedInfo.fee}}' class="form-control" id="fee" ng-model="updatedEvent.fee" required ><br>
+                <textarea rows="3" placeholder='Event Description: {{detailedInfo.description}}' class="form-control" id="description"
+                          ng-model="updatedEvent.description"></textarea><br>
+                <div>
+                  <label name="tag">Event Tag:</label>
+                  <select name="tags" ng-model="updatedEvent.tags">
+                    <option value="">--tags--</option>
+                    <option value="RPG">RPG</option>
+                    <option value="Adventure">Adventure</option>
+                    <option value="Sports">Sports</option>
+                    <option value="Racing">Racing</option>
+                    <option value="Fighting">Fighting</option>
+                    <option value="Action">Action</option>
+                    <option value="Simulation">Simulation</option>
+                    <option value="Strategy">Strategy</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div> <br>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-success" ng-click="updateEvent(currentIndex)" data-dismiss="modal"><span
+                    class="glyphicon glyphicon-ok"></span></button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel edit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Details modal dialog -->
+    <div id="detailsModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h2 class="modal-title" style="text-align:center">  {{detailedInfo.title}}</h2>
+          </div>
+          <div class="modal-body">
+            <h3 style="text-align:center">Game:  {{detailedInfo.game}}</h3>
+            <h3 style="text-align:center">Date</h3>
+            <h4 class="well" style="text-align:center; margin-top: 0px;">{{detailedInfo.start}}  to  {{detailedInfo.end}}</h4>
+            <h3 style="text-align:center">Location</h3>
+            <p class="well" style="text-align:center">{{detailedInfo.address}}</p>
+            <h3 style="text-align:center">Description</h3>
+            <p class="well">{{detailedInfo.description}}</p>
+            <h3 style="text-align:center">Fee:  ${{detailedInfo.fee}}</h3>
+          </div>
+
+          <div class="modal-footer">
+            <div class="text-center">
+              <button type="button" class="btn btn-success" >
+                <!-- ng-if="currentUser.registeredEvents[] does not contain detailedInfo" ng-click="subscribeUser(username, currentIndex)"-->
+                Subscribe
+              </button>
+              <button type="button" class="btn btn-secondary">
+                <!-- ng-if="currentUser.registeredEvents[] contains detailedInfo" ng-click="unsubscribeUser(username, currentIndex)"-->
+                Unsubscribe
+              </button>
+            </div>
+            <br><br>
+            <button type="button" class="btn btn-danger pull-left" ng-click="deleteEvent(currentIndex)" data-dismiss="modal">
+              <!-- ng-if="(currentUser == detailedInfo.creatorUsername)||(currentUser.admin)"-->
+              Delete Event</button>
+            <button type="button" class="btn btn-warning pull-left" ng-click="fillUpdateInput(currentIndex)" data-toggle="modal" data-target="#editEvent" data-dismiss="modal">
+              <!-- ng-if="(currentUser == detailedInfo.creatorUsername)||(currentUser.admin)" ng-click="editEvent()" -->
+              Edit Event
+            </button>
+            <!-- <button type="button" class="btn btn-info pull-left" >
+              <!-- ng-if="(currentUser == detailedInfo.creatorUsername)||(currentUser.admin)" ng-click="sendMessageModal()"
+              Message event members
+            </button>-->
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
 </div>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4kwn_SvtsH-sVdIrRuD_ptPyxNiCIk68&key=AIzaSyCs2M1YN1ZhGlZjN0epiAqBSuaqf_OZFKU&libraries=places&callback=initialize" async defer></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"
         integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ=="
         crossorigin="anonymous"></script>
 <script src="https://code.angularjs.org/1.4.3/angular.js"></script>
+<script src="https://code.angularjs.org/1.4.3/angular-route.js"></script>
 <script src="js/app.js"></script>
 <script src="js/factories/eventFactory.js"></script>
-<script src="js/factories/userFactory.js"></script>
 <script src="js/controllers/eventController.js"></script>
 <script src="js/controllers/userController.js"></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.js'></script>
@@ -486,127 +466,136 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js'></script>
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
 <script src="bower_components/moment/min/moment.min.js"></script>
-<script src="bower_components/angular/angular.min.js"></script>
+<!--<script src="bower_components/angular/angular.min.js"></script>-->
 <script src="bower_components/angular-ui-calendar/src/calendar.js"></script>
 <script src="bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
 <script src="bower_components/fullcalendar/dist/gcal.js"></script>
 
-<script>
-    function initialize() {
-        initMap();
-        init();
-    }
-    function init() {
-        var inp = document.getElementById('searchTextField');
-        var autocomplete = new google.maps.places.Autocomplete(inp);
-        google.maps.event.addListener(autocomplete, 'place_changed', function () {
-            var place = autocomplete.getPlace();
-            document.getElementById('city2').value = place.name;
-            document.getElementById('cityLat').value = place.geometry.location.lat();
-            document.getElementById('cityLng').value = place.geometry.location.lng();
-        });
-    }
+<!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4kwn_SvtsH-sVdIrRuD_ptPyxNiCIk68&callback=initMap" async defer>-->
+
+  <script>
+      //map.js
+
+      //Set up some of our variables.
+      var map,map2; //Will contain map object.
+      var marker = false; ////Has the user plotted their location marker?
+
+      //Function called to initialize / create the map.
+      function initMap() {
+
+          //The center location of our map.
+          var centerOfMap = new google.maps.LatLng(29.6436, -82.3549);
+
+          //Map options.
+          var options = {
+              center: centerOfMap, //Set center.
+              zoom: 14 //The zoom value.
+          };
+
+          //Create the map object.
+          map = new google.maps.Map(document.getElementById('map'), options);
+          map2 = new google.maps.Map(document.getElementById('mapT'), options);
+
+          //Listen for any clicks on the map.
+          google.maps.event.addListener(map, 'click', function(event) {
+              //Get the location that the user clicked.
+              var clickedLocation = event.latLng;
+              //If the marker hasn't been added.
+              if(marker === false){
+                  //Create the marker.
+                  marker = new google.maps.Marker({
+                      position: clickedLocation,
+                      map: map,
+                      draggable: true //make it draggable
+                  });
+                  //Listen for drag events!
+                  google.maps.event.addListener(marker, 'dragend', function(event){
+                      markerLocation();
+                  });
+              } else{
+                  //Marker has already been added, so just change its location.
+                  marker.setPosition(clickedLocation);
+              }
+              //Get the marker's location.
+              markerLocation();
+          });
+          //Listen for any clicks on the map2.
+          google.maps.event.addListener(map2, 'click', function(event) {
+              //Get the location that the user clicked.
+              var clickedLocation = event.latLng;
+              //If the marker hasn't been added.
+              if(marker === false){
+                  //Create the marker.
+                  marker = new google.maps.Marker({
+                      position: clickedLocation,
+                      map: map2,
+                      draggable: true //make it draggable
+                  });
+                  //Listen for drag events!
+                  google.maps.event.addListener(marker, 'dragend', function(event){
+                      markerLocation();
+                  });
+              } else{
+                  //Marker has already been added, so just change its location.
+                  marker.setPosition(clickedLocation);
+              }
+              //Get the marker's location.
+              markerLocation();
+          });
+      }
+
+      //This function will get the marker's current location and then add the lat/long
+      //values to our textfields so that we can save the location.
+      function markerLocation(){
+          //Get location.
+          var currentLocation = marker.getPosition();
+          //Add lat and lng values to a field that we can save.
+          document.getElementById('lat').value = currentLocation.lat(); //latitude
+          document.getElementById('lng').value = currentLocation.lng(); //longitude
+      }
 
 
-    //map.js
+      //Load the map when the page has finished loading.
+      google.maps.event.addDomListener(window, 'load', initMap);
+  </script>
 
-    //Set up some of our variables.
-    //var map,map2; //Will contain map object.
-    var map;
-    var marker = false; ////Has the user plotted their location marker?
+  <script async defer
+          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4kwn_SvtsH-sVdIrRuD_ptPyxNiCIk68&callback=initMap">
+  </script>
 
-    //Function called to initialize / create the map.
-    function initMap() {
-
-        //The center location of our map.
-        var centerOfMap = new google.maps.LatLng(29.6436, -82.3549);
-
-        //Map options.
-
-        var options = {
-            center: centerOfMap, //Set center.
-            zoom: 14 //The zoom value.
-        };
-
-        //Create the map object.
-        //map = new google.maps.Map(document.getElementById('map'), options);
-        map = new google.maps.Map(document.getElementById('mapT'), options);
-
-        //Listen for any clicks on the map2.
-        google.maps.event.addListener(map, 'click', function(event) {
-            //Get the location that the user clicked.
-            var clickedLocation = event.latLng;
-            //If the marker hasn't been added.
-            if(marker === false){
-                //Create the marker.
-                marker = new google.maps.Marker({
-                    position: clickedLocation,
-                    map: map,
-                    draggable: true //make it draggable
-                });
-                //Listen for drag events!
-                google.maps.event.addListener(marker, 'dragend', function(event){
-                    markerLocation();
-                });
-            } else{
-                //Marker has already been added, so just change its location.
-                marker.setPosition(clickedLocation);
-            }
-            //Get the marker's location.
-            markerLocation();
-        });
-        init();
-    }
-
-    //This function will get the marker's current location and then add the lat/long
-    //values to our textfields so that we can save the location.
-    function markerLocation(){
-        //Get location.
-        var currentLocation = marker.getPosition();
-        //Add lat and lng values to a field that we can save.
-        document.getElementById('lat').value = currentLocation.lat(); //latitude
-        document.getElementById('lng').value = currentLocation.lng(); //longitude
-    }
-
-
-    //Load the map when the page has finished loading.
-    google.maps.event.addDomListener(window, 'load', initMap);
-    google.maps.event.addDomListener(window, 'load', init);
-</script>
-
-<script>
-    function listVisible() {
-        if (document.getElementById('cal') || document.getElementById('mapTab')) {
-            if (document.getElementById('cal').style.display != 'none' || document.getElementById('mapTab').style.display != 'none') {
-                document.getElementById('cal').style.display = 'none';
-                document.getElementById('mapTab').style.display = 'none';
-                document.getElementById('list').style.display = 'block';
-            }
-        }
-    }
-    function calVisible() {
-      if (document.getElementById('list') || document.getElementById('mapTab')) {
-            if (document.getElementById('list').style.display != 'none' || document.getElementById('mapTab').style.display != 'none') {
-                document.getElementById('list').style.display = 'none';
-                document.getElementById('mapTab').style.display = 'none';
-                document.getElementById('cal').style.display = 'block';
-            }
-        }
-    }
-    function mapVisible() {
-      if (document.getElementById('list') || document.getElementById('cal')) {
-            if (document.getElementById('list').style.display != 'none' || document.getElementById('cal').style.display != 'none') {
-                document.getElementById('list').style.display = 'none';
-                document.getElementById('cal').style.display = 'none';
-                document.getElementById('mapTab').style.display = 'block';
-            }
-        }
-    }
-</script>
+  <script>
+      function listVisible() {
+          if (document.getElementById('cal') || document.getElementById('mapTab')) {
+              if (document.getElementById('cal').style.display != 'none' || document.getElementById('mapTab').style.display != 'none') {
+                  document.getElementById('cal').style.display = 'none';
+                  document.getElementById('mapTab').style.display = 'none';
+                  document.getElementById('list').style.display = 'block';
+              }
+          }
+      }
+      function calVisible() {
+          if (document.getElementById('list') || document.getElementById('mapTab')) {
+              if (document.getElementById('list').style.display != 'none' || document.getElementById('mapTab').style.display != 'none') {
+                  document.getElementById('list').style.display = 'none';
+                  document.getElementById('mapTab').style.display = 'none';
+                  document.getElementById('cal').style.display = 'block';
+              }
+          }
+      }
+      function mapVisible() {
+          if (document.getElementById('list') || document.getElementById('cal')) {
+              if (document.getElementById('list').style.display != 'none' || document.getElementById('cal').style.display != 'none') {
+                  document.getElementById('list').style.display = 'none';
+                  document.getElementById('cal').style.display = 'none';
+                  document.getElementById('mapTab').style.display = 'block';
+              }
+          }
+      }
+  </script>
 
 </body>
 
-<footer style="margin-top:20px">
+<footer style="margin-top:20px;">
     <div class="footer">
         <div class="container-fluid"  id="myfooter">
             <div class="row">
