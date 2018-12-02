@@ -1,17 +1,37 @@
-angular.module('users').controller('UserController', ['$scope', '$rootScope', '$http',
-    function ($rootScope, $scope, $http) {
+angular.module('users').controller('UserController', ['$rootScope', '$scope', '$http', '$location',
+    function ($rootScope, $scope, $http, $location) {
 
-    $scope.isLoggedIn = function() {
-        $http.get('/checklogin')
-            .success(function(data) {
-                console.log("hi");
-                console.log(data);
-                $rootScope.loggedIn = data;
-                window.localStorage.setItem("username", data.username);
-            })
-            .error(function(data) {
-                console.log('error: '+data);
-            });
-    };
-  }]);
+        $scope.register = function(user) {
+            console.log('Entering register() function...');
+
+                $http.post('/register', user)
+                    .success(function(user) {
+                        console.log('Registration success');
+                        $rootScope.currentUser = user;
+                        $location.url('/login');
+                    });
+
+        };
+
+        $scope.logout = function() {
+            console.log('Entered logout function');
+            $http.post("/logout")
+                .success(function() {
+                    console.log('Logout success');
+                    $rootScope.currentUser = null;
+                    $location.url('/');
+                });
+        };
+
+        $scope.login = function(user) {
+            console.log('Entered login function');
+            $http.post('/login', user)
+                .success(function(response) {
+                    console.log('Login success');
+                    $rootScope.currentUser = response;
+                    $location.url("/");
+                });
+        };
+
+    }]);
 
