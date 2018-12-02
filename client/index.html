@@ -8,6 +8,8 @@
    <link rel="stylesheet" href="bower_components/fullcalendar/dist/fullcalendar.css"/>
     <!-- jquery, moment, and angular have to get included before fullcalendar -->
   <link rel="icon" href="img/favicon.ico" type="image/x-icon"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
 </head>
 
 <body ng-view>
@@ -23,6 +25,8 @@
           <li data-target="#myCarousel" data-slide-to="1"></li>
           <li data-target="#myCarousel" data-slide-to="2"></li>
           <li data-target="#myCarousel" data-slide-to="3"></li>
+          <li data-target="#myCarousel" data-slide-to="4"></li>
+          <li data-target="#myCarousel" data-slide-to="5"></li>
         </ol>
 
         <!-- Wrapper for slides -->
@@ -35,6 +39,20 @@
             <!-- <div class="carousel-caption">
               <p style="font-size: 100px">Fortnite</p>
             </div> -->
+          </div>
+
+          <div class="item">
+            <img src="../img/dnd_banner.png" alt="banne" style="width:100%; height:250px;">
+            <div class="carousel-caption">
+              <h3></h3>
+            </div>
+          </div>
+
+          <div class="item">
+            <img src="../img/hearthstone_banner.png" alt="banne" style="width:100%; height:250px;">
+            <div class="carousel-caption">
+              <h3></h3>
+            </div>
           </div>
 
           <div class="item">
@@ -91,7 +109,7 @@
       <button type="button" class="btn btn-info rounded" onclick="listVisible();">
         List
       </button>
-      <button type="button" class="btn btn-info rounded" onclick="calVisible(); uiCalendarConfig.calendars[calendar].fullCalendar('render');">
+      <button type="button" class="btn btn-info rounded" onclick="calVisible();">
         Calendar
       </button>
       <button type="button" class="btn btn-info rounded" onclick="mapVisible();">
@@ -134,12 +152,16 @@
           <div class = "col-sm-12" style = "padding-left: 25px;">
 
             <input type="text" placeholder="Name:" class="form-control" id="name" ng-model="newEvent.title" required > <br>
+            <input id="searchTextField" type="text" placeholder="Location:" class="form-control" size="45"><br>
+            <input type = "hidden" id="city2" name="city2" />
+            <input type = "hidden" id="cityLat" name="cityLat" />
+            <input type = "hidden" id="cityLng" name="cityLng" />
 
-            <div id="map2">
+            <!--<div id="map2">
               <div id="map" style="margin-bottom:40px;">  </div>
               <input type="number" name="lat" id="lat" readonly="yes" ng-model="newEvent.latitude">
               <input type="number" name="lng" id="lng" readonly="yes" ng-model="newEvent.longitude">
-            </div>
+            </div>-->
 
             <div>
               <label name="start">Event Start Time:</label> <br>
@@ -449,7 +471,7 @@
 
 </div>
 
-
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4kwn_SvtsH-sVdIrRuD_ptPyxNiCIk68&key=AIzaSyCs2M1YN1ZhGlZjN0epiAqBSuaqf_OZFKU&libraries=places&callback=initialize" async defer></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"
         integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ=="
@@ -471,32 +493,39 @@
 <script src="bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
 <script src="bower_components/fullcalendar/dist/gcal.js"></script>
 
-<!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4kwn_SvtsH-sVdIrRuD_ptPyxNiCIk68&callback=initMap" async defer>-->
-
   <script>
+      function initialize() {
+          initMap();
+          init();
+      }
+      function init() {
+          var inp = document.getElementById('searchTextField');
+          var autocomplete = new google.maps.places.Autocomplete(inp);
+          google.maps.event.addListener(autocomplete, 'place_changed', function () {
+              var place = autocomplete.getPlace();
+              document.getElementById('city2').value = place.name;
+              document.getElementById('cityLat').value = place.geometry.location.lat();
+              document.getElementById('cityLng').value = place.geometry.location.lng();
+          });
+      }
       //map.js
-
       //Set up some of our variables.
-      var map,map2; //Will contain map object.
+      //var map,map2; //Will contain map object.
+      var map;
       var marker = false; ////Has the user plotted their location marker?
-
       //Function called to initialize / create the map.
       function initMap() {
-
           //The center location of our map.
           var centerOfMap = new google.maps.LatLng(29.6436, -82.3549);
-
           //Map options.
           var options = {
               center: centerOfMap, //Set center.
               zoom: 14 //The zoom value.
           };
-
           //Create the map object.
-          map = new google.maps.Map(document.getElementById('map'), options);
-          map2 = new google.maps.Map(document.getElementById('mapT'), options);
-
-          //Listen for any clicks on the map.
+          //map = new google.maps.Map(document.getElementById('map'), options);
+          map = new google.maps.Map(document.getElementById('mapT'), options);
+          //Listen for any clicks on the map2.
           google.maps.event.addListener(map, 'click', function(event) {
               //Get the location that the user clicked.
               var clickedLocation = event.latLng;
@@ -519,31 +548,8 @@
               //Get the marker's location.
               markerLocation();
           });
-          //Listen for any clicks on the map2.
-          google.maps.event.addListener(map2, 'click', function(event) {
-              //Get the location that the user clicked.
-              var clickedLocation = event.latLng;
-              //If the marker hasn't been added.
-              if(marker === false){
-                  //Create the marker.
-                  marker = new google.maps.Marker({
-                      position: clickedLocation,
-                      map: map2,
-                      draggable: true //make it draggable
-                  });
-                  //Listen for drag events!
-                  google.maps.event.addListener(marker, 'dragend', function(event){
-                      markerLocation();
-                  });
-              } else{
-                  //Marker has already been added, so just change its location.
-                  marker.setPosition(clickedLocation);
-              }
-              //Get the marker's location.
-              markerLocation();
-          });
+          init();
       }
-
       //This function will get the marker's current location and then add the lat/long
       //values to our textfields so that we can save the location.
       function markerLocation(){
@@ -553,16 +559,10 @@
           document.getElementById('lat').value = currentLocation.lat(); //latitude
           document.getElementById('lng').value = currentLocation.lng(); //longitude
       }
-
-
       //Load the map when the page has finished loading.
       google.maps.event.addDomListener(window, 'load', initMap);
+      google.maps.event.addDomListener(window, 'load', init);
   </script>
-
-  <script async defer
-          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4kwn_SvtsH-sVdIrRuD_ptPyxNiCIk68&callback=initMap">
-  </script>
-
   <script>
       function listVisible() {
           if (document.getElementById('cal') || document.getElementById('mapTab')) {
