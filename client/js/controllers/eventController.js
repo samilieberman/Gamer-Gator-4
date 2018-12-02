@@ -80,20 +80,20 @@ angular.module('events').controller('EventsController', ['$scope', 'Events','$co
       $scope.events.splice(index, 1);
     };
 
-    $scope.updatedStartTime = {};
-    $scope.updatedEndTime = {};
+    $scope.updatedStart = {};
+    $scope.updatedEnd = {};
 
     $scope.fillUpdateInput = function (index) {
       $scope.updatedEvent = $scope.events[index];
       console.log($scope.updatedEvent.start);
-      $scope.updatedStartTime.year = $scope.updatedEvent.start.substring(0,4);
-      $scope.updatedStartTime.month = $scope.updatedEvent.start.substring(5,7);
-      $scope.updatedStartTime.day = $scope.updatedEvent.start.substring(8,10);
-      $scope.updatedStartTime.hour = $scope.updatedEvent.start.substring(11,13);
-      $scope.updatedEndTime.year = $scope.updatedEvent.end.substring(0,4);
-      $scope.updatedEndTime.month = $scope.updatedEvent.end.substring(5,7);
-      $scope.updatedEndTime.day = $scope.updatedEvent.end.substring(8,10);
-      $scope.updatedEndTime.hour = $scope.updatedEvent.end.substring(11,13);
+      $scope.updatedStart.year = $scope.updatedEvent.start.substring(0,4);
+      $scope.updatedStart.month = $scope.updatedEvent.start.substring(5,7);
+      $scope.updatedStart.day = $scope.updatedEvent.start.substring(8,10);
+      $scope.updatedStart.hour = $scope.updatedEvent.start.substring(11,13);
+      $scope.updatedEnd.year = $scope.updatedEvent.end.substring(0,4);
+      $scope.updatedEnd.month = $scope.updatedEvent.end.substring(5,7);
+      $scope.updatedEnd.day = $scope.updatedEvent.end.substring(8,10);
+      $scope.updatedEnd.hour = $scope.updatedEvent.end.substring(11,13);
     };
 
     /*$scope.updateEvent = function (index) {
@@ -141,7 +141,6 @@ angular.module('events').controller('EventsController', ['$scope', 'Events','$co
           console.log(response.data);
         });
       });
-
     };
 
     $scope.showDetails = function (index) {
