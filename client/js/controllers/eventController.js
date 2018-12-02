@@ -1,6 +1,10 @@
-angular.module('events').controller('EventsController', ['$scope', 'Events','$compile', '$http', '$timeout', 'uiCalendarConfig',
-  function ($scope, Events, $compile, $http, $timeout, uiCalendarConfig) {
-
+angular.module('events').controller('EventsController', ['$rootScope', '$scope', 'Events','$compile', '$location', '$http', '$timeout', 'uiCalendarConfig',
+  function ($rootScope, $scope, Events, $compile, $location, $http, $timeout, uiCalendarConfig) {
+     
+    $rootScope.go = function(path){
+            $location.path(path);
+    };
+    
       /* Get all the listings, then bind it to the scope */
     Events.getAll().then(function (response) {
       $scope.events = response.data;
