@@ -7,18 +7,18 @@
   <!--<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.css'>-->
 </head>
 
-<body>
+<body ng-controller="UserController">
 
 <div class="login-page">
-  <h1 style="text-align:center; color:white;"><b>Register</b></h1>
+  <h1 style="text-align:center">Register</h1>
   <div class="form">
-    <form class="login-form" id = "form2" action = "/register" method = "POST">
-      <input type="text" name="email" placeholder="email"/> <br>
-      <input type="text" name="username" placeholder="username"/>
-      <input type="password" name="password" placeholder="password"/>
-      <button type="submit">register</button><br><br>
+    <form class="login-form" id = "form2">
+      <input type="text" ng-model="user.email" placeholder="email"/> <br>
+      <input type="text" ng-model="user.username" placeholder="username"/>
+      <input type="password" ng-model="user.password" placeholder="password"/>
+      <button ng-click="register(user)">register</button><br><br>
       <!--<button type="submit">back</button>-->
-      <a class="btn btn-info" href="/" role="button">BACK</a>
+      <a class="btn btn-info" ng-click="go('/')" role="button">BACK</a>
     </form>
   </div>
 </div>
@@ -28,7 +28,9 @@
         integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ=="
         crossorigin="anonymous"></script>
 <script src="https://code.angularjs.org/1.4.3/angular.js"></script>
+<script src="https://code.angularjs.org/1.4.3/angular-route.js"></script>
 <script src="js/app.js"></script>
+<script src="js/controllers/userController.js"></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
 
