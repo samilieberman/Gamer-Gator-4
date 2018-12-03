@@ -18,9 +18,12 @@ app.config(['$routeProvider', function($routeProvider) {
         })
         .when('/', {
             templateUrl: 'index.html',
+            controller: 'EventsController'
         })
         .otherwise({
-            redirectTo: '/'
+            redirectTo: '/',
+            controller: 'EventsController'
+
         });
 
 }]);
