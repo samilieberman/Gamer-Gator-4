@@ -6,24 +6,24 @@
 }
 
 #searchBar {
-  margin: 15px 10px;
+    margin: 15px 10px;
 }
 
 .tableWrapper {
-  max-height: 400px;
-  overflow: auto;
+    max-height: 400px;
+    overflow: auto;
 }
 .jumbotron {
-  background-size: cover;
-  background-color: white;
-  margin-bottom: 0px;
-  background-color:black;
-  border-radius: 0 !important;
+    background-size: cover;
+    background-color: white;
+    margin-bottom: 0px;
+    background-color:black;
+    border-radius: 0 !important;
 }
 .text-block {
-  color: black; /* text color */
-  background-color: #2196f3;
-  background-color: rgba(204, 204, 204, 0.8);
+    color: black; /* text color */
+    background-color: #2196f3;
+    background-color: rgba(204, 204, 204, 0.8);
 }
 
 /*Allows text of register button to change*/
@@ -32,7 +32,7 @@
 .btn-text.collapsed b {display:none}
 
 #list{
-  display:none;
+    display:none;
 }
 #mapTab{
     display:none;
@@ -42,33 +42,34 @@
     width: 100%;  /* The width is the width of the web page */
 }
 #mapT {
-  height: 400px;  /* The height is 400 pixels */
-  width: 100%;  /* The width is the width of the web page */
+    height: 400px;  /* The height is 400 pixels */
+    width: 100%;  /* The width is the width of the web page */
 }
 /* Style the buttons */
 .btn2 {
-  border: none;
-  outline: none;
-  padding: 12px 16px;
-  background-color: #f1f1f1;
-  cursor: pointer;
+    border: none;
+    outline: none;
+    padding: 12px 16px;
+    background-color: #f1f1f1;
+    cursor: pointer;
 }
 
 /* Add a light grey background on mouse-over */
 .btn2:hover {
-  background-color: #ddd;
+    background-color: #ddd;
 }
 
 /* Add a dark background to the active button */
 .btn2.active {
-  background-color: #666;
-  color: white;
+    background-color: #666;
+    color: white;
 }
 #myBtnContainer{
-  display: table;
-  margin-left: auto;
-  margin-right: auto;
+    display: table;
+    margin-left: auto;
+    margin-right: auto;
 }
+
 
 /*.btn {
 	-moz-box-shadow: 3px 4px 0px 0px #899599;
@@ -112,6 +113,6 @@
 
 
 @font-face {
-  font-family: arcadeFont;
-  src: url("../fonts/arcadefont.TTF");
+    font-family: arcadeFont;
+    src: url("../fonts/arcadefont.TTF");
 }

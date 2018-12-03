@@ -328,6 +328,130 @@
 
   </div>
 
+</div>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDU9S7E754G1tNl9E_p-iupT-qFHB0ZIO0&libraries=places&callback=initialize" async defer></script>-->
+<!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4kwn_SvtsH-sVdIrRuD_ptPyxNiCIk68&key=AIzaSyCs2M1YN1ZhGlZjN0epiAqBSuaqf_OZFKU&libraries=places&callback=initialize" async defer></script>-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"
+        integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ=="
+        crossorigin="anonymous"></script>
+<script src="https://code.angularjs.org/1.4.3/angular.js"></script>
+<script src="https://code.angularjs.org/1.4.3/angular-route.js"></script>
+<script src="js/app.js"></script>
+<script src="js/factories/eventFactory.js"></script>
+<script src="js/controllers/eventController.js"></script>
+<script src="js/controllers/userController.js"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js'></script>
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/moment/min/moment.min.js"></script>
+<!--<script src="bower_components/angular/angular.min.js"></script>-->
+<script src="bower_components/angular-ui-calendar/src/calendar.js"></script>
+<script src="bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
+<script src="bower_components/fullcalendar/dist/gcal.js"></script>
+
+  <script>
+      function initialize() {
+          initMap();
+          init();
+      }
+      function init() {
+          var inp = document.getElementById('searchTextField');
+          var autocomplete = new google.maps.places.Autocomplete(inp);
+          google.maps.event.addListener(autocomplete, 'place_changed', function () {
+              var place = autocomplete.getPlace();
+              document.getElementById('city2').value = place.name;
+              document.getElementById('cityLat').value = place.geometry.location.lat();
+              document.getElementById('cityLng').value = place.geometry.location.lng();
+          });
+      }
+      //map.js
+      //Set up some of our variables.
+      //var map,map2; //Will contain map object.
+      var map;
+      var marker = false; ////Has the user plotted their location marker?
+      //Function called to initialize / create the map.
+      function initMap() {
+          //The center location of our map.
+          var centerOfMap = new google.maps.LatLng(29.6436, -82.3549);
+          //Map options.
+          var options = {
+              center: centerOfMap, //Set center.
+              zoom: 14 //The zoom value.
+          };
+          //Create the map object.
+          //map = new google.maps.Map(document.getElementById('map'), options);
+          map = new google.maps.Map(document.getElementById('mapT'), options);
+          //Listen for any clicks on the map2.
+          google.maps.event.addListener(map, 'click', function(event) {
+              //Get the location that the user clicked.
+              var clickedLocation = event.latLng;
+              //If the marker hasn't been added.
+              if(marker === false){
+                  //Create the marker.
+                  marker = new google.maps.Marker({
+                      position: clickedLocation,
+                      map: map,
+                      draggable: true //make it draggable
+                  });
+                  //Listen for drag events!
+                  google.maps.event.addListener(marker, 'dragend', function(event){
+                      markerLocation();
+                  });
+              } else{
+                  //Marker has already been added, so just change its location.
+                  marker.setPosition(clickedLocation);
+              }
+              //Get the marker's location.
+              markerLocation();
+          });
+          init();
+      }
+      //This function will get the marker's current location and then add the lat/long
+      //values to our textfields so that we can save the location.
+      function markerLocation(){
+          //Get location.
+          var currentLocation = marker.getPosition();
+          //Add lat and lng values to a field that we can save.
+          document.getElementById('lat').value = currentLocation.lat(); //latitude
+          document.getElementById('lng').value = currentLocation.lng(); //longitude
+      }
+      //Load the map when the page has finished loading.
+      //google.maps.event.addDomListener(window, 'load', initMap);
+      google.maps.event.addDomListener(window, 'load', initialize);
+  </script>
+  <script>
+      function listVisible() {
+          if (document.getElementById('cal') || document.getElementById('mapTab')) {
+              if (document.getElementById('cal').style.display != 'none' || document.getElementById('mapTab').style.display != 'none') {
+                  document.getElementById('cal').style.display = 'none';
+                  document.getElementById('mapTab').style.display = 'none';
+                  document.getElementById('list').style.display = 'block';
+              }
+          }
+      }
+      function calVisible() {
+          if (document.getElementById('list') || document.getElementById('mapTab')) {
+              if (document.getElementById('list').style.display != 'none' || document.getElementById('mapTab').style.display != 'none') {
+                  document.getElementById('list').style.display = 'none';
+                  document.getElementById('mapTab').style.display = 'none';
+                  document.getElementById('cal').style.display = 'block';
+              }
+          }
+      }
+      function mapVisible() {
+          if (document.getElementById('list') || document.getElementById('cal')) {
+              if (document.getElementById('list').style.display != 'none' || document.getElementById('cal').style.display != 'none') {
+                  document.getElementById('list').style.display = 'none';
+                  document.getElementById('cal').style.display = 'none';
+                  document.getElementById('mapTab').style.display = 'block';
+              }
+          }
+      }
+  </script>
 
     <div id="editEvent" class="modal fade" role="dialog">
       <div class="modal-dialog">
@@ -462,152 +586,6 @@
         </div>
       </div>
     </div>
-
-
-</div>
-
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4kwn_SvtsH-sVdIrRuD_ptPyxNiCIk68&key=AIzaSyCs2M1YN1ZhGlZjN0epiAqBSuaqf_OZFKU&libraries=places&callback=initialize" async defer></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"
-        integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ=="
-        crossorigin="anonymous"></script>
-<script src="https://code.angularjs.org/1.4.3/angular.js"></script>
-<script src="https://code.angularjs.org/1.4.3/angular-route.js"></script>
-<script src="js/app.js"></script>
-<script src="js/factories/eventFactory.js"></script>
-<script src="js/controllers/eventController.js"></script>
-<script src="js/controllers/userController.js"></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js'></script>
-<script src="bower_components/jquery/dist/jquery.min.js"></script>
-<script src="bower_components/moment/min/moment.min.js"></script>
-<!--<script src="bower_components/angular/angular.min.js"></script>-->
-<script src="bower_components/angular-ui-calendar/src/calendar.js"></script>
-<script src="bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
-<script src="bower_components/fullcalendar/dist/gcal.js"></script>
-
-<script>
-
-    var locat;
-    var lat;
-    var lng;
-
-    function initialize() {
-        initMap();
-        init();
-    }
-    function init() {
-        var inp = document.getElementById('searchTextField');
-        var autocomplete = new google.maps.places.Autocomplete(inp);
-        google.maps.event.addListener(autocomplete, 'place_changed', function () {
-            var place = autocomplete.getPlace();
-            //document.getElementById('city2').value = place.name;
-            //document.getElementById('cityLat').value = place.geometry.location.lat();
-            //document.getElementById('cityLng').value = place.geometry.location.lng();
-          locat = place.name;
-          lat = place.geometry.location.lat();
-          lng = place.geometry.location.lng();
-        });
-    }
-
-
-    //map.js
-
-    //Set up some of our variables.
-    //var map,map2; //Will contain map object.
-    var map;
-    var marker = false; ////Has the user plotted their location marker?
-
-    //Function called to initialize / create the map.
-    function initMap() {
-
-        //The center location of our map.
-        var centerOfMap = new google.maps.LatLng(29.6436, -82.3549);
-
-        //Map options.
-
-        var options = {
-            center: centerOfMap, //Set center.
-            zoom: 14 //The zoom value.
-        };
-
-        //Create the map object.
-        //map = new google.maps.Map(document.getElementById('map'), options);
-        map = new google.maps.Map(document.getElementById('mapT'), options);
-
-        //Listen for any clicks on the map2.
-        google.maps.event.addListener(map, 'click', function(event) {
-            //Get the location that the user clicked.
-            var clickedLocation = event.latLng;
-            //If the marker hasn't been added.
-            if(marker === false){
-                //Create the marker.
-                marker = new google.maps.Marker({
-                    position: clickedLocation,
-                    map: map,
-                    draggable: true //make it draggable
-                });
-                //Listen for drag events!
-                google.maps.event.addListener(marker, 'dragend', function(event){
-                    markerLocation();
-                });
-            } else{
-                //Marker has already been added, so just change its location.
-                marker.setPosition(clickedLocation);
-            }
-            //Get the marker's location.
-            markerLocation();
-        });
-        init();
-    }
-
-    //This function will get the marker's current location and then add the lat/long
-    //values to our textfields so that we can save the location.
-    function markerLocation(){
-        //Get location.
-        var currentLocation = marker.getPosition();
-        //Add lat and lng values to a field that we can save.
-        document.getElementById('lat').value = currentLocation.lat(); //latitude
-        document.getElementById('lng').value = currentLocation.lng(); //longitude
-    }
-
-
-    //Load the map when the page has finished loading.
-    google.maps.event.addDomListener(window, 'load', initMap);
-    google.maps.event.addDomListener(window, 'load', init);
-</script>
-
-<script>
-    function listVisible() {
-        if (document.getElementById('cal') || document.getElementById('mapTab')) {
-            if (document.getElementById('cal').style.display != 'none' || document.getElementById('mapTab').style.display != 'none') {
-                document.getElementById('cal').style.display = 'none';
-                document.getElementById('mapTab').style.display = 'none';
-                document.getElementById('list').style.display = 'block';
-            }
-        }
-    }
-    function calVisible() {
-      if (document.getElementById('list') || document.getElementById('mapTab')) {
-            if (document.getElementById('list').style.display != 'none' || document.getElementById('mapTab').style.display != 'none') {
-                document.getElementById('list').style.display = 'none';
-                document.getElementById('mapTab').style.display = 'none';
-                document.getElementById('cal').style.display = 'block';
-            }
-        }
-    }
-    function mapVisible() {
-      if (document.getElementById('list') || document.getElementById('cal')) {
-            if (document.getElementById('list').style.display != 'none' || document.getElementById('cal').style.display != 'none') {
-                document.getElementById('list').style.display = 'none';
-                document.getElementById('cal').style.display = 'none';
-                document.getElementById('mapTab').style.display = 'block';
-            }
-        }
-    }
-</script>
 
 </body>
 
