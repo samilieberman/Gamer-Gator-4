@@ -7,6 +7,7 @@
   "license": "MIT",
   "dependencies": {
     "angular": "^1.7.4",
+    "angular-route": "^1.4.3",
     "bcrypt-nodejs": "latest",
     "bcryptjs": "*",
     "body-parser": "*",
