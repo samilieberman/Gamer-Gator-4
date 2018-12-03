@@ -13,6 +13,8 @@ angular.module('events').controller('EventsController', ['$rootScope', '$scope',
       console.log('Unable to retrieve listings:', error);
     });
 
+    $window.foo = "hello"
+
     $scope.detailedInfo = undefined;
     $scope.currentIndex = -1;
 
@@ -208,6 +210,7 @@ angular.module('events').controller('EventsController', ['$rootScope', '$scope',
               }
           });
       };
+
       $scope.eventRender = function( event, element,view) {
           element.attr({'tooltip': event.title,
               'tooltip-append-to-body': true});

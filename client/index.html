@@ -573,11 +573,16 @@
         document.getElementById('lng').value = currentLocation.lng(); //longitude
     }
 
-
     //Load the map when the page has finished loading.
     google.maps.event.addDomListener(window, 'load', initMap);
     google.maps.event.addDomListener(window, 'load', init);
+
 </script>
+
+  <script type='text/javascript'>
+    document.write("\<script src='...' type='text/javascript'>\<\/script>");
+    console.log(foo);
+  </script>
 
 <script>
     function listVisible() {
