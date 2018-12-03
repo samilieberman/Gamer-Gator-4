@@ -314,7 +314,6 @@
 
 </div>
 
-<!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4kwn_SvtsH-sVdIrRuD_ptPyxNiCIk68&key=AIzaSyCs2M1YN1ZhGlZjN0epiAqBSuaqf_OZFKU&libraries=places&callback=initialize" async defer></script>-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"
         integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ=="
@@ -338,6 +337,9 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDU9S7E754G1tNl9E_p-iupT-qFHB0ZIO0&libraries=places&callback=initialize" async defer></script>
 
 <script>
+    var locat;
+    var lat;
+    var lng;
     function initialize() {
         initMap();
         init();
@@ -347,9 +349,12 @@
         var autocomplete = new google.maps.places.Autocomplete(inp);
         google.maps.event.addListener(autocomplete, 'place_changed', function () {
             var place = autocomplete.getPlace();
-            document.getElementById('city2').value = place.name;
-            document.getElementById('cityLat').value = place.geometry.location.lat();
-            document.getElementById('cityLng').value = place.geometry.location.lng();
+            //document.getElementById('city2').value = place.name;
+            //document.getElementById('cityLat').value = place.geometry.location.lat();
+            //document.getElementById('cityLng').value = place.geometry.location.lng();
+            locat = place.name;
+            lat = place.geometry.location.lat();
+            lng = place.geometry.location.lng();
         });
     }
     //map.js
