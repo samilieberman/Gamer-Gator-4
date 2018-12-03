@@ -141,6 +141,12 @@ angular.module('events').controller('EventsController', ['$scope', 'Events','$co
     };*/
 
     $scope.updateEvent = function (index) {
+
+      var startConcat = $scope.updatedStart.year + "-" + $scope.updatedStart.month + "-" + $scope.updatedStart.day + "T" + $scope.updatedStart.hour + ":00:00Z";
+      var endConcat = $scope.updatedEnd.year + "-" + $scope.updatedEnd.month + "-" + $scope.updatedEnd.day + "T" + $scope.updatedEnd.hour + ":00:00Z";
+      $scope.updatedEvent.start = new Date(startConcat);
+      $scope.updatedEvent.end = new Date(endConcat);
+
       Events.update($scope.events[index]._id, $scope.updatedEvent).then(function (response) {
           console.log(index);
 
