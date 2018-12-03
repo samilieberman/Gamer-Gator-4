@@ -284,9 +284,9 @@
 
             <input type="text" placeholder="Name:" class="form-control" id="name" ng-model="newEvent.title" required > <br>
             <input id="searchTextField" type="text" placeholder="Location:" class="form-control" size="45"><br>
-            <input type = "hidden" id="city2" name="city2" />
-            <input type = "hidden" id="cityLat" name="cityLat" />
-            <input type = "hidden" id="cityLng" name="cityLng" />
+            <input type="hidden" id="city2" name="city2" ng-model="newEvent.location"/>
+            <input type="hidden" id=cityLat" name="cityLat" ng-model="newEvent.latitude"/>
+            <input type="hidden" id="cityLng" name="cityLng" ng-model="newEvent.longitude"/>
 <!--            <div id="map2">
               <div id="map" style="margin-bottom:40px;">  </div>
               <input type="number" name="lat" id="lat" readonly="yes" ng-model="newEvent.latitude">
@@ -492,6 +492,11 @@
 <script src="bower_components/fullcalendar/dist/gcal.js"></script>
 
 <script>
+
+    var locat;
+    var lat;
+    var lng;
+
     function initialize() {
         initMap();
         init();
@@ -501,9 +506,12 @@
         var autocomplete = new google.maps.places.Autocomplete(inp);
         google.maps.event.addListener(autocomplete, 'place_changed', function () {
             var place = autocomplete.getPlace();
-            document.getElementById('city2').value = place.name;
-            document.getElementById('cityLat').value = place.geometry.location.lat();
-            document.getElementById('cityLng').value = place.geometry.location.lng();
+            //document.getElementById('city2').value = place.name;
+            //document.getElementById('cityLat').value = place.geometry.location.lat();
+            //document.getElementById('cityLng').value = place.geometry.location.lng();
+          locat = place.name;
+          lat = place.geometry.location.lat();
+          lng = place.geometry.location.lng();
         });
     }
 
