@@ -153,15 +153,10 @@
 
             <input type="text" placeholder="Name:" class="form-control" id="name" ng-model="newEvent.title" required > <br>
             <input id="searchTextField" type="text" placeholder="Location:" class="form-control" size="45"><br>
-            <input type = "hidden" id="city2" name="city2" />
-            <input type = "hidden" id="cityLat" name="cityLat" />
-            <input type = "hidden" id="cityLng" name="cityLng" />
 
-            <!--<div id="map2">
-              <div id="map" style="margin-bottom:40px;">  </div>
-              <input type="number" name="lat" id="lat" readonly="yes" ng-model="newEvent.latitude">
-              <input type="number" name="lng" id="lng" readonly="yes" ng-model="newEvent.longitude">
-            </div>-->
+            <input type="hidden" id="city2" name="city2" ng-model="newEvent.location"/>
+            <input type="hidden" id=cityLat" name="cityLat" ng-model="newEvent.latitude"/>
+            <input type="hidden" id="cityLng" name="cityLng" ng-model="newEvent.longitude"/>
 
             <div>
               <label name="start">Event Start Time:</label> <br>
@@ -592,6 +587,7 @@
           }
       }
   </script>
+
 
 </body>
 
