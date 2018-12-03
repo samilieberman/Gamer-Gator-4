@@ -17,6 +17,7 @@ var eventSchema = new Schema({
   },
   longitude: Number,
   latitude: Number,
+  location: String,
   creatorUsername: String,
   description: String,
   participantUsernames: [String],

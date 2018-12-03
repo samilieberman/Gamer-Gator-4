@@ -153,15 +153,10 @@
 
             <input type="text" placeholder="Name:" class="form-control" id="name" ng-model="newEvent.title" required > <br>
             <input id="searchTextField" type="text" placeholder="Location:" class="form-control" size="45"><br>
-            <input type = "hidden" id="city2" name="city2" />
-            <input type = "hidden" id="cityLat" name="cityLat" />
-            <input type = "hidden" id="cityLng" name="cityLng" />
 
-            <!--<div id="map2">
-              <div id="map" style="margin-bottom:40px;">  </div>
-              <input type="number" name="lat" id="lat" readonly="yes" ng-model="newEvent.latitude">
-              <input type="number" name="lng" id="lng" readonly="yes" ng-model="newEvent.longitude">
-            </div>-->
+            <input type="hidden" id="city2" name="city2" ng-model="newEvent.location"/>
+            <input type="hidden" id=cityLat" name="cityLat" ng-model="newEvent.latitude"/>
+            <input type="hidden" id="cityLng" name="cityLng" ng-model="newEvent.longitude"/>
 
             <div>
               <label name="start">Event Start Time:</label> <br>
@@ -493,105 +488,126 @@
 <script src="bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
 <script src="bower_components/fullcalendar/dist/gcal.js"></script>
 
-  <script>
-      function initialize() {
-          initMap();
-          init();
-      }
-      function init() {
-          var inp = document.getElementById('searchTextField');
-          var autocomplete = new google.maps.places.Autocomplete(inp);
-          google.maps.event.addListener(autocomplete, 'place_changed', function () {
-              var place = autocomplete.getPlace();
-              document.getElementById('city2').value = place.name;
-              document.getElementById('cityLat').value = place.geometry.location.lat();
-              document.getElementById('cityLng').value = place.geometry.location.lng();
-          });
-      }
-      //map.js
-      //Set up some of our variables.
-      //var map,map2; //Will contain map object.
-      var map;
-      var marker = false; ////Has the user plotted their location marker?
-      //Function called to initialize / create the map.
-      function initMap() {
-          //The center location of our map.
-          var centerOfMap = new google.maps.LatLng(29.6436, -82.3549);
-          //Map options.
-          var options = {
-              center: centerOfMap, //Set center.
-              zoom: 14 //The zoom value.
-          };
-          //Create the map object.
-          //map = new google.maps.Map(document.getElementById('map'), options);
-          map = new google.maps.Map(document.getElementById('mapT'), options);
-          //Listen for any clicks on the map2.
-          google.maps.event.addListener(map, 'click', function(event) {
-              //Get the location that the user clicked.
-              var clickedLocation = event.latLng;
-              //If the marker hasn't been added.
-              if(marker === false){
-                  //Create the marker.
-                  marker = new google.maps.Marker({
-                      position: clickedLocation,
-                      map: map,
-                      draggable: true //make it draggable
-                  });
-                  //Listen for drag events!
-                  google.maps.event.addListener(marker, 'dragend', function(event){
-                      markerLocation();
-                  });
-              } else{
-                  //Marker has already been added, so just change its location.
-                  marker.setPosition(clickedLocation);
-              }
-              //Get the marker's location.
-              markerLocation();
-          });
-          init();
-      }
-      //This function will get the marker's current location and then add the lat/long
-      //values to our textfields so that we can save the location.
-      function markerLocation(){
-          //Get location.
-          var currentLocation = marker.getPosition();
-          //Add lat and lng values to a field that we can save.
-          document.getElementById('lat').value = currentLocation.lat(); //latitude
-          document.getElementById('lng').value = currentLocation.lng(); //longitude
-      }
-      //Load the map when the page has finished loading.
-      google.maps.event.addDomListener(window, 'load', initMap);
-      google.maps.event.addDomListener(window, 'load', init);
-  </script>
-  <script>
-      function listVisible() {
-          if (document.getElementById('cal') || document.getElementById('mapTab')) {
-              if (document.getElementById('cal').style.display != 'none' || document.getElementById('mapTab').style.display != 'none') {
-                  document.getElementById('cal').style.display = 'none';
-                  document.getElementById('mapTab').style.display = 'none';
-                  document.getElementById('list').style.display = 'block';
-              }
-          }
-      }
-      function calVisible() {
-          if (document.getElementById('list') || document.getElementById('mapTab')) {
-              if (document.getElementById('list').style.display != 'none' || document.getElementById('mapTab').style.display != 'none') {
-                  document.getElementById('list').style.display = 'none';
-                  document.getElementById('mapTab').style.display = 'none';
-                  document.getElementById('cal').style.display = 'block';
-              }
-          }
-      }
-      function mapVisible() {
-          if (document.getElementById('list') || document.getElementById('cal')) {
-              if (document.getElementById('list').style.display != 'none' || document.getElementById('cal').style.display != 'none') {
-                  document.getElementById('list').style.display = 'none';
-                  document.getElementById('cal').style.display = 'none';
-                  document.getElementById('mapTab').style.display = 'block';
-              }
-          }
-      }
-  </script>
+<script>
+
+    var locat;
+    var lat;
+    var lng;
+
+    function initialize() {
+        initMap();
+        init();
+    }
+    function init() {
+        var inp = document.getElementById('searchTextField');
+        var autocomplete = new google.maps.places.Autocomplete(inp);
+        google.maps.event.addListener(autocomplete, 'place_changed', function () {
+            var place = autocomplete.getPlace();
+            //document.getElementById('city2').value = place.name;
+            //document.getElementById('cityLat').value = place.geometry.location.lat();
+            //document.getElementById('cityLng').value = place.geometry.location.lng();
+          locat = place.name;
+          lat = place.geometry.location.lat();
+          lng = place.geometry.location.lng();
+        });
+    }
+
+
+    //map.js
+
+    //Set up some of our variables.
+    //var map,map2; //Will contain map object.
+    var map;
+    var marker = false; ////Has the user plotted their location marker?
+
+    //Function called to initialize / create the map.
+    function initMap() {
+
+        //The center location of our map.
+        var centerOfMap = new google.maps.LatLng(29.6436, -82.3549);
+
+        //Map options.
+
+        var options = {
+            center: centerOfMap, //Set center.
+            zoom: 14 //The zoom value.
+        };
+
+        //Create the map object.
+        //map = new google.maps.Map(document.getElementById('map'), options);
+        map = new google.maps.Map(document.getElementById('mapT'), options);
+
+        //Listen for any clicks on the map2.
+        google.maps.event.addListener(map, 'click', function(event) {
+            //Get the location that the user clicked.
+            var clickedLocation = event.latLng;
+            //If the marker hasn't been added.
+            if(marker === false){
+                //Create the marker.
+                marker = new google.maps.Marker({
+                    position: clickedLocation,
+                    map: map,
+                    draggable: true //make it draggable
+                });
+                //Listen for drag events!
+                google.maps.event.addListener(marker, 'dragend', function(event){
+                    markerLocation();
+                });
+            } else{
+                //Marker has already been added, so just change its location.
+                marker.setPosition(clickedLocation);
+            }
+            //Get the marker's location.
+            markerLocation();
+        });
+        init();
+    }
+
+    //This function will get the marker's current location and then add the lat/long
+    //values to our textfields so that we can save the location.
+    function markerLocation(){
+        //Get location.
+        var currentLocation = marker.getPosition();
+        //Add lat and lng values to a field that we can save.
+        document.getElementById('lat').value = currentLocation.lat(); //latitude
+        document.getElementById('lng').value = currentLocation.lng(); //longitude
+    }
+
+
+    //Load the map when the page has finished loading.
+    google.maps.event.addDomListener(window, 'load', initMap);
+    google.maps.event.addDomListener(window, 'load', init);
+</script>
+
+<script>
+    function listVisible() {
+        if (document.getElementById('cal') || document.getElementById('mapTab')) {
+            if (document.getElementById('cal').style.display != 'none' || document.getElementById('mapTab').style.display != 'none') {
+                document.getElementById('cal').style.display = 'none';
+                document.getElementById('mapTab').style.display = 'none';
+                document.getElementById('list').style.display = 'block';
+            }
+        }
+    }
+    function calVisible() {
+      if (document.getElementById('list') || document.getElementById('mapTab')) {
+            if (document.getElementById('list').style.display != 'none' || document.getElementById('mapTab').style.display != 'none') {
+                document.getElementById('list').style.display = 'none';
+                document.getElementById('mapTab').style.display = 'none';
+                document.getElementById('cal').style.display = 'block';
+            }
+        }
+    }
+    function mapVisible() {
+      if (document.getElementById('list') || document.getElementById('cal')) {
+            if (document.getElementById('list').style.display != 'none' || document.getElementById('cal').style.display != 'none') {
+                document.getElementById('list').style.display = 'none';
+                document.getElementById('cal').style.display = 'none';
+                document.getElementById('mapTab').style.display = 'block';
+            }
+        }
+    }
+</script>
 
 </body>
 

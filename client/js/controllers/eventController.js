@@ -1,5 +1,5 @@
-angular.module('events').controller('EventsController', ['$rootScope', '$scope', 'Events','$compile', '$location', '$http', '$timeout', 'uiCalendarConfig',
-  function ($rootScope, $scope, Events, $compile, $location, $http, $timeout, uiCalendarConfig) {
+angular.module('events').controller('EventsController', ['$rootScope', '$scope', 'Events','$compile', '$location', '$http', '$timeout', 'uiCalendarConfig', '$window',
+  function ($rootScope, $scope, Events, $compile, $location, $http, $timeout, uiCalendarConfig, $window) {
      
     $rootScope.go = function(path){
             $location.path(path);
@@ -15,6 +15,12 @@ angular.module('events').controller('EventsController', ['$rootScope', '$scope',
 
     $scope.detailedInfo = undefined;
     $scope.currentIndex = -1;
+
+    $scope.newEvent = {};
+    $scope.updatedEvent = {};
+
+    $scope.updatedStart = {};
+    $scope.updatedEnd = {};
 
     // Initializing info for date picker
     $scope.months=[];
@@ -49,12 +55,23 @@ angular.module('events').controller('EventsController', ['$rootScope', '$scope',
     // Event CRUD
 
     $scope.addEvent = function () {
+      console.log($window.lat);
+      console.log($window.lng);
+      $scope.location = $window.locat;
+      $scope.lat = $window.lat;
+      $scope.lng = $window.lng;
+
+      $scope.newEvent.location = $scope.location;
+      $scope.newEvent.latitude = $scope.lat;
+      $scope.newEvent.longitude = $scope.lng;
+
       var startConcat = $scope.start.year + "-" + $scope.start.month + "-" + $scope.start.day + "T" + $scope.start.hour + ":00:00Z";
       var endConcat = $scope.end.year + "-" + $scope.end.month + "-" + $scope.end.day + "T" + $scope.end.hour + ":00:00Z";
       //catch exceptions?
       $scope.newEvent.start = new Date(startConcat);
       $scope.newEvent.end = new Date(endConcat);
 
+      console.log($scope.newEvent.location);
       console.log($scope.newEvent.latitude);
       console.log($scope.newEvent.longitude);
 
@@ -83,9 +100,6 @@ angular.module('events').controller('EventsController', ['$rootScope', '$scope',
       });
       $scope.events.splice(index, 1);
     };
-
-    $scope.updatedStart = {};
-    $scope.updatedEnd = {};
 
     $scope.fillUpdateInput = function (index) {
       $scope.updatedEvent = $scope.events[index];
@@ -132,7 +146,6 @@ angular.module('events').controller('EventsController', ['$rootScope', '$scope',
 
     $scope.updateEvent = function (index) {
       Events.update($scope.events[index]._id, $scope.updatedEvent).then(function (response) {
-
           console.log(index);
 
           $scope.events[index] = $scope.updatedEvent;
