@@ -254,24 +254,6 @@
             </div>
         </div>
 
-        <!--<div class="col-md-9" id="map2">
-          <div class="ui container">
-              &lt;!&ndash;<body onload="initialize()">&ndash;&gt;
-            <div id="map" style="margin-bottom:40px;"></div>
-            &lt;!&ndash;<div>
-                <input id="address2" type="textbox">
-                <input type="button" value="Drop Pin" onclick="codeAddress()" style = "margin-bottom:20px;">
-            </div>&ndash;&gt;
-            <h2>Chosen Location</h2>
-            <form method="post">
-                <input type="text" id="lat" readonly="yes"><br>
-                <input type="text" id="lng" readonly="yes"><br><br>
-            </form>
-              &lt;!&ndash;</body>&ndash;&gt;
-
-          </div>
-        </div>-->
-
         <div class="col-md-9 collapse in" id="list" >
             <!-- top filter code -->
             <div id="myBtnContainer" style="margin-bottom:20px;">
@@ -298,6 +280,7 @@
                         <th>Event Name</th>
                         <th>Start Time</th>
                         <th>End Time</th>
+                        <th>Location</th>
                         <th>Game</th>
                         <th>Fee</th>
                         <th></th>
@@ -308,6 +291,7 @@
                         <td>{{event.title}}</td>
                         <td>{{event.start | date:"MM/dd/yyyy 'at' h:mma" : 'UTC'}}</td>
                         <td>{{event.end | date:"MM/dd/yyyy 'at' h:mma" : 'UTC'}}</td>
+                        <td>{{event.location}}</td>
                         <td>{{event.game}}</td>
                         <td>{{event.fee}}</td>
                         <td>
@@ -330,7 +314,6 @@
 
 </div>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDU9S7E754G1tNl9E_p-iupT-qFHB0ZIO0&libraries=places&callback=initialize" async defer></script>
 <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4kwn_SvtsH-sVdIrRuD_ptPyxNiCIk68&key=AIzaSyCs2M1YN1ZhGlZjN0epiAqBSuaqf_OZFKU&libraries=places&callback=initialize" async defer></script>-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"
@@ -352,6 +335,7 @@
 <script src="bower_components/angular-ui-calendar/src/calendar.js"></script>
 <script src="bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
 <script src="bower_components/fullcalendar/dist/gcal.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDU9S7E754G1tNl9E_p-iupT-qFHB0ZIO0&libraries=places&callback=initialize" async defer></script>
 
 <script>
     function initialize() {
