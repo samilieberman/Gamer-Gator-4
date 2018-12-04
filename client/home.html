@@ -184,8 +184,8 @@
                     <tr ng-repeat="event in events | orderBy: 'start'| filter: searchInput as results">
 
                         <td>{{event.title}}</td>
-                        <td>{{event.start | date:"MM/dd/yyyy 'at' h:mma" : 'UTC'}}</td>
-                        <td>{{event.end | date:"MM/dd/yyyy 'at' h:mma" : 'UTC'}}</td>
+                        <td>{{event.start | date: "MM/dd/yyyy 'at' h:mma" : 'UTC'}}</td>
+                        <td>{{event.end | date: "MM/dd/yyyy 'at' h:mma" : 'UTC'}}</td>
                         <td>{{event.location}}</td>
                         <td>{{event.game}}</td>
                         <td>{{event.fee}}</td>
@@ -306,7 +306,7 @@
             <div class="modal-body">
                 <h3 style="text-align:center">Game:  {{detailedInfo.game}}</h3>
                 <h3 style="text-align:center">Date</h3>
-                <h4 class="well" style="text-align:center; margin-top: 0px;">{{detailedInfo.start}}  to  {{detailedInfo.end}}</h4>
+                <h4 class="well" style="text-align:center; margin-top: 0px;">{{detailedInfo.start | date: "MM/dd/yyyy 'at' h:mma" : 'UTC'}}  to  {{detailedInfo.end | date: "MM/dd/yyyy 'at' h:mma" : 'UTC'}}</h4>
                 <h3 style="text-align:center">Location</h3>
                 <p class="well" style="text-align:center">{{detailedInfo.location}}</p>
                 <h3 style="text-align:center">Description</h3>
