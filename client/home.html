@@ -9,7 +9,7 @@
 </head>
 
 <div class="container-fluid" ng-controller="EventsController">
-
+    <body>
     <div class="row">
 
         <div class="jumbotron">
@@ -152,7 +152,7 @@
             <div class="ui container">
                 <div class="ui grid">
                     <div class="ui sixteen column">
-                        <div ui-calendar ng-model="eventSources" id="calendar"></div>
+                        <div ui-calendar ng-model="eventSources" id="calendar" ui-calendar="uiConfig.calendar"></div>
                     </div>
                 </div>
             </div>
