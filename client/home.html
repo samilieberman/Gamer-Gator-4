@@ -224,20 +224,20 @@
                         <input type="text" placeholder='Location: {{detailedInfo.location}}' class="form-control" id="editLocation" ng-model="updatedEvent.location" required> <br>
                         <div>
                             <label name="start"> Event Start Time: </label> <br>
-                            <select name="year" ng-model="updatedstart.year">
+                            <select name="year" ng-model="updatedStart.year">
                                 <option value="">year</option>
                                 <option value="2018">2018</option>
                                 <option value="2019">2019</option>
                             </select>
-                            <select name="month" ng-model="updatedstart.month">
+                            <select name="month" ng-model="updatedStart.month">
                                 <option value="">month</option>
                                 <option ng-repeat="month in months" value="{{month}}">{{month}}</option>
                             </select>
-                            <select name="day" ng-model="updatedstart.day">
+                            <select name="day" ng-model="updatedStart.day">
                                 <option value="">day</option>
                                 <option ng-repeat="day in days" value="{{day}}">{{day}}</option>
                             </select>
-                            <select name="hour" ng-model="updatedstart.hour">
+                            <select name="hour" ng-model="updatedStart.hour">
                                 <option value="">hour</option>
                                 <option ng-repeat="hour in hours" value="{{hour}}">{{hour}}</option>
                             </select>
@@ -245,20 +245,20 @@
 
                         <div>
                             <label name="end"> Event End Time: </label> <br>
-                            <select name="year" ng-model="updatedend.year">
+                            <select name="year" ng-model="updatedEnd.year">
                                 <option value="">year</option>
                                 <option value="2018">2018</option>
                                 <option value="2019">2019</option>
                             </select>
-                            <select name="month" ng-model="updatedend.month">
+                            <select name="month" ng-model="updatedEnd.month">
                                 <option value="">month</option>
                                 <option ng-repeat="month in months" value="{{month}}">{{month}}</option>
                             </select>
-                            <select name="day" ng-model="updatedend.day">
+                            <select name="day" ng-model="updatedEnd.day">
                                 <option value="">day</option>
                                 <option ng-repeat="day in days" value="{{day}}">{{day}}</option>
                             </select>
-                            <select name="hour" ng-model="updatedend.hour">
+                            <select name="hour" ng-model="updatedEnd.hour">
                                 <option value="">hour</option>
                                 <option ng-repeat="hour in hours" value="{{hour}}">{{hour}}</option>
                             </select>
