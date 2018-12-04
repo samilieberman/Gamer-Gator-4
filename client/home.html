@@ -9,8 +9,10 @@
 </head>
 
 <body>
-<div class="container-fluid">
+<div class="container-fluid" ng-controller="EventsController">
+
     <div class="row">
+
         <div class="jumbotron">
             <h1 style="text-align:center; font-family: arcadeFont; font-size: xx-large; color:white; margin-top: 20px;"><b>Gator Gaming Tournaments </b></h1>
         </div>
@@ -433,6 +435,7 @@
 </div>
 
 
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDU9S7E754G1tNl9E_p-iupT-qFHB0ZIO0&libraries=places&callback=initialize" async defer></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.js'></script>
@@ -447,6 +450,14 @@
 <script src="bower_components/fullcalendar/dist/gcal.js"></script>
 
 <script>
+
+    $(document).ready(function(){
+        console.log("Entering scope finding function");
+        var $element = $('div[ng-controller="EventsController"]');
+        var scope = angular.element($element).scope();
+        var markers = scope.markers;
+        console.log(markers);
+    });
 
     var locat;
     var lat;

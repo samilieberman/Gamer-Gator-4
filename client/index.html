@@ -33,14 +33,24 @@
                 <li ng-show="!currentUser"><a ng-click="go('/login')">Login</a></li>
                 <li ng-show="!currentUser"><a ng-click="go('/register')">Register</a></li>
                 <li ng-show="currentUser"><a>Currently logged in as:  <b>{{currentUser.username}}</b></a></li>
-                <li ng-show="currentUser"><a ng-click="currentUser = null;">Log out</a></li>
+                <li ng-show="currentUser"><a ng-click="currentUser = null; logoutUser();">Log out</a></li>
 
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
 
-<div ng-view>
+<div class="alert alert-success alert-dismissible fade in" style="margin-top: 50px;" ng-if="successMessage" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true" ng-click="sucessMessage=null;">&times;</span></button>
+    <strong>{{successMessage}}</strong>
+</div>
+
+<div class="alert alert-danger alert-dismissible fade in" style="margin-top: 50px;" ng-show="errorMessage" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true" ng-click="errorMessage=null;">&times;</span></button>
+    <strong>{{errorMessage}}</strong>
+</div>
+
+<div ng-view >
 </div>
 
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
@@ -64,5 +74,6 @@
 
 
 </body>
+
 
 </html>
