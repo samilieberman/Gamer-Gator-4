@@ -23,7 +23,22 @@
             </button>
             <a class="navbar-brand" ng-click="go('/home')">Gamer Gator</a>
         </div>
- 
+         <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a ng-click="go('/home')">Homepage</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li ng-show="!currentUser"><a ng-click="go('/login')">Login</a></li>
+                <li ng-show="!currentUser"><a ng-click="go('/register')">Register</a></li>
+                <li ng-show="currentUser"><a>Currently logged in as:  <b>{{currentUser.username}}</b></a></li>
+                <li ng-show="currentUser"><a ng-click="currentUser = null;">Log out</a></li>
+
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
 
 <div ng-view>
 </div>
