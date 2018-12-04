@@ -19,7 +19,7 @@ angular.module('users').controller('UserController', ['$rootScope', '$scope', '$
                 .success(function() {
                     console.log('Logout success');
                     $rootScope.currentUser = null;
-                    $location.url('/');
+                    $location.url('/home');
                 });
         };
 
@@ -29,7 +29,7 @@ angular.module('users').controller('UserController', ['$rootScope', '$scope', '$
                 .success(function(response) {
                     console.log('Login success');
                     $rootScope.currentUser = response;
-                    $location.url("/");
+                    $location.url("/home");
                 });
         };
 

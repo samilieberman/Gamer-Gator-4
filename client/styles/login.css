@@ -78,7 +78,7 @@
     color: #EF3B3A;
 }*/
 body {
-    background: linear-gradient(#428bca, #282828);
+    background: linear-gradient(to top, #428bca, #000000);
     font-family: "Roboto", sans-serif;
     background-repeat: no-repeat;
     background-attachment: fixed;
