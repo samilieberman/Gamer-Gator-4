@@ -498,6 +498,31 @@
         //map = new google.maps.Map(document.getElementById('map'), options);
         map = new google.maps.Map(document.getElementById('mapT'), options);
 
+        //create markers
+        var locations = [
+            ['<b>Marston</b>', 29.64800550050426, -82.34393348764826, 1],
+            ['<b>Dungeon</b>', 29.648323964973187, -82.34447633568726, 2],
+            ['<b>Reitz Union</b>', 29.646221, -82.347788, 3],
+            ['<b>Gamestop</b>', 29.627223, -82.38591, 4]
+        ];
+        var infowindow = new google.maps.InfoWindow;
+
+        var marker, i;
+
+        for (i = 0; i < locations.length; i++) {
+            marker = new google.maps.Marker({
+                position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+                map: map
+            });
+
+            google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                return function () {
+                    infowindow.setContent(locations[i][0]);
+                    infowindow.open(map, marker);
+                }
+            })(marker, i));
+        }
+        /*
         //Listen for any clicks on the map2.
         google.maps.event.addListener(map, 'click', function(event) {
             //Get the location that the user clicked.
@@ -521,6 +546,7 @@
             //Get the marker's location.
             markerLocation();
         });
+        */
         init();
     }
 
