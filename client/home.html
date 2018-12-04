@@ -172,12 +172,12 @@
             <div class="tableWrapper">
                 <table class="table table-striped table-hover" id="eventsTable">
                     <tr>
-                        <th>Event Name</th>
-                        <th>Start Time</th>
-                        <th>End Time</th>
-                        <th>Location</th>
-                        <th>Game</th>
-                        <th>Fee</th>
+                        <th style="text-align:center;">Event Name</th>
+                        <th style="text-align:center;">Start Time</th>
+                        <th style="text-align:center;">End Time</th>
+                        <th style="text-align:center;">Location</th>
+                        <th style="text-align:center;">Game</th>
+                        <th style="text-align:center;">Fee</th>
                         <th></th>
                     </tr>
 
@@ -305,7 +305,7 @@
             </div>
             <div class="modal-body">
                 <h3 style="text-align:center">Game: {{detailedInfo.game}}</h3>
-                <h3 style="text-align:center">Date</h3>
+                <h3 style="text-align:center">Date/Time</h3>
                 <h4 class="well" style="text-align:center; margin-top: 0px;">{{detailedInfo.start | date: "MM/dd/yyyy 'at' h:mma" : 'UTC'}}  to  {{detailedInfo.end | date: "MM/dd/yyyy 'at' h:mma" : 'UTC'}}</h4>
                 <h3 style="text-align:center">Location</h3>
                 <p class="well" style="text-align:center">{{detailedInfo.location}}</p>
