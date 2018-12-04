@@ -9,7 +9,7 @@
 </head>
 
 <body>
-<div class="container-fluid" >
+<div class="container-fluid">
     <div class="row">
         <div class="jumbotron">
             <h1 style="text-align:center; font-family: arcadeFont; font-size: xx-large; color:white; margin-top: 20px;"><b>Gator Gaming Tournaments </b></h1>
@@ -149,7 +149,7 @@
             </div>
         </div>
 
-        <div class="col-md-9 collapse in text-center" id="list" style="float:none; margin: 0 auto;">
+        <div class="col-md-9 collapse in text-center" id="list" style="float:none; margin: 0 auto; margin-top:30px;">
             <!-- top filter code -->
             <div id="myBtnContainer" style="margin-bottom:20px; float: none; display: inline-block;">
                 <button class="btn2" ng-model="searchInput" value="" ng-click="getFilterVal($event)" style="font-family: arcadeFont; font-size: x-small;"> All </button>
@@ -316,27 +316,24 @@
 
             <div class="modal-footer">
                 <div class="text-center">
-                    <button type="button" class="btn btn-success" >
-                        <!-- ng-if="currentUser.registeredEvents[] does not contain detailedInfo" ng-click="subscribeUser(username, currentIndex)"-->
+                    <button type="button" class="btn btn-success" ng-show="((currentUser)&&(detailedInfo.participantUsernames.indexOf(currentUser.username) === -1))" ng-click="subscribeUser()">
+                        <!-- ng-show="detailedInfo.participantUsernames.indexOf(currentUser.username) === -1" ng-click="subscribeUser()"-->
                         Subscribe
                     </button>
-                    <button type="button" class="btn btn-secondary">
+                    <button type="button" class="btn btn-secondary" ng-show="((currentUser)&&(detailedInfo.participantUsernames.indexOf(currentUser.username) >= 0))" ng-click="unsubscribeUser()">
                         <!-- ng-if="currentUser.registeredEvents[] contains detailedInfo" ng-click="unsubscribeUser(username, currentIndex)"-->
                         Unsubscribe
                     </button>
                 </div>
                 <br><br>
-                <button type="button" class="btn btn-danger pull-left" ng-click="deleteEvent(currentIndex)" data-dismiss="modal">
-                    <!-- ng-if="(currentUser == detailedInfo.creatorUsername)||(currentUser.admin)"-->
+                <button type="button" class="btn btn-danger pull-left" ng-click="deleteEvent(currentIndex)"
+                        ng-show="((currentUser)&&(currentUser.username === detailedInfo.creatorUsername))||(currentUser.admin)" data-dismiss="modal">
                     Delete Event</button>
-                <a type="button" class="btn btn-warning pull-left" ng-click="fillUpdateInput(currentIndex)" data-toggle="modal" data-target="#editEvent" data-dismiss="modal">
-                    <!-- ng-if="(currentUser == detailedInfo.creatorUsername)||(currentUser.admin)" ng-click="editEvent()" -->
+                <a type="button" class="btn btn-warning pull-left" ng-click="fillUpdateInput(currentIndex)"
+                   ng-show="((currentUser)&&(currentUser.username === detailedInfo.creatorUsername))||(currentUser.admin)" data-toggle="modal" data-target="#editEvent" data-dismiss="modal">
                     Edit Event
                 </a>
-                <!-- <button type="button" class="btn btn-info pull-left" >
-                  <!-- ng-if="(currentUser == detailedInfo.creatorUsername)||(currentUser.admin)" ng-click="sendMessageModal()"
-                  Message event members
-                </button>-->
+
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>

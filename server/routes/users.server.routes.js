@@ -40,7 +40,9 @@ module.exports = function(app, passport) {
         res.sendFile(path.resolve('client/login.html'));
     });
 
-    app.post('/login', passport.authenticate('local-login', {passReqToCallback: true}), function (req, res) {
+    app.post('/login', passport.authenticate('local-login', {
+        passReqToCallback: true,
+    }), function (req, res) {
         res.json(req.user);
     });
 

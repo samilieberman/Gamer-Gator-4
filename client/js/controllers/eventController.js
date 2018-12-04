@@ -69,7 +69,7 @@ angular.module('events').controller('EventsController', ['$rootScope', '$scope',
       $scope.newEvent.latitude = $scope.lat;
       $scope.newEvent.longitude = $scope.lng;
 
-      $scope.markers.push[{title: $scope.newEvent.title, lat: $scope.newEvent.latitude, lng: $scope.newEvent.longitude}];
+      $scope.markers.push({title: $scope.newEvent.title, lat: $scope.newEvent.latitude, lng: $scope.newEvent.longitude});
 
       var startConcat = $scope.start.year + "-" + $scope.start.month + "-" + $scope.start.day + "T" + $scope.start.hour + ":00:00Z";
       var endConcat = $scope.end.year + "-" + $scope.end.month + "-" + $scope.end.day + "T" + $scope.end.hour + ":00:00Z";
@@ -80,6 +80,10 @@ angular.module('events').controller('EventsController', ['$rootScope', '$scope',
       console.log($scope.newEvent.location);
       console.log($scope.newEvent.latitude);
       console.log($scope.newEvent.longitude);
+
+      if($rootScope.currentUser) { $scope.newEvent.creatorUsername = $rootScope.currentUser.username; }
+      else { $scope.newEvent.creatorUsername = "admin"; }
+      console.log('Set event owner: '+$scope.newEvent.creatorUsername);
 
       Events.create($scope.newEvent).then(function (response) {
         Events.getAll().then(function (response) {
@@ -118,6 +122,30 @@ angular.module('events').controller('EventsController', ['$rootScope', '$scope',
       $scope.updatedEnd.month = $scope.updatedEvent.end.substring(5,7);
       $scope.updatedEnd.day = $scope.updatedEvent.end.substring(8,10);
       $scope.updatedEnd.hour = $scope.updatedEvent.end.substring(11,13);
+    };
+
+    $rootScope.subscribeUser = function(){
+        console.log('Subscribing user '+$rootScope.currentUser.username+' to '+$scope.detailedInfo.title);
+
+        $rootScope.currentUser.registeredEvents.push($scope.detailedInfo.title);
+        $scope.detailedInfo.participantUsernames.push($rootScope.currentUser.username);
+    };
+
+    $rootScope.unsubscribeUser = function(){
+        for(var i = 0; i < $scope.detailedInfo.participantUsernames.length; i++){
+            if($scope.detailedInfo.participantUsernames[i] === $rootScope.currentUser.username){
+                console.log('Unsubscribing user '+$rootScope.currentUser.username+' from '+$scope.detailedInfo.title);
+                $scope.detailedInfo.participantUsernames.splice(i, 1);
+                break;
+            }
+        }
+
+        for(var j = 0; j < $rootScope.currentUser.registeredEvents.length; j++){
+            if($rootScope.currentUser.registeredEvents[j] === $scope.detailedInfo.title){
+                $rootScope.currentUser.registeredEvents.splice(j, 1);
+                return;
+            }
+        }
     };
 
     /*$scope.updateEvent = function (index) {
