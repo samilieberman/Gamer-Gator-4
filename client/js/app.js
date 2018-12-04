@@ -16,16 +16,10 @@ app.config(['$routeProvider', function($routeProvider) {
             templateUrl: 'register.html',
             controller: 'UserController'
         })
-        .when('/', {
-            templateUrl: 'index.html',
+        .when('/home', {
+            templateUrl: 'home.html',
             controller: 'EventsController'
-        })
-        .otherwise({
-            redirectTo: '/',
-            controller: 'EventsController'
-
         });
-
 }]);
 
 var checkLogin = function($q, $timeout, $http, $location, $rootScope) {
