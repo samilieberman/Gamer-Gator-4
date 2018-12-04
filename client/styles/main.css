@@ -69,8 +69,8 @@
     margin-left: auto;
     margin-right: auto;
 }
-.model-backdrop{
-    z: 0.01;
+body.modal-open div.modal-backdrop {
+    z-index: 0.01;
 }
 
 
