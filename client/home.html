@@ -338,7 +338,7 @@
 
             <div class="modal-footer">
                 <div class="text-center">
-                    <button type="button" class="btn btn-success" ng-show="((currentUser)&&(detailedInfo.participantUsernames.indexOf(currentUser.username) === -1))" ng-click="subscribeUser()">
+                    <button type="button" class="btn btn-success" ng-show="((currentUser)&&(detailedInfo.participantUsernames.indexOf(currentUser.username) === -1))" ng-click="subscribeUser(currentIndex)">
                         <!-- ng-show="detailedInfo.participantUsernames.indexOf(currentUser.username) === -1" ng-click="subscribeUser()"-->
                         Subscribe
                     </button>

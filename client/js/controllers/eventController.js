@@ -131,11 +131,29 @@ angular.module('events').controller('EventsController', ['$rootScope', '$scope',
       $scope.updatedEnd.hour = $scope.updatedEvent.end.substring(11,13);
     };
 
-    $rootScope.subscribeUser = function(){
+    $rootScope.subscribeUser = function (index) {
         console.log('Subscribing user '+$rootScope.currentUser.username+' to '+$scope.detailedInfo.title);
 
         $rootScope.currentUser.registeredEvents.push($scope.detailedInfo.title);
         $scope.detailedInfo.participantUsernames.push($rootScope.currentUser.username);
+
+        $scope.updatedEvent = "";
+        $scope.updatedEvent = $scope.events[index];
+        $scope.updatedEvent.participantUsernames.push($rootScope.currentUser.username);
+
+        Events.update($scope.events[index]._id, $scope.updatedEvent).then(function (response) {
+          console.log(index);
+
+          $scope.events[index] = $scope.updatedEvent;
+
+          Events.getAll().then(function (response) {
+            console.log(response.data);
+            $scope.events = response.data;
+          }, function (error) {
+            console.log('Unable to update events:', error);
+            console.log(response.data);
+          });
+        });
     };
 
     $rootScope.unsubscribeUser = function(){
