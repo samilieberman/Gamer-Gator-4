@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="styles/main.css">
 </head>
 
-<body>
 <div class="container-fluid" ng-controller="EventsController">
 
     <div class="row">
@@ -229,7 +228,6 @@
 
     </div>
 
-</div>
 
 <div id="editEvent" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -455,7 +453,6 @@
 </div>
 
 
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDU9S7E754G1tNl9E_p-iupT-qFHB0ZIO0&libraries=places&callback=initialize" async defer></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.js'></script>
@@ -469,24 +466,21 @@
 <script src="bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
 <script src="bower_components/fullcalendar/dist/gcal.js"></script>
 
+
 <script>
 
-    $(document).ready(function(){
-        console.log("Entering scope finding function");
-        var $element = $('div[ng-controller="EventsController"]');
-        var scope = angular.element($element).scope();
-        var markers = scope.markers;
-        console.log(markers);
-    });
+
 
     var locat;
     var lat;
     var lng;
 
+
     function initialize() {
         initMap();
         init();
     }
+
     function init() {
         var inp = document.getElementById('searchTextField');
         var autocomplete = new google.maps.places.Autocomplete(inp);
@@ -512,6 +506,8 @@
     //Function called to initialize / create the map.
     function initMap() {
 
+
+
         //The center location of our map.
         var centerOfMap = new google.maps.LatLng(29.6436, -82.3549);
 
@@ -526,26 +522,35 @@
         //map = new google.maps.Map(document.getElementById('map'), options);
         map = new google.maps.Map(document.getElementById('mapT'), options);
 
-        //create markers
+        /*create markers
         var locations = [
             ['<b>Marston</b>', 29.64800550050426, -82.34393348764826, 1],
             ['<b>Dungeon</b>', 29.648323964973187, -82.34447633568726, 2],
             ['<b>Reitz Union</b>', 29.646221, -82.347788, 3],
             ['<b>Gamestop</b>', 29.627223, -82.38591, 4]
-        ];
+        ]; */
         var infowindow = new google.maps.InfoWindow;
 
         var marker, i;
 
-        for (i = 0; i < locations.length; i++) {
+
+        var markerArray;
+        var $element = $('div[ng-controller="EventsController"]');
+        var scope = angular.element($element).scope();
+        markerArray = scope.markers;
+
+        for (i = 0; i < markerArray.length; i++) {
+
+            var position = new google.maps.LatLng(markerArray[i].lat, markerArray[i].lng);
             marker = new google.maps.Marker({
-                position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-                map: map
+                position: position,
+                map: map,
+                title: markerArray[i].title
             });
 
             google.maps.event.addListener(marker, 'click', (function (marker, i) {
                 return function () {
-                    infowindow.setContent(locations[i][0]);
+                    infowindow.setContent(markerArray[i].title);
                     infowindow.open(map, marker);
                 }
             })(marker, i));
@@ -575,7 +580,7 @@
             markerLocation();
         });
         */
-        init();
+        //init();
     }
 
     //This function will get the marker's current location and then add the lat/long
@@ -626,6 +631,7 @@
                 document.getElementById('mapTab').style.display = 'block';
             }
         }
+        initialize();
     }
 </script>
 
