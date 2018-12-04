@@ -23,27 +23,10 @@
             </button>
             <a class="navbar-brand" ng-click="go('/home')">Gamer Gator</a>
         </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li><a ng-click="go('/home')">Homepage</a></li>
-            </ul>
-
-            <ul class="nav navbar-nav navbar-right">
-                <li ng-show="!currentUser"><a ng-click="go('/login')">Login</a></li>
-                <li ng-show="!currentUser"><a ng-click="go('/register')">Register</a></li>
-                <li ng-show="currentUser"><a>Currently logged in as:  <b>{{currentUser.username}}</b></a></li>
-                <li ng-show="currentUser"><a ng-click="currentUser = null;">Log out</a></li>
-
-            </ul>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-</nav>
+ 
 
 <div ng-view>
 </div>
-
 
 
 <div id="editEvent" class="modal fade" role="dialog">
@@ -181,18 +164,17 @@
 </div>
 
 
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <script src="https://code.angularjs.org/1.4.3/angular.js"></script>
 <script src="https://code.angularjs.org/1.4.3/angular-route.js"></script>
 <script src="js/app.js"></script>
 <script src="js/factories/eventFactory.js"></script>
 <script src="js/controllers/eventController.js"></script>
 <script src="js/controllers/userController.js"></script>
+      
 <script src='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js'></script>
-<script src="bower_components/jquery/dist/jquery.min.js"></script>
+
 <script src="bower_components/moment/min/moment.min.js"></script>
 <!--<script src="bower_components/angular/angular.min.js"></script>-->
 <script src="bower_components/angular-ui-calendar/src/calendar.js"></script>
