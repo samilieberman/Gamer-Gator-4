@@ -183,12 +183,12 @@
 
                     <tr ng-repeat="event in events | orderBy: 'start'| filter: searchInput as results">
 
-                        <td>{{event.title}}</td>
-                        <td>{{event.start | date: "MM/dd/yyyy 'at' h:mma" : 'UTC'}}</td>
-                        <td>{{event.end | date: "MM/dd/yyyy 'at' h:mma" : 'UTC'}}</td>
-                        <td>{{event.location}}</td>
-                        <td>{{event.game}}</td>
-                        <td>{{event.fee}}</td>
+                        <td style = "vertical-align: middle;">{{event.title}}</td>
+                        <td style = "vertical-align: middle;">{{event.start | date: "MM/dd/yyyy 'at' h:mma" : 'UTC'}}</td>
+                        <td style = "vertical-align: middle;">{{event.end | date: "MM/dd/yyyy 'at' h:mma" : 'UTC'}}</td>
+                        <td style = "vertical-align: middle;">{{event.location}}</td>
+                        <td style = "vertical-align: middle;">{{event.game}}</td>
+                        <td style = "vertical-align: middle;">{{event.fee}}</td>
                         <td>
                             <a type="button" class="btn btn-info" ng-click="showDetails($index)" data-toggle="modal" data-target="#detailsModal">
                                 <span class="glyphicon glyphicon-option-horizontal"></span>
