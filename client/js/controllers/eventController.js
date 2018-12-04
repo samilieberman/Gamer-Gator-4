@@ -140,6 +140,7 @@ angular.module('events').controller('EventsController', ['$rootScope', '$scope',
         $scope.updatedEvent = "";
         $scope.updatedEvent = $scope.events[index];
         $scope.updatedEvent.participantUsernames.push($rootScope.currentUser.username);
+        $scope.updatedEvent.participantUsernames = [...new Set($scope.updatedEvent.participantUsernames)];
 
         Events.update($scope.events[index]._id, $scope.updatedEvent).then(function (response) {
           console.log(index);
@@ -156,8 +157,8 @@ angular.module('events').controller('EventsController', ['$rootScope', '$scope',
         });
     };
 
-    $rootScope.unsubscribeUser = function(){
-        for(var i = 0; i < $scope.detailedInfo.participantUsernames.length; i++){
+    $rootScope.unsubscribeUser = function(index) {
+        for(var i = 0; i < $scope.detailedInfo.participantUsernames.length; i++) {
             if($scope.detailedInfo.participantUsernames[i] === $rootScope.currentUser.username){
                 console.log('Unsubscribing user '+$rootScope.currentUser.username+' from '+$scope.detailedInfo.title);
                 $scope.detailedInfo.participantUsernames.splice(i, 1);
@@ -165,12 +166,46 @@ angular.module('events').controller('EventsController', ['$rootScope', '$scope',
             }
         }
 
-        for(var j = 0; j < $rootScope.currentUser.registeredEvents.length; j++){
+        for(var j = 0; j < $rootScope.currentUser.registeredEvents.length; j++) {
             if($rootScope.currentUser.registeredEvents[j] === $scope.detailedInfo.title){
                 $rootScope.currentUser.registeredEvents.splice(j, 1);
                 return;
             }
         }
+
+      $scope.updatedEvent = "";
+      $scope.updatedEvent = $scope.events[index];
+      var usernameIndex = $scope.updatedEvent.participantUsernames.indexOf($rootScope.currentUser.username);
+      $scope.updatedEvent.participantUsernames.splice(usernameIndex, 1);
+
+      Events.update($scope.events[index]._id, $scope.updatedEvent).then(function (response) {
+        console.log(index);
+
+        $scope.events[index] = $scope.updatedEvent;
+
+        Events.getAll().then(function (response) {
+          console.log(response.data);
+          $scope.events = response.data;
+        }, function (error) {
+          console.log('Unable to update events:', error);
+          console.log(response.data);
+        });
+      });
+
+    };
+
+    $rootScope.getRegisteredEvents = function() {
+      console.log($scope.events);
+
+      for (var i = 0; i < $scope.events.length; ++i) {
+        var event = $scope.events[i];
+        for (var j = 0; j < event.participantUsernames.length; ++j) {
+          var username = event.participantUsernames[j];
+          if ($rootScope.currentUser.username == username)
+            $rootScope.currentUser.registeredEvents.push(event.title);
+        }
+      }
+      //console.log($rootScope.currentUser.registeredEvents)
     };
 
     /*$scope.updateEvent = function (index) {
