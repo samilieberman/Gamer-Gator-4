@@ -55,6 +55,7 @@ exports.update = function(req, res) {
     event.fee = req.body.fee;
     event.description = req.body.description;
     event.tags = req.body.tags;
+    event.participantUsernames = req.body.participantUsernames;
 
 
 
