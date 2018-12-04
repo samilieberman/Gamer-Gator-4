@@ -1,7 +1,7 @@
 angular.module('events').controller('EventsController', ['$rootScope', '$scope', 'Events','$compile', '$location', '$http', '$timeout', 'uiCalendarConfig', '$window',
   function ($rootScope, $scope, Events, $compile, $location, $http, $timeout, uiCalendarConfig, $window) {
 
-    $scope.markers = [];
+    $scope.markers = new Array();
 
     $rootScope.go = function(path){
             $location.path(path);
@@ -10,6 +10,15 @@ angular.module('events').controller('EventsController', ['$rootScope', '$scope',
       /* Get all the listings, then bind it to the scope */
     Events.getAll().then(function (response) {
       $scope.events = response.data;
+
+      for(var i = 0; i < $scope.events.length; i++)
+        {
+            $scope.markers.push({
+                title: $scope.events[i].title,
+                lat: $scope.events[i].latitude,
+                lng: $scope.events[i].longitude
+            });
+        }
 
     }, function (error) {
       console.log('Unable to retrieve listings:', error);
@@ -68,8 +77,6 @@ angular.module('events').controller('EventsController', ['$rootScope', '$scope',
       $scope.newEvent.location = $scope.location;
       $scope.newEvent.latitude = $scope.lat;
       $scope.newEvent.longitude = $scope.lng;
-
-      $scope.markers.push({title: $scope.newEvent.title, lat: $scope.newEvent.latitude, lng: $scope.newEvent.longitude});
 
       var startConcat = $scope.start.year + "-" + $scope.start.month + "-" + $scope.start.day + "T" + $scope.start.hour + ":00:00Z";
       var endConcat = $scope.end.year + "-" + $scope.end.month + "-" + $scope.end.day + "T" + $scope.end.hour + ":00:00Z";
