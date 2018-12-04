@@ -1,0 +1,14 @@
+body {
+    background-image: url('../img/gamergatorbackground.png');
+    background-postion: center;
+    background-size: cover;
+}
+
+.modal{
+    z-index: 20;
+    margin-top: 30px;
+}
+
+.modal-backdrop {
+    z-index: 10;
+}
