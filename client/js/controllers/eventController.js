@@ -97,6 +97,18 @@ angular.module('events').controller('EventsController', ['$rootScope', '$scope',
           // redirect back to the list page
           console.log(response.data);
           $scope.events = response.data;
+
+          //update markers array after adding event
+            for(var i = 0; i < $scope.events.length; i++)
+            {
+                $scope.markers.push({
+                    title: $scope.events[i].title,
+                    lat: $scope.events[i].latitude,
+                    lng: $scope.events[i].longitude
+                });
+            }
+
+
           //window.location.href = '/';
         }, function (error) {
           console.log('Unable to create events:', error);
