@@ -103,13 +103,13 @@
     <br>
 
     <div class="btn-group" style="float:right; margin-right:25px; margin-bottom:10px;">
-        <button type="button" class="btn btn-default btn-lg" onclick="calVisible();">
+        <button type="button" class="btn btn-primary" onclick="calVisible();">
             <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
         </button>
-        <button type="button" class="btn btn-default btn-lg" onclick="listVisible();">
+        <button type="button" class="btn btn-primary" onclick="listVisible();">
             <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
         </button>
-        <button type="button" class="btn btn-default btn-lg" onclick="mapVisible();">
+        <button type="button" class="btn btn-primary" onclick="mapVisible();">
             <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
         </button>
     </div>
@@ -172,7 +172,7 @@
 
         <div class="col-md-9 collapse in text-center" id="list" style="float:none; margin: 0 auto; margin-top:30px;">
             <!-- top filter code -->
-            <div id="myBtnContainer" style="margin-bottom:20px; float: none; display: inline-block;">
+            <div id="myBtnContainer" style="margin-bottom:20px;">
                 <button class="btn2" ng-model="searchInput" value="" ng-click="getFilterVal($event)" style="font-family: arcadeFont; font-size: x-small;"> All </button>
                 <button class="btn2" ng-model="searchInput" value="RPG" ng-click="getFilterVal($event)" style="font-family: arcadeFont; font-size: x-small;"> RPG </button>
                 <button class="btn2" ng-model="searchInput" value="Adventure" ng-click="getFilterVal($event)" style="font-family: arcadeFont; font-size: x-small;"> Adventure </button>
