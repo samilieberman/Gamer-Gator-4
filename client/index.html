@@ -30,10 +30,10 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                <li ng-show="!currentUser"><a ng-click="go('/login')">Login</a></li>
-                <li ng-show="!currentUser"><a ng-click="go('/register')">Register</a></li>
-                <li ng-show="currentUser"><a>Currently logged in as:  <b>{{currentUser.username}}</b></a></li>
-                <li ng-show="currentUser"><a ng-click="currentUser = null; logoutUser();">Log out</a></li>
+                <li ng-if="!currentUser"><a ng-click="go('/login')">Login</a></li>
+                <li ng-if="!currentUser"><a ng-click="go('/register')">Register</a></li>
+                <li ng-if="currentUser"><a>Currently logged in as:  <b>{{currentUser.username}}</b></a></li>
+                <li ng-if="currentUser"><a ng-click="currentUser = null; logoutUser();">Log out</a></li>
 
             </ul>
         </div><!-- /.navbar-collapse -->
