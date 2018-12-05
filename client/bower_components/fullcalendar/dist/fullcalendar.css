@@ -512,7 +512,7 @@ temporary rendered events).
 	border: 1px #428bca;
 	background-color: #428bca;
 	font-weight: normal; /* undo jqui's ui-widget-header bold */
-    font-family: 'Assistant', sans-serif;
+    font-family: 'calibri', sans-serif;
 }
 
 /* overpower some of bootstrap's and jqui's styles on <a> tags */
