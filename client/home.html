@@ -103,14 +103,14 @@
     <br>
 
     <div class="btn-group" style="float:right; margin-right:25px; margin-bottom:10px;">
-        <button type="button" class="btn btn-info rounded" onclick="listVisible();">
-            List
+        <button type="button" class="btn btn-default btn-lg" onclick="calVisible();">
+            <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
         </button>
-        <button type="button" class="btn btn-info rounded" onclick="calVisible();">
-            Calendar
+        <button type="button" class="btn btn-default btn-lg" onclick="listVisible();">
+            <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
         </button>
-        <button type="button" class="btn btn-info rounded" onclick="mapVisible();">
-            Map
+        <button type="button" class="btn btn-default btn-lg" onclick="mapVisible();">
+            <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
         </button>
     </div>
 
@@ -152,7 +152,7 @@
             <div class="ui container">
                 <div class="ui grid">
                     <div class="ui sixteen column">
-                        <div ui-calendar ng-model="eventSources" id="calendar" ui-calendar="uiConfig.calendar"></div>
+                        <div ng-model="eventSources" id="calendar" ui-calendar="uiConfig.calendar"></div>
                     </div>
                 </div>
             </div>
@@ -183,7 +183,6 @@
                 <button class="btn2" ng-model="searchInput" value="Simulation" ng-click="getFilterVal($event)" style="font-family: arcadeFont; font-size: x-small;"> Simulation </button>
                 <button class="btn2" ng-model="searchInput" value="Strategy" ng-click="getFilterVal($event)" style="font-family: arcadeFont; font-size: x-small;"> Strategy </button>
                 <button class="btn2" ng-model="searchInput" value="Other" ng-click="getFilterVal($event)" style="font-family: arcadeFont; font-size: x-small;"> Other </button>
-
             </div>
             <div class="input-group" id="searchBar">
                 <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-search"></span></span>
@@ -226,7 +225,7 @@
 
         </div>
 
-    </div>
+    </div> <!-- closes row -->
 
 
 <div id="editEvent" class="modal fade" role="dialog">
