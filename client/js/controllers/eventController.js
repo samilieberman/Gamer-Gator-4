@@ -312,7 +312,7 @@ angular.module('events').controller('EventsController', ['$rootScope', '$scope',
       $scope.uiConfig = {
           calendar: {
               navLinks: true,
-              displayEventTime: false,
+              displayEventTime: true,
               defaultTimedEventDuration: '01:00:00',
               height: 900,
               editable: false,
@@ -325,8 +325,6 @@ angular.module('events').controller('EventsController', ['$rootScope', '$scope',
               eventRender: $scope.eventRender,
           }
       };
-
-
 
       //Events.getAll();
 
